@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corlemps Company</title>
+<meta name="description" content="Corlemps Company – POS / Kès vant · Point of sale · Caja">
+<meta name="theme-color" content="#7A4DFF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 64 64%27%3E%3Crect width=%2764%27 height=%2764%27 rx=%2716%27 fill=%27%237A4DFF%27/%3E%3Ctext x=%2732%27 y=%2745%27 font-size=%2738%27 font-family=%27Arial%27 font-weight=%27bold%27 text-anchor=%27middle%27 fill=%27white%27%3EC%3C/text%3E%3C/svg%3E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Corlemps">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E4DBFF;--paper:#FFFFFF;--ink:#14101F;--muted:#5E5578;--line:#14101F;--sh:#14101F;--field:#F3EEFF;
+  --violet:#7A4DFF;--pink:#FF5CA8;--lime:#C6F432;--sky:#6EC8FF;--sun:#FFD84D;--dark:#14101F;--bad:#E0245E;--good:#0B8F5A;
+  --display:'DM Sans',system-ui,sans-serif;--body:'DM Sans',system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#150F2A;--paper:#231A40;--ink:#F4EFFF;--muted:#B3A8D6;--line:#9B86E8;--sh:#05030C;--field:#2D2350;--bad:#FF6B97;--good:#4BE0A0}
+}
+:root[data-theme="dark"]{--bg:#150F2A;--paper:#231A40;--ink:#F4EFFF;--muted:#B3A8D6;--line:#9B86E8;--sh:#05030C;--field:#2D2350;--bad:#FF6B97;--good:#4BE0A0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.4;-webkit-tap-highlight-color:transparent}
+body[data-sec="bou"]{--acc:var(--lime)}
+body[data-sec="fam"]{--acc:var(--sky)}
+body[data-sec="hop"]{--acc:var(--pink)}
+body[data-sec="hot"]{--acc:#FF9A3D}
+body[data-sec="mar"]{--acc:var(--sun)}
+body[data-sec="lek"]{--acc:#B79CFF}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{flex:none;width:46px;height:46px;border-radius:14px;background:var(--violet);color:#fff;border:3px solid var(--line);box-shadow:3px 3px 0 var(--sh);display:grid;place-items:center;font:800 22px var(--display);transform:rotate(-6deg)}
+.brand h1{font:800 clamp(16px,4.4vw,24px) var(--display);margin:0;letter-spacing:-.02em;line-height:1.1}
+.brand small{color:var(--muted);display:block;font-size:13px;margin-top:2px}
+.stats{display:flex;gap:10px;flex:none}
+.stat{background:var(--sun);color:var(--dark);border:3px solid var(--line);border-radius:14px;box-shadow:3px 3px 0 var(--sh);padding:6px 12px;text-align:right}
+.stat b{font:800 16px var(--display);display:block}
+.stat span{font-size:12px;font-weight:500}
+.stat.alt{background:var(--paper);color:var(--ink)}
+
+.app{display:grid;grid-template-columns:1fr 390px;gap:20px;padding:6px 16px 24px;max-width:1200px;margin:0 auto}
+.card{background:var(--paper);border:3px solid var(--line);border-radius:20px;box-shadow:5px 5px 0 var(--sh)}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tab{border:3px solid var(--line);background:var(--paper);border-radius:16px;padding:12px 6px;font:700 15px var(--display);box-shadow:3px 3px 0 var(--sh);display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .1s,box-shadow .1s}
+.tab .i{font-size:24px}
+.tab span:last-child{font-size:clamp(12px,3.2vw,15px)}
+.tab[aria-pressed="true"]{background:var(--acc);color:var(--dark);transform:translate(2px,2px);box-shadow:1px 1px 0 var(--sh)}
+
+.catalog{padding:16px}
+.search{width:100%;padding:13px 16px;border:3px solid var(--line);border-radius:14px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.search::placeholder{color:var(--muted)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 4px 8px}
+.cat{flex:none;border:2px solid var(--line);background:var(--paper);padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px}
+.cat[aria-pressed="true"]{background:var(--acc);color:var(--dark)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-top:8px}
+.prod{position:relative;text-align:left;border:3px solid var(--line);background:var(--paper);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:3px;min-height:130px;box-shadow:3px 3px 0 var(--sh);transition:transform .1s,box-shadow .1s}
+.prod:active:not([disabled]){transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
+.prod .e{font-size:28px;line-height:1}
+.prod .n{font-weight:700;font-size:14px;margin-top:4px}
+.prod .p{font:800 14px var(--display);color:var(--ink)}
+.prod .s{font-size:12px;color:var(--muted)}
+.prod .s.low{color:var(--bad);font-weight:700}
+.prod .x{font-size:12px;font-weight:700;color:var(--muted)}
+.prod .x.soon{color:#B45309}
+:root[data-theme="dark"] .prod .x.soon{color:#FFB357}
+.prod .x.gone{color:var(--bad)}
+.rx{position:absolute;top:8px;right:8px;background:var(--pink);color:var(--dark);border:2px solid var(--line);border-radius:8px;font:800 11px var(--display);padding:2px 6px;transform:rotate(6deg)}
+.prod[disabled]{opacity:.5;cursor:not-allowed;box-shadow:none}
+.none{grid-column:1/-1;text-align:center;color:var(--muted);padding:28px 8px}
+
+.cart{padding:16px;align-self:start;position:sticky;top:12px;display:flex;flex-direction:column}
+.cart h2{font:800 18px var(--display);margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+.cart h2 small{font:500 13px var(--body);color:var(--muted)}
+.held{display:flex;gap:6px;flex-wrap:wrap}
+.held button{border:2px dashed var(--line);background:transparent;border-radius:10px;padding:4px 10px;font-size:13px;font-weight:700;margin-bottom:8px}
+.lines{min-height:80px;max-height:280px;overflow-y:auto}
+.empty{color:var(--muted);padding:22px 4px;text-align:center}
+.line{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:2px dashed var(--line)}
+.line .nm{font-weight:700}
+.line .un{font-size:12px;color:var(--muted)}
+.tag{display:inline-block;background:var(--pink);color:var(--dark);border-radius:6px;font:800 10px var(--display);padding:1px 5px;margin-left:4px;vertical-align:1px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);background:var(--field);font-weight:800;font-size:18px;line-height:1}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+
+.fields{display:grid;gap:8px;margin-top:10px}
+.fld{display:grid;gap:3px;font-size:13px;font-weight:700}
+.fld input,.num{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.row .num{width:96px;text-align:right;padding:7px 10px}
+.sum{display:grid;gap:7px;margin-top:12px}
+.totalbox{margin-top:10px;background:var(--acc);color:var(--dark);border:3px solid var(--line);border-radius:18px;box-shadow:4px 4px 0 var(--sh);padding:12px 16px;transform:rotate(-1.2deg);display:flex;justify-content:space-between;align-items:center}
+.totalbox span{font-weight:700}
+.totalbox b{font:800 26px var(--display);letter-spacing:-.02em}
+.totalbox.pop b{animation:pop .25s}
+@keyframes pop{50%{transform:scale(1.12)}}
+.methods{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
+.m{border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:10px;font-weight:700}
+.m[aria-pressed="true"]{background:var(--violet);color:#fff}
+.cash{margin-top:10px;display:none;gap:8px}
+.cash.on{display:grid}
+.change{font-weight:800;color:var(--good)}
+.change.bad{color:var(--bad)}
+.msg{min-height:20px;font-size:13px;font-weight:700;color:var(--bad);margin-top:8px}
+.actions{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-top:6px}
+.btn{border:3px solid var(--line);border-radius:14px;padding:13px;font:800 15px var(--display);box-shadow:3px 3px 0 var(--sh);transition:transform .1s,box-shadow .1s;color:var(--dark)}
+.btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
+.btn.sec{background:var(--paper);color:var(--ink);font-size:13px}
+.btn.pay{background:var(--lime)}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+#bar{display:none}
+.hbtn{background:var(--paper);color:var(--ink);font-family:var(--body);text-align:center}
+.hbtn b{font-size:18px}
+.hist{background:var(--paper);color:var(--ink);width:100%;max-width:420px;max-height:88%;overflow-y:auto;border:3px solid var(--line);border-radius:20px;box-shadow:6px 6px 0 var(--sh);padding:18px}
+.hist h3{margin:0 0 10px;font:800 18px var(--display)}
+.hrow{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;background:var(--field);border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.hrow small{display:block;color:var(--muted);font-size:12px}
+.hbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;background:var(--field);border:3px solid var(--line);border-radius:14px;padding:4px}
+.mode button{border:0;background:transparent;border-radius:10px;padding:9px 6px;font:700 13px var(--display);color:var(--ink)}
+.mode button[aria-pressed="true"]{background:var(--violet);color:#fff}
+.prod .gw{font-size:12px;font-weight:700;color:var(--good)}
+.overlay{position:fixed;inset:0;background:rgba(10,5,30,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.overlay.on{display:flex}
+.receipt{background:#fff;color:#14101F;width:100%;max-width:350px;max-height:100%;overflow-y:auto;border:3px solid #14101F;border-radius:16px;padding:20px 18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;box-shadow:6px 6px 0 #000}
+.receipt h3{margin:0;text-align:center;font:800 17px var(--display);letter-spacing:-.02em}
+.receipt .c{text-align:center;color:#554D70}
+.receipt hr{border:0;border-top:2px dashed #9A90BC;margin:10px 0}
+.receipt .r{display:flex;justify-content:space-between;gap:8px}
+.receipt .big{font-size:16px;font-weight:700}
+.receipt svg{display:block;margin:10px auto 4px;width:96px;height:96px}
+.rbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.rbtns .btn{padding:10px;font-size:12px;background:#EDE7FF;color:#14101F;border-color:#14101F;box-shadow:2px 2px 0 #14101F}
+.rbtns .btn.pri{grid-column:1/-1;background:#C6F432;font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+
+@media (max-width:880px){
+  .app{grid-template-columns:1fr;padding:6px 12px 100px}
+  .cart{position:static}
+  .stat span{display:none}
+  .stat.alt{display:none}
+  #bar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--violet);color:#fff;justify-content:space-between;align-items:center;border:3px solid var(--line);border-radius:16px;box-shadow:4px 4px 0 var(--sh);padding:13px 16px;font:800 15px var(--display);z-index:5}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.subbar{background:var(--sun);color:var(--dark);border-bottom:3px solid var(--line);padding:10px 16px;font-weight:700;text-align:center}
+.subbar.bad{background:var(--bad);color:#fff}
+.center{min-height:100vh;display:grid;place-items:center;padding:20px}
+.lcard{width:100%;max-width:400px;padding:26px;display:grid;gap:14px}
+.lcard h1{font:800 24px var(--display);letter-spacing:-.03em;margin:0}
+.lcard p{margin:0;color:var(--muted)}
+.lcard .brand{margin-bottom:6px}
+.lcard code{background:var(--field);border:2px solid var(--line);border-radius:8px;padding:1px 6px;font-size:13px}
+.fld select{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.chk{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;margin-top:8px}
+.chk input{width:20px;height:20px;accent-color:var(--violet)}
+.hbtns.one{grid-template-columns:1fr}
+.hist h4{font:800 14px var(--display);margin:16px 0 8px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--sun);color:var(--dark);border:3px solid var(--line);border-radius:14px;padding:8px 8px;box-shadow:3px 3px 0 var(--sh)}
+.kpi b{font:800 14px var(--display);display:block;word-break:break-word}
+.kpi span{font-size:11px;font-weight:500}
+.rbar{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:8px;margin-bottom:8px;font-size:14px;position:static;background:none;border:0;box-shadow:none;padding:0;color:inherit}
+.rbar i{display:block;height:16px;background:var(--acc,var(--violet));border:2px solid var(--line);border-radius:8px;min-width:3px}
+.mini{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:2px dashed var(--line)}
+.lowt{color:var(--bad)}
+.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+.chatlog{max-height:46vh;min-height:90px;overflow-y:auto;display:grid;gap:8px;align-content:start;padding:4px 2px;margin-bottom:8px}
+.bub{max-width:88%;padding:9px 12px;border:2px solid var(--line);border-radius:14px;white-space:pre-wrap;font-size:14px;line-height:1.4}
+.bub.me{justify-self:end;background:var(--violet);color:#fff;border-bottom-right-radius:4px}
+.bub.ai{justify-self:start;background:var(--field);border-bottom-left-radius:4px}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.qchips .cat{font-size:12px;padding:5px 10px;text-align:left}
+.chatin{display:grid;grid-template-columns:1fr auto;gap:8px}
+.chatin input{padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.who{font-size:12px;color:var(--muted);display:block}
+.stats{flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:880px){
+  #bar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--violet);color:#fff;justify-content:space-between;align-items:center;border:3px solid var(--line);border-radius:16px;box-shadow:4px 4px 0 var(--sh);padding:13px 16px;font:800 15px var(--display);z-index:5}
+}
+@media print{
+  body>*:not(#ov){display:none!important}
+  #ov{position:static;background:none;display:block!important;padding:0}
+  .receipt{box-shadow:none;border:0;max-width:none;max-height:none}
+  .rbtns{display:none}
+}
+
+/* intro video */
+#intro{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,#2B1B5A,#14101F);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px;animation:introOut .6s ease 4.4s forwards}
+#intro .lg{width:96px;height:96px;border-radius:26px;background:var(--violet);display:grid;place-items:center;font:800 52px/1 system-ui,sans-serif;animation:ipop .9s cubic-bezier(.2,1.4,.4,1) both}
+#intro .w{font-size:16px;letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:rise .8s ease .7s forwards}
+#intro h2{font-size:clamp(28px,7vw,52px);margin:0;opacity:0;animation:rise .8s ease 1.3s forwards}
+#intro .bar{width:min(240px,60vw);height:4px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+#intro .bar i{display:block;height:100%;width:0;background:#fff;animation:fill 4s linear .4s forwards}
+#intro button{background:none;border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer}
+@keyframes ipop{from{transform:scale(0) rotate(-20deg)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fill{to{width:100%}}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#intro .w,#intro h2{opacity:1}#intro .bar i{width:100%}}
+/* telefòn · tablèt · laptòp · òdinatè */
+@media (min-width:600px) and (max-width:880px){.app{padding:10px 24px 100px}.lcard{max-width:460px}}
+@media (min-width:1400px){.top,.app{max-width:1500px}.app{grid-template-columns:1fr 440px}}
+
+/* ===== v2: look pwofesyonèl + nouvo eleman ===== */
+:root{--line:#D8D1EC;--sh:rgba(20,16,31,.10);--soft:0 1px 2px rgba(20,16,31,.06),0 6px 18px rgba(20,16,31,.07)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--line:#3C3168;--sh:rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--line:#3C3168;--sh:rgba(0,0,0,.4)}
+.card,.tab,.prod,.stat,.btn,.kpi,.totalbox,.hist,.logo,#bar,.receipt{box-shadow:var(--soft)}
+.card,.tab,.prod,.stat,.btn,.kpi,.totalbox,.hist,.search,.mode,.logo,#bar,.fld input,.fld select,.num{border-width:1.5px}
+.logo,.totalbox,.rx{transform:none}
+.card{border-radius:16px}
+.stat,.kpi{background:var(--paper);color:var(--ink)}
+.stat b,.kpi b{color:var(--violet)}
+.btn.pay{background:var(--violet);color:#fff}
+.btn.sec{background:var(--paper)}
+.tab[aria-pressed="true"],.prod:hover{transform:none;box-shadow:var(--soft)}
+.tab[aria-pressed="true"]{outline:2px solid var(--violet)}
+.line,.mini{border-bottom:1px solid var(--line)}
+.langsel,.sel2{background:var(--paper);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:7px 8px;font:600 13px var(--body);max-width:130px}
+.stats{align-items:center}
+.or{text-align:center;color:var(--muted);font-size:12px}
+.demo-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.btn.sm{padding:9px 12px;font-size:13px}
+.exrow{display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.exrow small{display:block;color:var(--muted);font-size:12px}
+.xbtn{border:1.5px solid var(--line);background:transparent;border-radius:8px;padding:2px 9px;color:var(--bad)}
+.fields{margin-bottom:4px}
+@media (max-width:600px){.top{flex-wrap:wrap}.stats{width:100%;justify-content:space-between}.stat{padding:6px 8px}.hist{max-height:92%}}
+@media (min-width:600px) and (max-width:1100px){.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr))}}
+@media print{.toast{display:none}}
+</style>
+</head>
+<body data-sec="bou">
+<div id="intro" role="presentation"><div class="lg" aria-hidden="true">C</div><div class="w" data-t="Byenveni nan">Byenveni nan</div><h2>Corlemps Company</h2><div class="bar"><i></i></div><button type="button" id="introSkip" data-t="Pase">Pase</button></div>
+
+<section id="login" class="center" hidden>
+  <div class="card lcard">
+    <div class="brand"><div class="logo" aria-hidden="true">C</div></div>
+    <select class="langsel" aria-label="Language" style="justify-self:end"></select>
+    <h1>Corlemps Company</h1>
+    <p data-t="Konekte pou louvri kès la.">Konekte pou louvri kès la.</p>
+    <label class="fld"><span data-t="Imèl">Imèl</span><input id="lem" type="email" autocomplete="username" inputmode="email"></label>
+    <label class="fld"><span data-t="Modpas">Modpas</span><input id="lpw" type="password" autocomplete="current-password"></label>
+    <div class="msg" id="lmsg" role="status"></div>
+    <button class="btn pay" id="lbtn" type="button" data-t="Konekte">Konekte</button>
+  </div>
+</section>
+
+<section id="locked" class="center" hidden>
+  <div class="card lcard">
+    <div class="brand"><div class="logo" aria-hidden="true">C</div></div>
+    <h1 data-t="Kès la bloke 🔒">Kès la bloke 🔒</h1>
+    <p id="lkmsg"></p>
+    <a class="btn pay" id="lkwa" href="#" hidden target="_blank" rel="noopener" data-t="Renouvle sou WhatsApp">Renouvle sou WhatsApp</a>
+    <button class="btn sec" id="lkretry" type="button" data-t="Mwen peye deja, verifye ankò">Mwen peye deja, verifye ankò</button>
+    <button class="btn sec" id="lkout" type="button" data-t="Soti">Soti</button>
+  </div>
+</section>
+
+<div id="appRoot" hidden>
+<div class="subbar" id="subBar" role="status" hidden></div>
+<header class="top">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">C</div>
+    <div><h1 id="bizH">Corlemps Company</h1><small id="who" class="who"></small></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="stTotal">0 G</b><span data-t="Vant jodi a">Vant jodi a</span></div>
+    <div class="stat alt"><b id="stCount">0</b><span data-t="Tranzaksyon">Tranzaksyon</span></div>
+    <button class="stat hbtn" id="hist" type="button" data-a="Istorik vant"><b>🧾</b><span data-t="Istorik">Istorik</span></button>
+    <button class="stat hbtn" id="btnExp" type="button" data-a="Depans" hidden><b>💸</b><span data-t="Depans">Depans</span></button>
+    <button class="stat hbtn" id="btnDash" type="button" data-a="Rapò" hidden><b>📊</b><span data-t="Rapò">Rapò</span></button>
+    <button class="stat hbtn" id="btnAI" type="button" data-a="Asistan IA" hidden><b>💬</b><span data-t="Asistan IA">Asistan IA</span></button>
+    <button class="stat hbtn" id="btnAdmin" type="button" data-a="Paramèt" hidden><b>⚙️</b><span data-t="Paramèt">Paramèt</span></button>
+    <select class="langsel" aria-label="Language"></select>
+    <button class="stat hbtn" id="btnOut" type="button" data-a="Soti"><b>🚪</b><span data-t="Soti">Soti</span></button>
+  </div>
+</header>
+
+<main class="app">
+  <section>
+    <div class="tabs" id="tabs" role="group"></div>
+    <div class="card catalog">
+      <input id="q" class="search" type="search" data-p="Chèche pwodwi, medikaman oswa sèvis" data-a="Chèche">
+      <div class="cats" id="cats" role="group"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <aside class="card cart" id="cart">
+    <h2><span data-t="Panye">Panye</span> <small id="cnt"></small></h2>
+    <div class="mode" id="mode" role="group"><button type="button" data-mode="det" aria-pressed="true" data-t="Vant detay">Vant detay</button><button type="button" data-mode="gro" aria-pressed="false" data-t="Vant an gwo">Vant an gwo</button></div>
+    <div class="held" id="held"></div>
+    <div class="lines" id="lines"></div>
+
+    <div class="fields">
+      <label class="fld" id="custBox" hidden><span data-t="Non kliyan / biznis (vant an gwo)">Non kliyan / biznis (vant an gwo)</span>
+        <input id="cust" type="text" data-p="Egz: Boutik Mari" autocomplete="off"></label>
+      <label class="fld" id="rxBox" hidden><span data-t="Non doktè / # ordonnans (pou medikaman Rx)">Non doktè / # ordonnans (pou medikaman Rx)</span>
+        <input id="doc" type="text" data-p="Egz: Dr. Pierre #2041" autocomplete="off"></label>
+      <div class="two" id="patBox" hidden>
+        <label class="fld"><span id="patL">Non pasyan</span><input id="pat" type="text" autocomplete="off"></label>
+        <label class="fld"><span id="dosL"># dosye</span><input id="dos" type="text" data-p="Opsyonèl" autocomplete="off"></label>
+      </div>
+    </div>
+
+    <div class="sum">
+      <div class="row"><span data-t="Sou-total">Sou-total</span><span id="sub">0 G</span></div>
+      <div class="row" id="gainRow" hidden><span data-t="Ou ekonomize">Ou ekonomize</span><b id="gain">0 G</b></div>
+      <div class="row" id="insRow" hidden><label for="ins" data-t="Asirans pran chaj (%)">Asirans pran chaj (%)</label><input class="num" id="ins" type="number" min="0" max="100" value="0" inputmode="numeric"></div>
+      <div class="row"><label for="disc" data-t="Rabè (%)">Rabè (%)</label><input class="num" id="disc" type="number" min="0" max="100" value="0" inputmode="numeric"></div>
+    </div>
+    <div class="totalbox" id="tbox"><span data-t="Total pou peye">Total pou peye</span><b id="tot">0 G</b></div>
+
+    <div class="methods" id="methods" role="group"></div>
+    <div class="cash" id="cashBox">
+      <div class="row"><label for="recv" data-t="Kach resevwa">Kach resevwa</label><input class="num" id="recv" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+      <div class="row"><span data-t="Monnen pou remèt">Monnen pou remèt</span><span class="change" id="chg">0 G</span></div>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <div class="actions">
+      <button class="btn sec" id="hold" type="button" data-t="Mete an pause">Mete an pause</button>
+      <button class="btn pay" id="pay" type="button" disabled data-t="Peye 💸">Peye 💸</button>
+    </div>
+  </aside>
+</main>
+<button class="bar" id="bar" type="button"><span id="barN"></span><span id="barT">0 G</span></button>
+</div>
+
+<div class="overlay" id="ov" role="dialog" aria-modal="true"><div class="receipt" id="rc"></div></div>
+<div class="overlay" id="hov" role="dialog" aria-modal="true"><div class="hist" id="hbox"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>window.CORLEMPS={url:"https://juvhvyciklatbnerjxlq.supabase.co",key:"sb_publishable_8OxBH-_Fi2uXZd33LOo_EA_EZKLZ3xb",support:""};</script>
+<script>
+/* Corlemps Company — Kès Vant v2 (Supabase + demo + HT/EN/ES) */
+/* ---------- i18n: [ht, en, es] ---------- */
+var TR=[
+['Byenveni nan','Welcome to','Bienvenido a'],['Pase','Skip','Saltar'],
+['Konekte pou louvri kès la.','Sign in to open the register.','Inicia sesión para abrir la caja.'],
+['Imèl','Email','Correo'],['Modpas','Password','Contraseña'],['Konekte','Sign in','Entrar'],
+['oswa eseye san kont reyèl (done yo pa sove)','or try without a real account (data is not saved)','o prueba sin cuenta real (los datos no se guardan)'],
+['Demo: Direktè','Demo: Director','Demo: Director'],['Demo: Vandè','Demo: Cashier','Demo: Cajero'],
+['Kès la bloke 🔒','Register locked 🔒','Caja bloqueada 🔒'],['Renouvle sou WhatsApp','Renew on WhatsApp','Renovar por WhatsApp'],
+['Mwen peye deja, verifye ankò','I already paid, check again','Ya pagué, verificar de nuevo'],['Soti','Log out','Salir'],
+['Vant jodi a','Sales today','Ventas de hoy'],['Tranzaksyon','Transactions','Transacciones'],['Istorik','History','Historial'],
+['Istorik vant','Sales history','Historial de ventas'],['Depans','Expenses','Gastos'],['Rapò','Reports','Informes'],
+['Asistan IA','AI Assistant','Asistente IA'],['Paramèt','Settings','Ajustes'],
+['Chèche pwodwi, medikaman oswa sèvis','Search products, medicines or services','Buscar productos, medicinas o servicios'],['Chèche','Search','Buscar'],
+['Panye','Cart','Carrito'],['Vant detay','Retail sale','Venta al detalle'],['Vant an gwo','Wholesale','Venta al por mayor'],
+['Non kliyan / biznis (vant an gwo)','Customer / business name (wholesale)','Cliente / negocio (mayoreo)'],['Egz: Boutik Mari','e.g. Mary\'s Shop','ej. Tienda María'],
+['Non doktè / # ordonnans (pou medikaman Rx)','Doctor / prescription # (for Rx medicines)','Médico / # receta (medicinas Rx)'],['Egz: Dr. Pierre #2041','e.g. Dr. Pierre #2041','ej. Dr. Pierre #2041'],
+['Opsyonèl','Optional','Opcional'],['Sou-total','Subtotal','Subtotal'],['Ou ekonomize','You save','Ahorras'],
+['Asirans pran chaj (%)','Insurance coverage (%)','Cobertura del seguro (%)'],['Rabè (%)','Discount (%)','Descuento (%)'],
+['Total pou peye','Total to pay','Total a pagar'],['Kach resevwa','Cash received','Efectivo recibido'],['Monnen pou remèt','Change due','Cambio a devolver'],
+['Mete an pause','Hold','En espera'],['Peye 💸','Pay 💸','Pagar 💸'],
+['Boutik','Shop','Tienda'],['Market','Market','Mercado'],['Famasi','Pharmacy','Farmacia'],['Lopital','Hospital','Hospital'],['Otèl','Hotel','Hotel'],['Lekòl','School','Escuela'],
+['Lajan kach','Cash','Efectivo'],['Kat','Card','Tarjeta'],['Tout','All','Todo'],['Lòt','Other','Otro'],
+['Non kliyan / pasyan / elèv','Customer / patient / student','Cliente / paciente / alumno'],['# dosye / chanm / klas','File # / room / class','N.º expediente / habitación / clase'],['Kliyan','Customer','Cliente'],
+['Non pasyan','Patient name','Nombre del paciente'],['# dosye','File #','N.º expediente'],['Pasyan','Patient','Paciente'],
+['Non kliyan otèl','Hotel guest name','Nombre del huésped'],['# chanm','Room #','N.º habitación'],['Non elèv','Student name','Nombre del alumno'],['Klas','Class','Clase'],['Elèv','Student','Alumno'],['Non','Name','Nombre'],['Referans','Reference','Referencia'],
+['Direktè Jeneral','General Director','Director General'],['Vandè Maten','Morning Cashier','Cajero de mañana'],['Vandè Aswè','Evening Cashier','Cajero de tarde'],['Vandè','Cashier','Cajero'],
+['Dekonekte otomatikman (inaktivite)','Logged out automatically (inactivity)','Sesión cerrada automáticamente (inactividad)'],
+['Kont reyèl pa konfigire. Itilize demo.','Real account not configured. Use the demo.','Cuenta real no configurada. Usa la demo.'],
+['Pa gen entènèt. Eseye ankò lè rezo a retounen.','No internet. Try again when the network is back.','Sin internet. Inténtalo de nuevo cuando vuelva la red.'],
+['Antre imèl ak modpas.','Enter email and password.','Ingresa correo y contraseña.'],['Imèl oswa modpas pa kòrèk.','Wrong email or password.','Correo o contraseña incorrectos.'],
+['Kont sa a poko gen aksè. Kontakte Corlemps.','This account has no access yet. Contact Corlemps.','Esta cuenta aún no tiene acceso. Contacta a Corlemps.'],
+['Kont sa a se administratè plat fòm nan. Itilize sit Kontwòl la (kontwol.html).','This is the platform admin account. Use the Control site (kontwol.html).','Esta es la cuenta de administrador de la plataforma. Usa el sitio de Control (kontwol.html).'],
+['Kont sa a poko asiyen a yon biznis. Kontakte Corlemps.','This account is not assigned to a business yet. Contact Corlemps.','Esta cuenta aún no está asignada a un negocio. Contacta a Corlemps.'],
+['Aksè kont sa a sispann pa Corlemps. Kontakte nou pou rezoud sa. Done ou yo an sekirite.','This account was suspended by Corlemps. Contact us to resolve it. Your data is safe.','Corlemps suspendió esta cuenta. Contáctanos para resolverlo. Tus datos están seguros.'],
+['Kès la sispann travay depi <b>{0}</b>. Renouvle abònman an pou kontinye vann. Done ou yo an sekirite.','The register stopped working on <b>{0}</b>. Renew the subscription to keep selling. Your data is safe.','La caja dejó de funcionar el <b>{0}</b>. Renueva la suscripción para seguir vendiendo. Tus datos están seguros.'],
+['Bonjou, mwen vle renouvle abònman Corlemps mwen.','Hello, I want to renew my Corlemps subscription.','Hola, quiero renovar mi suscripción de Corlemps.'],
+['anyèl','yearly','anual'],['mansyèl','monthly','mensual'],['abònman','subscription','suscripción'],['jiska','until','hasta'],
+['⚠️ Abònman an ekspire. Kès la ap koupe nan {0} jou si ou pa renouvle.','⚠️ Subscription expired. The register will shut off in {0} days if you do not renew.','⚠️ Suscripción vencida. La caja se cortará en {0} días si no renuevas.'],
+['Abònman ou fini jodi a. Renouvle pou kès la pa koupe.','Your subscription ends today. Renew to keep the register on.','Tu suscripción termina hoy. Renueva para que la caja siga activa.'],
+['Abònman ou fini nan {0} jou ({1}). Renouvle pou kès la pa koupe.','Your subscription ends in {0} days ({1}). Renew to keep the register on.','Tu suscripción termina en {0} días ({1}). Renueva para que la caja siga activa.'],
+['MÒD DEMO: done yo pa sove, anyen pa reyèl.','DEMO MODE: data is not saved, nothing is real.','MODO DEMO: los datos no se guardan, nada es real.'],
+['Pa ka chaje pwodwi yo: {0}','Could not load products: {0}','No se pudieron cargar los productos: {0}'],
+['Ekspire ({0})','Expired ({0})','Vencido ({0})'],['Ekspire nan {0} jou','Expires in {0} days','Vence en {0} días'],['Ekspire: {0}','Expires: {0}','Vence: {0}'],
+['Fini','Out','Agotado'],['{0} kabann lib','{0} beds free','{0} camas libres'],['Rete {0}','{0} left','Quedan {0}'],['{0} nan stok','{0} in stock','{0} en stock'],
+['Gwo: {0} (≥{1})','Wholesale: {0} (≥{1})','Mayoreo: {0} (≥{1})'],
+['Anyen pa matche isit la 👀 Si katalòg la vid, Direktè a ka ajoute pwodwi nan ⚙️.','Nothing matches here 👀 If the catalog is empty, the Director can add products in ⚙️.','Nada coincide aquí 👀 Si el catálogo está vacío, el Director puede añadir productos en ⚙️.'],
+['{0} chak','{0} each','{0} c/u'],[' · pri an gwo ✓',' · wholesale price ✓',' · precio mayoreo ✓'],[' · +{0} pou pri an gwo',' · +{0} for wholesale price',' · +{0} para precio mayoreo'],
+['Retire yon {0}','Remove one {0}','Quitar un {0}'],['Ajoute yon {0}','Add one {0}','Añadir un {0}'],
+['Panye a vid 👀<br>Tape sou yon bagay pou kòmanse.','Cart is empty 👀<br>Tap an item to start.','El carrito está vacío 👀<br>Toca un artículo para empezar.'],
+['{0} atik','{0} items','{0} artículos'],['Wè panye ({0})','View cart ({0})','Ver carrito ({0})'],['Rale vant #{0}','Resume sale #{0}','Retomar venta #{0}'],
+['Manke {0}','Short by {0}','Faltan {0}'],['Panye a vid','Cart is empty','El carrito está vacío'],['Vant lan mete an pause','Sale put on hold','Venta en espera'],
+['Resi','Receipt','Recibo'],['Kasye: {0}','Cashier: {0}','Cajero: {0}'],['Doktè/Ord.','Doctor/Rx','Médico/Receta'],['Ou ekonomize (gwo)','You saved (wholesale)','Ahorraste (mayoreo)'],
+['Asirans','Insurance','Seguro'],['Rabè','Discount','Descuento'],['Peman','Payment','Pago'],['Resevwa','Received','Recibido'],['Monnen','Change','Cambio'],
+['Mèsi! Pran swen tèt ou 💜','Thank you! Take care 💜','¡Gracias! Cuídate 💜'],['Enprime','Print','Imprimir'],['Fèmen','Close','Cerrar'],['Mèsi!','Thanks!','¡Gracias!'],['Resi {0}','Receipt {0}','Recibo {0}'],
+['Antre non kliyan an oswa biznis la pou vant an gwo.','Enter the customer or business name for wholesale.','Ingresa el nombre del cliente o negocio para mayoreo.'],
+['Antre non doktè a oswa # ordonnans lan pou medikaman Rx yo.','Enter the doctor name or prescription # for Rx medicines.','Ingresa el médico o # de receta para las medicinas Rx.'],
+['Ranpli "{0}" pou kontinye.','Fill in "{0}" to continue.','Completa "{0}" para continuar.'],
+['Kach la pa ase. Antre yon kantite ki egal oswa pi gran pase total la.','Not enough cash. Enter an amount equal to or above the total.','Efectivo insuficiente. Ingresa un monto igual o mayor al total.'],
+['Ap anrejistre vant lan…','Saving the sale…','Guardando la venta…'],['Ap chaje…','Loading…','Cargando…'],
+['Pa gen vant ankò.','No sales yet.','Aún no hay ventas.'],
+['7 dènye jou','Last 7 days','Últimos 7 días'],['30 dènye jou','Last 30 days','Últimos 30 días'],['Jodi a','Today','Hoy'],['{0} vant','{0} sales','{0} ventas'],
+['Vant pa seksyon (30 jou)','Sales by section (30 days)','Ventas por sección (30 días)'],['Pwodwi ki vann plis','Top-selling products','Productos más vendidos'],['Poko gen done.','No data yet.','Aún no hay datos.'],
+['Stok ki ba','Low stock','Stock bajo'],['Tout stok yo OK 👍','All stock levels OK 👍','Todo el stock está bien 👍'],
+['Vant (30 jou)','Sales (30 days)','Ventas (30 días)'],['Depans (30 jou)','Expenses (30 days)','Gastos (30 días)'],['Benefis net (30 jou)','Net result (30 days)','Resultado neto (30 días)'],
+['Depans yo (Direktè sèlman)','Expenses (Director only)','Gastos (solo Director)'],['Deskripsyon','Description','Descripción'],['Kategori','Category','Categoría'],['Montan (G)','Amount (G)','Monto (G)'],['Dat','Date','Fecha'],
+['Ajoute depans','Add expense','Añadir gasto'],['Total 30 jou','30-day total','Total 30 días'],['Poko gen depans.','No expenses yet.','Aún no hay gastos.'],
+['Achte machandiz','Stock purchase','Compra de mercancía'],['Lwaye','Rent','Alquiler'],['Salè','Salaries','Salarios'],['Transpò','Transport','Transporte'],['Kouran / Dlo','Electricity / Water','Electricidad / Agua'],
+['Antre yon deskripsyon ak yon montan valab.','Enter a description and a valid amount.','Ingresa una descripción y un monto válido.'],['Depans anrejistre','Expense saved','Gasto guardado'],['Depans retire','Expense removed','Gasto eliminado'],['Retire','Remove','Eliminar'],
+['Non biznis la (parèt anwo ak sou resi yo)','Business name (shown on top and on receipts)','Nombre del negocio (se muestra arriba y en recibos)'],['Sove non an','Save name','Guardar nombre'],
+['Adrès biznis la (parèt sou resi yo)','Business address (shown on receipts)','Dirección del negocio (se muestra en recibos)'],['Sove adrès la','Save address','Guardar dirección'],
+['Sovgad done','Data backup','Copia de datos'],['Telechaje kopi done (JSON)','Download data backup (JSON)','Descargar copia de datos (JSON)'],['Kopi done a telechaje','Backup downloaded','Copia descargada'],
+['Pa gen kopi done depi {0} jou. Fè yon sovgad nan ⚙️.','No backup for {0} days. Make one in ⚙️.','Sin copia desde hace {0} días. Haz una en ⚙️.'],
+['Anplwaye ak wòl','Staff and roles','Personal y roles'],['Anplwaye','Staff','Personal'],
+['Kreye kont nan Supabase (Authentication → Add user), epi asiyen wòl la isit la.','Create the account in Supabase (Authentication → Add user), then assign the role here.','Crea la cuenta en Supabase (Authentication → Add user) y asigna el rol aquí.'],
+['Wòl chanje','Role updated','Rol actualizado'],['ID: {0}','ID: {0}','ID: {0}'],['Pa gen anplwaye.','No staff.','Sin personal.'],
+['Pwodwi','Products','Productos'],['+ Nouvo pwodwi','+ New product','+ Nuevo producto'],['Pa gen pwodwi ankò.','No products yet.','Aún no hay productos.'],
+['stok: {0}','stock: {0}','stock: {0}'],['ilimite','unlimited','ilimitado'],['gwo {0} (≥{1})','wholesale {0} (≥{1})','mayoreo {0} (≥{1})'],
+['Modifye pwodwi','Edit product','Editar producto'],['Nouvo pwodwi','New product','Nuevo producto'],['Seksyon','Section','Sección'],['Emoji','Emoji','Emoji'],['Pri (G)','Price (G)','Precio (G)'],
+['Pri an gwo (G)','Wholesale price (G)','Precio mayoreo (G)'],['Minimòm pou gwo','Wholesale minimum','Mínimo para mayoreo'],['Stok (vid = ilimite)','Stock (empty = unlimited)','Stock (vacío = ilimitado)'],['Ekspirasyon','Expiry','Vencimiento'],
+['Bezwen ordonnans (Rx)','Requires prescription (Rx)','Requiere receta (Rx)'],['Se yon kabann (admisyon)','This is a bed (admission)','Es una cama (ingreso)'],['Anile','Cancel','Cancelar'],['Sove','Save','Guardar'],['Retire pwodwi sa a','Remove this product','Eliminar este producto'],
+['Konfime: retire li','Confirm: remove it','Confirmar: eliminar'],['Antre non pwodwi a.','Enter the product name.','Ingresa el nombre del producto.'],['Antre yon pri valab.','Enter a valid price.','Ingresa un precio válido.'],
+['Pou vant an gwo, ranpli pri a ak minimòm nan toude (oswa kite yo vid).','For wholesale, fill both price and minimum (or leave both empty).','Para mayoreo, completa precio y mínimo (o deja ambos vacíos).'],
+['Pri an gwo oswa minimòm nan pa valab.','Wholesale price or minimum is not valid.','El precio mayoreo o el mínimo no es válido.'],['Stok la dwe yon nonb antye.','Stock must be a whole number.','El stock debe ser un número entero.'],
+['Ap sove…','Saving…','Guardando…'],['Pwodwi a sove','Product saved','Producto guardado'],['Pwodwi a retire','Product removed','Producto eliminado'],
+['Antre yon non pou biznis la.','Enter a business name.','Ingresa un nombre para el negocio.'],['Non biznis la chanje','Business name updated','Nombre del negocio actualizado'],['Adrès la sove','Address saved','Dirección guardada'],
+['Li wè sèlman total, pwodwi ak stok. Li pa wè non kliyan, pasyan, elèv oswa ordonnans.','It only sees totals, products and stock. It cannot see customer, patient, student or prescription names.','Solo ve totales, productos y stock. No ve nombres de clientes, pacientes, alumnos ni recetas.'],
+['Poze yon kesyon sou biznis ou an Kreyòl, oswa tape sou yon sijesyon.','Ask a question about your business, or tap a suggestion.','Haz una pregunta sobre tu negocio o toca una sugerencia.'],
+['Konbyen kòb mwen fè jodi a?','How much did I make today?','¿Cuánto vendí hoy?'],['Ki pwodwi ki vann plis semèn sa a?','What sold most this week?','¿Qué se vendió más esta semana?'],['Ki pwodwi ki prèske fini nan stok?','Which products are almost out of stock?','¿Qué productos casi se agotan?'],['Ki pwodwi ki pral ekspire?','Which products will expire soon?','¿Qué productos van a vencer?'],['Fè m yon rezime biznis la','Give me a business summary','Dame un resumen del negocio'],
+['Egz: Ki jou mwen vann plis?','e.g. Which day do I sell most?','ej. ¿Qué día vendo más?'],['Voye','Send','Enviar'],['Ap reflechi…','Thinking…','Pensando…'],
+['Asistan IA pa disponib kounye a (verifye ke fonksyon ask-ai deplwaye epi kle IA a mete).','AI assistant unavailable right now (check that the ask-ai function is deployed and the AI key is set).','Asistente IA no disponible (verifica que la función ask-ai esté desplegada y la clave IA configurada).'],['Pa gen repons.','No answer.','Sin respuesta.'],
+['Asistan IA pa disponib nan mòd demo.','The AI assistant is not available in demo mode.','El asistente IA no está disponible en modo demo.'],
+['Vant an gwo','Wholesale','Mayoreo'],['Kabann (nwit)','Bed (night)','Cama (noche)'],['Pa gen aksè.','No access.','Sin acceso.'],
+['Pa disponib nan demo','Not available in demo','No disponible en demo'],
+['Rete nan demo? Done yo ap efase lè ou soti.','Demo data is erased when you leave.','Los datos demo se borran al salir.']
+];
+var DICT={ht:{},en:{},es:{}};TR.forEach(function(r){DICT.en[r[0]]=r[1];DICT.es[r[0]]=r[2]});
+var LANGS={ht:'Kreyòl',en:'English',es:'Español'};
+var lang='ht';try{lang=localStorage.getItem('corlemps.lang')||(/^es/i.test(navigator.language)?'es':/^en/i.test(navigator.language)?'en':'ht')}catch(e){}
+function T(s,a){var d=DICT[lang],r=(d&&d[s])||s;if(a)r=r.replace(/\{(\d)\}/g,function(_,i){return a[i]});return r}
+function LOC(){return lang==='en'?'en-US':lang==='es'?'es-ES':'fr-FR'}
+function applyStatic(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(function(e){e.textContent=T(e.dataset.t)});
+  document.querySelectorAll('[data-p]').forEach(function(e){e.placeholder=T(e.dataset.p)});
+  document.querySelectorAll('[data-a]').forEach(function(e){e.setAttribute('aria-label',T(e.dataset.a))});
+  document.querySelectorAll('.langsel').forEach(function(s){s.innerHTML=Object.keys(LANGS).map(function(k){return '<option value="'+k+'"'+(k===lang?' selected':'')+'>'+LANGS[k]+'</option>'}).join('')});
+}
+function setLang(l){
+  lang=l;try{localStorage.setItem('corlemps.lang',l)}catch(e){}
+  applyStatic();
+  if(me&&!$('appRoot').hidden){setWho();all();if(sub&&!DEMO)banner();else if(DEMO)demoBar();$('bizH').textContent=bizName()}
+  $('hov').classList.remove('on');
+}
+
+/* ---------- State ---------- */
+var SECS=[{k:'bou',i:'🛒'},{k:'mar',i:'🧺'},{k:'fam',i:'💊'},{k:'hop',i:'🏥'},{k:'hot',i:'🏨'},{k:'lek',i:'🎓'}];
+var NM={bou:'Boutik',mar:'Market',fam:'Famasi',hop:'Lopital',hot:'Otèl',lek:'Lekòl'};
+function secName(k){return T(NM[k]||k)}
+var METHODS=['Lajan kach','MonCash','NatCash','Kat'];
+var EXPCATS=['Achte machandiz','Lwaye','Salè','Transpò','Kouran / Dlo','Lòt'];
+var CFG=window.CORLEMPS||{};
+var sb=null,sub=null,me=null,DEMO=false,D=null,PRODUCTS=[],todaySum={t:0,n:0},histRows=[],curSale=null,busy=false,armed='',editId=null;
+var st={cart:{},sec:'bou',cat:'Tout',q:'',method:'Lajan kach',held:[],mode:'det'};
+
+function $(i){return document.getElementById(i)}
+function isParty(p){return p.sec==='hop'||p.sec==='hot'||p.sec==='lek'}
+function secsInCart(){var a=[];ids().forEach(function(i){var p=prod(i);if(p&&a.indexOf(p.sec)<0)a.push(p.sec)});return a}
+function partyLbl(secs){
+  var h=secs.indexOf('hop')>-1,o=secs.indexOf('hot')>-1,l=secs.indexOf('lek')>-1,n=(h?1:0)+(o?1:0)+(l?1:0);
+  var r=n>1?['Non kliyan / pasyan / elèv','# dosye / chanm / klas','Kliyan']:h?['Non pasyan','# dosye','Pasyan']:o?['Non kliyan otèl','# chanm','Kliyan']:l?['Non elèv','Klas','Elèv']:['Non','Referans','Kliyan'];
+  return r.map(function(x){return T(x)});
+}
+function bizName(){return DEMO?'Corlemps Demo':(sub&&sub.name)||'Corlemps Company'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function g(n){return Math.round(+n||0).toLocaleString('fr-FR')+' G'}
+function prod(id){for(var i=0;i<PRODUCTS.length;i++)if(PRODUCTS[i].id===id)return PRODUCTS[i];return null}
+function inCart(id){return st.cart[id]||0}
+function ids(){return Object.keys(st.cart).map(Number)}
+function cartCount(){var n=0;ids().forEach(function(i){n+=st.cart[i]});return n}
+function has(fn){return ids().some(function(i){var p=prod(i);return p&&fn(p)})}
+function pct(id){var v=parseFloat($(id).value)||0;return Math.min(100,Math.max(0,v))}
+function unit(p,q){return (st.mode==='gro'&&p.w!=null&&q>=p.wm)?p.w:p.p}
+function hint(p,q){if(st.mode!=='gro'||p.w==null)return '';return q>=p.wm?T(' · pri an gwo ✓'):T(' · +{0} pou pri an gwo',[p.wm-q])}
+function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on')},2800)}
+function nice(err){var m=(err&&err.message)||String(err||'');return /fetch|network|load failed/i.test(m)?T('Pa gen entènèt. Eseye ankò lè rezo a retounen.'):m}
+function fdate(s){return new Date(s+'T12:00:00').toLocaleDateString(LOC())}
+function daysTo(d){return Math.floor((new Date(d+'T23:59:59')-Date.now())/864e5)}
+function isoDay(d){var x=d||new Date();return x.getFullYear()+'-'+('0'+(x.getMonth()+1)).slice(-2)+'-'+('0'+x.getDate()).slice(-2)}
+function roleLbl(role,shift){return role==='owner'?T('Direktè Jeneral'):role==='cashier'?(shift==='aswe'?T('Vandè Aswè'):shift==='maten'?T('Vandè Maten'):T('Vandè')):''}
+function setWho(){
+  if(!me)return;var s=me.name+' · '+roleLbl(me.role,me.shift);
+  if(!DEMO&&sub){s=(sub.name?sub.name+' · ':'')+s;if(me.role==='owner')s+=' · '+T('abònman')+' '+(sub.plan==='yearly'?T('anyèl'):T('mansyèl'))+' '+T('jiska')+' '+fdate(sub.paid_until)}
+  if(DEMO)s='Demo · '+s;
+  $('who').textContent=s;
+}
+
+function calc(){
+  var tot=0,hosp=0,gain=0;
+  ids().forEach(function(i){var p=prod(i);if(!p)return;var u=unit(p,st.cart[i]),a=u*st.cart[i];tot+=a;gain+=(p.p-u)*st.cart[i];if(p.sec==='hop')hosp+=a});
+  var ins=has(function(p){return p.sec==='hop'})?Math.round(hosp*pct('ins')/100):0;
+  var d=Math.round((tot-ins)*pct('disc')/100);
+  return {sub:tot,ins:ins,disc:d,gain:gain,total:tot-ins-d};
+}
+function expInfo(p){
+  if(p.exp==null)return null;
+  var d=new Date(p.expDate+'T12:00:00').toLocaleDateString(LOC(),{month:'short',year:'numeric'});
+  if(p.exp<0)return {cls:'gone',t:T('Ekspire ({0})',[d]),dead:true};
+  if(p.exp<90)return {cls:'soon',t:T('Ekspire nan {0} jou',[p.exp])};
+  return {cls:'',t:T('Ekspire: {0}',[d])};
+}
+function norm(r){
+  return {id:r.id,sec:r.sec,n:r.name,c:r.category||'Lòt',e:r.emoji||'📦',p:+r.price,
+    w:r.wholesale_price==null?null:+r.wholesale_price,wm:r.wholesale_min,s:r.stock,rx:!!r.rx,
+    exp:r.exp_date?daysTo(r.exp_date):null,expDate:r.exp_date,bed:!!r.is_bed};
+}
+
+/* ---------- Demo data ---------- */
+function demoInit(){
+  var d=function(n){return isoDay(new Date(Date.now()+n*864e5))};
+  var P=[[1,'bou','Diri 5 lb','Manje','🍚',350,320,10,40],[2,'bou','Lwil 1 L','Manje','🫒',275,null,null,25],[3,'bou','Sik 1 kg','Manje','🧂',120,110,10,60],[4,'bou','Dlo 1 L','Bwason','💧',50,40,12,100],[5,'mar','Bannann (grap)','Legim','🍌',200,null,null,null],[6,'mar','Zoranj (5)','Fwi','🍊',125,null,null,30],
+   [7,'fam','Paracetamol 500mg','Doulè','💊',75,60,20,120,0,d(400)],[8,'fam','Amoxicillin 500mg','Antibyotik','💊',250,null,null,40,1,d(60)],[9,'fam','Vitamin C','Vitamin','🍋',150,null,null,3,0,d(300)],
+   [10,'hop','Konsiltasyon','Sèvis','🩺',1500,null,null,null],[11,'hop','Kabann (nwit)','Admisyon','🛏️',3000,null,null,6,0,null,1],
+   [12,'hot','Chanm estanda (nwit)','Chanm','🏨',4500,null,null,8,0,null,1],[13,'lek','Frè eskolè (mwa)','Frè','🎓',2500,null,null,null],[14,'lek','Inifòm','Machandiz','👕',900,null,null,30]];
+  D={products:P.map(function(r){return {id:r[0],sec:r[1],n:r[2],c:r[3],e:r[4],p:r[5],w:r[6],wm:r[7],s:r[8],rx:!!r[9],expDate:r[10]||null,bed:!!r[11],active:true}}),sales:[],expenses:[],staff:[
+    {id:'d1',name:'Demo Direktè',role:'owner',shift:null,employee_code:'EMP-0001'},{id:'d2',name:'Demo Maten',role:'cashier',shift:'maten',employee_code:'EMP-0002'},{id:'d3',name:'Demo Aswè',role:'cashier',shift:'aswe',employee_code:'EMP-0003'}],nextId:100,nextNo:1};
+  var cs=[['d2','Demo Maten'],['d3','Demo Aswè']];
+  for(var i=0;i<28;i++){
+    var p=D.products[Math.floor(Math.random()*D.products.length)],q=1+Math.floor(Math.random()*3),c=cs[i%2],t=new Date(Date.now()-Math.random()*29*864e5);
+    var tot=p.p*q;D.sales.push({no:'DEMO-'+('000'+(D.nextNo++)).slice(-4),created_at:t.toISOString(),total:tot,subtotal:tot,discount:0,insurance:0,method:'Lajan kach',sectors:[p.sec],cashier:c[1],cashier_id:c[0],items:[{id:p.id,name:p.n,qty:q,unit:p.p,retail:p.p,sec:p.sec,rx:p.rx}]});
+  }
+  [['Lwaye boutik','Lwaye',15000,-20],['Achte diri ak lwil','Achte machandiz',32000,-12],['Kouran','Kouran / Dlo',4800,-6],['Taksi livrezon','Transpò',900,-1]].forEach(function(e,i){D.expenses.push({id:i+1,description:e[0],category:e[1],amount:e[2],spent_on:isoDay(new Date(Date.now()+e[3]*864e5))})});
+}
+function demoSale(list,c,o){
+  var items=[],secs=[];
+  list.forEach(function(i){var p=prod(i);if(!p)return;var q=st.cart[i];p0=D.products.filter(function(x){return x.id===i})[0];if(p0.s!=null)p0.s-=q;
+    items.push({id:i,name:p.n,qty:q,unit:unit(p,q),retail:p.p,sec:p.sec,rx:p.rx});if(secs.indexOf(p.sec)<0)secs.push(p.sec)});
+  var s={no:'DEMO-'+('000'+(D.nextNo++)).slice(-4),created_at:new Date().toISOString(),total:c.total,subtotal:c.sub,discount:c.disc,insurance:c.ins,method:st.method,sectors:secs,wholesale:st.mode==='gro',
+    customer:o.cust||null,patient:o.pat||null,dossier:o.dos||null,doctor:o.doc||null,received:st.method==='Lajan kach'?o.r:null,cashier:me.name,cashier_id:me.id,items:items};
+  D.sales.push(s);return s;
+}
+var p0;
+
+/* ---------- Data layer (Supabase or demo) ---------- */
+function P(x){return Promise.resolve(x)}
+function qSales(since,limit,cols){
+  if(DEMO){var rows=D.sales.filter(function(s){return (!since||s.created_at>=since)&&(me.role==='owner'||s.cashier_id===me.id)}).sort(function(a,b){return a.created_at<b.created_at?1:-1}).slice(0,limit);return P({data:rows})}
+  var q=sb.from('sales').select(cols||'*');if(since)q=q.gte('created_at',since);return P(q.order('created_at',{ascending:false}).limit(limit));
+}
+function qExp(sinceDay){
+  if(DEMO)return P({data:D.expenses.filter(function(e){return e.spent_on>=sinceDay}).sort(function(a,b){return a.spent_on<b.spent_on?1:-1})});
+  return P(sb.from('expenses').select('*').gte('spent_on',sinceDay).order('spent_on',{ascending:false}).limit(500));
+}
+function loadProducts(){
+  if(DEMO){PRODUCTS=D.products.filter(function(x){return x.active}).map(function(x){var y=Object.assign({},x);y.exp=x.expDate?daysTo(x.expDate):null;return y});return P()}
+  return P(sb.from('products').select('*').eq('active',true).order('sec').order('name')).then(function(r){
+    if(r.error){toast(T('Pa ka chaje pwodwi yo: {0}',[nice(r.error)]));return}
+    PRODUCTS=r.data.map(norm);
+  });
+}
+function loadToday(){
+  var d=new Date();d.setHours(0,0,0,0);
+  return qSales(d.toISOString(),2000,'total').then(function(r){
+    if(r.error)return;var t=0;r.data.forEach(function(x){t+=+x.total});todaySum={t:t,n:r.data.length};
+  });
+}
+function refresh(){return Promise.all([loadProducts(),loadToday()]).then(all)}
+function saveHeld(){if(DEMO)return;try{localStorage.setItem('corlemps.held.'+me.id,JSON.stringify(st.held))}catch(e){}}
+
+/* ---------- Boot / auth ---------- */
+function introInit(){var el=$('intro');if(!el)return;try{if(sessionStorage.getItem('corlemps.intro')){el.remove();return}sessionStorage.setItem('corlemps.intro','1')}catch(e){}var t=setTimeout(close,4800);function close(){clearTimeout(t);el.remove()}$('introSkip').onclick=close}
+function view(v){['login','locked','appRoot'].forEach(function(k){$(k).hidden=(k!==v)})}
+var addr='',idleT,IDLE_MS=10*60*1000;
+function idleReset(){clearTimeout(idleT);if(!me)return;idleT=setTimeout(function(){if(me){toast(T('Dekonekte otomatikman (inaktivite)'));logout()}},IDLE_MS)}
+['click','keydown','touchstart','mousemove'].forEach(function(ev){document.addEventListener(ev,idleReset,{passive:true})});
+function loadAddr(){if(DEMO){addr='Rue Demo 12, Port-au-Prince';return P()}return P(sb.from('tenants').select('address').maybeSingle()).then(function(r){addr=(r.data&&r.data.address)||''}).catch(function(){})}
+function resetUI(){
+  clearTimeout(idleT);me=null;sub=null;DEMO=false;PRODUCTS=[];st.cart={};st.held=[];st.mode='det';chat=[];
+  ['disc','ins'].forEach(function(i){$(i).value=0});['recv','doc','pat','dos','cust'].forEach(function(i){$(i).value=''});
+  $('subBar').hidden=true;$('hov').classList.remove('on');$('ov').classList.remove('on');
+}
+function boot(){
+  introInit();applyStatic();
+  if(CFG.url&&CFG.key&&window.supabase){
+    sb=window.supabase.createClient(CFG.url,CFG.key);
+    sb.auth.getSession().then(function(r){if(r.data&&r.data.session)enter();else view('login')}).catch(function(){view('login')});
+    sb.auth.onAuthStateChange(function(ev){if(ev==='SIGNED_OUT'&&!DEMO){resetUI();view('login')}});
+  }else{view('login');$('lmsg').textContent='Config Supabase manke.'}
+}
+function login(){
+  if(!sb){$('lmsg').textContent='Config Supabase manke.';return}
+  var em=$('lem').value.trim(),pw=$('lpw').value;
+  if(!em||!pw){$('lmsg').textContent=T('Antre imèl ak modpas.');return}
+  $('lbtn').disabled=true;$('lmsg').textContent='';
+  sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){
+    $('lbtn').disabled=false;
+    if(r.error){$('lmsg').textContent=/invalid/i.test(r.error.message)?T('Imèl oswa modpas pa kòrèk.'):nice(r.error);return}
+    $('lpw').value='';enter();
+  }).catch(function(e){$('lbtn').disabled=false;$('lmsg').textContent=nice(e)});
+}
+function deny(msg){view('login');$('lmsg').textContent=T(msg);sb.auth.signOut()}
+function enter(){
+  sb.auth.getUser().then(function(r){
+    var u=r.data&&r.data.user;if(!u){view('login');return}
+    return sb.from('profiles').select('name,role,shift').eq('id',u.id).maybeSingle().then(function(p){
+      if(p.error||!p.data){deny('Kont sa a poko gen aksè. Kontakte Corlemps.');return}
+      if(p.data.role==='superadmin'){deny('Kont sa a se administratè plat fòm nan. Itilize sit Kontwòl la (kontwol.html).');return}
+      if(p.data.role!=='owner'&&p.data.role!=='cashier'){deny('Kont sa a poko asiyen a yon biznis. Kontakte Corlemps.');return}
+      me={id:u.id,name:p.data.name||u.email,role:p.data.role,shift:p.data.shift};idleReset();loadAddr();setWho();setRoleUI();
+      try{st.held=JSON.parse(localStorage.getItem('corlemps.held.'+me.id)||'[]')}catch(e){st.held=[]}
+      return checkSub().then(function(ok){if(!ok)return;view('appRoot');backupNag();return refresh()});
+    });
+  }).catch(function(e){view('login');$('lmsg').textContent=nice(e)});
+}
+function setRoleUI(){var o=me.role==='owner';$('btnDash').hidden=$('btnAdmin').hidden=$('btnExp').hidden=!o;$('btnAI').hidden=!o||DEMO}
+function startDemo(role){
+  DEMO=true;demoInit();
+  me={id:role==='owner'?'d1':'d2',name:role==='owner'?'Demo Direktè':'Demo Maten',role:role,shift:role==='owner'?null:'maten'};
+  addr='Rue Demo 12, Port-au-Prince';st.held=[];setWho();setRoleUI();demoBar();idleReset();view('appRoot');$('bizH').textContent=bizName();refresh();
+}
+function demoBar(){var el=$('subBar');el.className='subbar';el.textContent=T('MÒD DEMO: done yo pa sove, anyen pa reyèl.');el.hidden=false}
+function logout(){if(DEMO){resetUI();view('login')}else if(sb)sb.auth.signOut()}
+function backupNag(){
+  if(!me||me.role!=='owner'||DEMO)return;
+  try{var l=+localStorage.getItem('corlemps.bk.'+me.id)||0;if(!l){localStorage.setItem('corlemps.bk.'+me.id,Date.now());return}var d=Math.floor((Date.now()-l)/864e5);if(d>=7)setTimeout(function(){toast(T('Pa gen kopi done depi {0} jou. Fè yon sovgad nan ⚙️.',[d]))},2500)}catch(e){}
+}
+
+/* ---------- Abònman ---------- */
+function checkSub(){
+  if(DEMO)return P(true);
+  return P(sb.rpc('sub_status')).then(function(r){
+    if(r.error||!r.data)return true;
+    sub=r.data;
+    if(!sub.active){lock();return false}
+    banner();return true;
+  });
+}
+function lock(){
+  $('lkmsg').innerHTML=sub.suspended?T('Aksè kont sa a sispann pa Corlemps. Kontakte nou pou rezoud sa. Done ou yo an sekirite.'):T('Kès la sispann travay depi <b>{0}</b>. Renouvle abònman an pou kontinye vann. Done ou yo an sekirite.',[fdate(sub.paid_until)]);
+  var w=$('lkwa'),n=String(CFG.support||'').replace(/\D/g,'');
+  w.hidden=!n;if(n)w.href='https://wa.me/'+n+'?text='+encodeURIComponent(T('Bonjou, mwen vle renouvle abònman Corlemps mwen.'));
+  view('locked');
+}
+function banner(){
+  $('bizH').textContent=bizName();document.title=bizName();setWho();
+  var el=$('subBar'),d=sub.days_left,left=sub.grace_days+d;
+  if(d<0){el.className='subbar bad';el.textContent=T('⚠️ Abònman an ekspire. Kès la ap koupe nan {0} jou si ou pa renouvle.',[left]);el.hidden=false}
+  else if(d<=5){el.className='subbar';el.textContent=d===0?T('Abònman ou fini jodi a. Renouvle pou kès la pa koupe.'):T('Abònman ou fini nan {0} jou ({1}). Renouvle pou kès la pa koupe.',[d,fdate(sub.paid_until)]);el.hidden=false}
+  else el.hidden=true;
+}
+function tick(){if(document.hidden||!me||busy||DEMO||$('appRoot').hidden)return;checkSub().then(function(ok){if(ok&&!$('hov').classList.contains('on'))refresh()})}
+
+/* ---------- Render ---------- */
+function renderTabs(){
+  $('tabs').innerHTML=SECS.map(function(s){return '<button class="tab" type="button" data-sec="'+s.k+'" aria-pressed="'+(s.k===st.sec)+'"><span class="i">'+s.i+'</span><span>'+esc(secName(s.k))+'</span></button>'}).join('');
+  document.body.setAttribute('data-sec',st.sec);
+}
+function renderCats(){
+  var cs=['Tout'];PRODUCTS.forEach(function(p){if(p.sec===st.sec&&cs.indexOf(p.c)<0)cs.push(p.c)});
+  if(cs.indexOf(st.cat)<0)st.cat='Tout';
+  $('cats').innerHTML=cs.map(function(c){return '<button class="cat" type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===st.cat)+'">'+esc(c==='Tout'?T(c):c)+'</button>'}).join('');
+}
+function renderGrid(){
+  var q=st.q.toLowerCase();
+  var list=PRODUCTS.filter(function(p){return p.sec===st.sec&&(st.cat==='Tout'||p.c===st.cat)&&(!q||p.n.toLowerCase().indexOf(q)>-1)});
+  $('grid').innerHTML=list.length?list.map(function(p){
+    var ex=expInfo(p),left=p.s==null?Infinity:p.s-inCart(p.id),dead=(ex&&ex.dead)||left<=0;
+    var stock=p.s==null?'':(left<=0?'<span class="s low">'+T('Fini')+'</span>':'<span class="s'+(left<=5?' low':'')+'">'+(p.bed?T('{0} kabann lib',[left]):(left<=5?T('Rete {0}',[left]):T('{0} nan stok',[left])))+'</span>');
+    return '<button class="prod" type="button" data-id="'+p.id+'"'+(dead?' disabled':'')+'>'+(p.rx?'<span class="rx">Rx</span>':'')+
+      '<span class="e">'+esc(p.e)+'</span><span class="n">'+esc(p.n)+'</span><span class="p">'+g(p.p)+'</span>'+
+      (st.mode==='gro'&&p.w!=null?'<span class="gw">'+T('Gwo: {0} (≥{1})',[g(p.w),p.wm])+'</span>':'')+stock+
+      (ex?'<span class="x '+ex.cls+'">'+ex.t+'</span>':'')+'</button>';
+  }).join(''):'<p class="none">'+T('Anyen pa matche isit la 👀 Si katalòg la vid, Direktè a ka ajoute pwodwi nan ⚙️.')+'</p>';
+}
+function renderCart(){
+  ids().forEach(function(i){if(!prod(i))delete st.cart[i]});
+  var list=ids();
+  $('lines').innerHTML=list.length?list.map(function(k){
+    var p=prod(k),q=st.cart[k];
+    return '<div class="line"><div><div class="nm">'+esc(p.n)+(p.rx?'<span class="tag">Rx</span>':'')+'</div><div class="un">'+T('{0} chak',[g(unit(p,q))])+hint(p,q)+'</div></div>'+
+      '<div class="qty"><button type="button" data-dec="'+k+'" aria-label="'+esc(T('Retire yon {0}',[p.n]))+'">−</button><span>'+q+'</span><button type="button" data-inc="'+k+'" aria-label="'+esc(T('Ajoute yon {0}',[p.n]))+'">+</button></div>'+
+      '<b>'+g(unit(p,q)*q)+'</b></div>';
+  }).join(''):'<div class="empty">'+T('Panye a vid 👀<br>Tape sou yon bagay pou kòmanse.')+'</div>';
+  $('cnt').textContent=list.length?T('{0} atik',[cartCount()]):'';
+  var needRx=has(function(p){return p.rx}),needPat=has(isParty),needIns=has(function(p){return p.sec==='hop'});
+  $('rxBox').hidden=!needRx;$('custBox').hidden=st.mode!=='gro';$('patBox').hidden=!needPat;$('insRow').hidden=!needIns;
+  var pl=partyLbl(secsInCart());$('patL').textContent=pl[0];$('dosL').textContent=pl[1];
+  document.querySelectorAll('#mode button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===st.mode)});
+  var c=calc();
+  $('sub').textContent=g(c.sub);$('gainRow').hidden=!(c.gain>0);$('gain').textContent=g(c.gain);
+  $('tot').textContent=g(c.total);
+  var tb=$('tbox');tb.classList.remove('pop');void tb.offsetWidth;tb.classList.add('pop');
+  $('barN').textContent=T('Wè panye ({0})',[cartCount()]);$('barT').textContent=g(c.total);
+  $('methods').innerHTML=METHODS.map(function(m){return '<button class="m" type="button" data-m="'+m+'" aria-pressed="'+(m===st.method)+'">'+esc(T(m))+'</button>'}).join('');
+  $('cashBox').classList.toggle('on',st.method==='Lajan kach');
+  $('held').innerHTML=st.held.map(function(h,i){return '<button type="button" data-held="'+i+'">'+T('Rale vant #{0}',[i+1])+'</button>'}).join('');
+  updateChange();
+  $('pay').disabled=!list.length||busy;
+}
+function updateChange(){
+  if(st.method!=='Lajan kach')return;
+  var r=parseFloat($('recv').value)||0,d=r-calc().total,el=$('chg');
+  if(!r){el.textContent='0 G';el.className='change';return}
+  if(d<0){el.textContent=T('Manke {0}',[g(-d)]);el.className='change bad'}else{el.textContent=g(d);el.className='change'}
+}
+function renderStats(){$('stTotal').textContent=g(todaySum.t);$('stCount').textContent=todaySum.n}
+function all(){renderTabs();renderCats();renderGrid();renderCart();renderStats()}
+function add(id){var p=prod(id);if(!p)return;if(p.s!=null&&inCart(id)>=p.s)return;st.cart[id]=inCart(id)+1;$('msg').textContent='';renderGrid();renderCart()}
+function dec(id){if(!st.cart[id])return;st.cart[id]--;if(st.cart[id]<=0)delete st.cart[id];renderGrid();renderCart()}
+
+/* ---------- Receipt ---------- */
+function sectorsTxt(a){return (a||[]).map(secName).join(' + ')}
+function receiptHTML(s){
+  var d=new Date(s.created_at),date=d.toLocaleDateString(LOC())+' '+d.toLocaleTimeString(LOC(),{hour:'2-digit',minute:'2-digit'});
+  var items=s.items||[],gain=0;items.forEach(function(it){gain+=(it.retail-it.unit)*it.qty});
+  var h='<h3>'+esc(bizName())+'</h3>'+(addr?'<div class="c">'+esc(addr)+'</div>':'')+'<div class="c">'+esc(sectorsTxt(s.sectors))+'<br>'+esc(T('Resi {0}',[s.no]))+'<br>'+date+(s.cashier?'<br>'+esc(T('Kasye: {0}',[s.cashier])):'')+'</div><hr>';
+  if(s.wholesale)h+='<div class="r"><span>'+T('Vant an gwo')+'</span><span>'+esc(s.customer||'')+'</span></div><hr>';
+  if(s.patient){var pl=partyLbl(s.sectors||[]);h+='<div class="r"><span>'+esc(pl[2])+'</span><span>'+esc(s.patient)+(s.dossier?' ('+esc(pl[1])+' '+esc(s.dossier)+')':'')+'</span></div>'}
+  if(s.doctor)h+='<div class="r"><span>'+T('Doktè/Ord.')+'</span><span>'+esc(s.doctor)+'</span></div>';
+  if(s.patient||s.doctor)h+='<hr>';
+  items.forEach(function(it){h+='<div class="r"><span>'+it.qty+' × '+esc(it.name)+(it.rx?' (Rx)':'')+'</span><span>'+g(it.unit*it.qty)+'</span></div>'});
+  h+='<hr><div class="r"><span>'+T('Sou-total')+'</span><span>'+g(s.subtotal)+'</span></div>';
+  if(gain>0)h+='<div class="r"><span>'+T('Ou ekonomize (gwo)')+'</span><span>'+g(gain)+'</span></div>';
+  if(+s.insurance>0)h+='<div class="r"><span>'+T('Asirans')+'</span><span>− '+g(s.insurance)+'</span></div>';
+  if(+s.discount>0)h+='<div class="r"><span>'+T('Rabè')+'</span><span>− '+g(s.discount)+'</span></div>';
+  h+='<div class="r big"><span>TOTAL</span><span>'+g(s.total)+'</span></div><div class="r"><span>'+T('Peman')+'</span><span>'+esc(T(s.method))+'</span></div>';
+  if(s.method==='Lajan kach'&&s.received!=null)h+='<div class="r"><span>'+T('Resevwa')+'</span><span>'+g(s.received)+'</span></div><div class="r"><span>'+T('Monnen')+'</span><span>'+g(s.received-s.total)+'</span></div>';
+  h+='<hr><div class="c">'+T('Mèsi! Pran swen tèt ou 💜')+'</div>'+
+    '<div class="rbtns"><button class="btn" type="button" data-act="print">'+T('Enprime')+'</button><button class="btn" type="button" data-act="wa">WhatsApp</button><button class="btn pri" type="button" data-act="new">'+T('Fèmen')+'</button></div>';
+  return h;
+}
+function showReceipt(s){curSale=s;$('rc').innerHTML=receiptHTML(s);$('ov').classList.add('on')}
+function waText(s){
+  var t=bizName()+(addr?'\n'+addr:'')+'\n'+T('Resi {0}',[s.no])+'\n';
+  (s.items||[]).forEach(function(it){t+=it.qty+' x '+it.name+' = '+g(it.unit*it.qty)+'\n'});
+  return t+'TOTAL: '+g(s.total)+' ('+T(s.method)+')\n'+T('Mèsi!');
+}
+
+/* ---------- Sale ---------- */
+function pay(){
+  if(busy)return;
+  var list=ids();if(!list.length)return;
+  var c=calc(),r=parseFloat($('recv').value)||0;
+  var doc=$('doc').value.trim(),pat=$('pat').value.trim(),dos=$('dos').value.trim(),cust=$('cust').value.trim();
+  var needRx=has(function(p){return p.rx}),needPat=has(isParty),needIns=has(function(p){return p.sec==='hop'});
+  if(st.mode==='gro'&&!cust){$('msg').textContent=T('Antre non kliyan an oswa biznis la pou vant an gwo.');$('cust').focus();return}
+  if(needRx&&!doc){$('msg').textContent=T('Antre non doktè a oswa # ordonnans lan pou medikaman Rx yo.');$('doc').focus();return}
+  if(needPat&&!pat){$('msg').textContent=T('Ranpli "{0}" pou kontinye.',[partyLbl(secsInCart())[0]]);$('pat').focus();return}
+  if(st.method==='Lajan kach'&&r<c.total){$('msg').textContent=T('Kach la pa ase. Antre yon kantite ki egal oswa pi gran pase total la.');$('recv').focus();return}
+  busy=true;$('pay').disabled=true;$('msg').textContent=T('Ap anrejistre vant lan…');
+  var done=function(res){
+    busy=false;
+    if(res.error){$('msg').textContent=nice(res.error);renderCart();if(/abònman/i.test(res.error.message||''))checkSub();else refresh();return}
+    st.cart={};st.mode='det';
+    ['disc','ins'].forEach(function(i){$(i).value=0});['recv','doc','pat','dos','cust'].forEach(function(i){$(i).value=''});
+    $('msg').textContent='';showReceipt(res.data);refresh();
+  };
+  if(DEMO){done({data:demoSale(list,c,{r:r,doc:needRx?doc:null,pat:needPat?pat:null,dos:needPat?dos:null,cust:cust})});return}
+  P(sb.rpc('make_sale',{
+    p_items:list.map(function(i){return {id:i,qty:st.cart[i]}}),
+    p_method:st.method,p_discount:pct('disc'),p_insurance:needIns?pct('ins'):0,
+    p_wholesale:st.mode==='gro',p_customer:cust||null,p_patient:needPat?pat:null,
+    p_dossier:needPat?(dos||null):null,p_doctor:needRx?doc:null,
+    p_received:st.method==='Lajan kach'?r:null
+  })).then(done).catch(function(e){busy=false;$('msg').textContent=nice(e);renderCart()});
+}
+
+/* ---------- History ---------- */
+function closeBtn(){return '<div class="hbtns one"><button type="button" class="btn sec" data-act="hclose">'+T('Fèmen')+'</button></div>'}
+function openHist(){
+  $('hbox').innerHTML='<h3>'+T('Istorik vant')+'</h3><p class="none">'+T('Ap chaje…')+'</p>';$('hov').classList.add('on');
+  qSales(null,50).then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>'+T('Istorik vant')+'</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    histRows=r.data;
+    var h='<h3>'+T('Istorik vant')+'</h3>';
+    h+=histRows.length?histRows.map(function(x,i){
+      return '<button type="button" class="hrow" data-rec="'+i+'"><span><b>'+esc(x.no)+'</b><small>'+new Date(x.created_at).toLocaleString(LOC(),{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+' · '+esc(sectorsTxt(x.sectors))+' · '+esc(T(x.method))+(me.role==='owner'&&x.cashier?' · '+esc(x.cashier):'')+'</small></span><b>'+g(x.total)+'</b></button>';
+    }).join(''):'<p class="none">'+T('Pa gen vant ankò.')+'</p>';
+    $('hbox').innerHTML=h+closeBtn();
+  });
+}
+
+/* ---------- Dashboard (owner) ---------- */
+function openDash(){
+  $('hbox').innerHTML='<h3>'+T('Rapò')+'</h3><p class="none">'+T('Ap chaje…')+'</p>';$('hov').classList.add('on');
+  var since=new Date(Date.now()-30*864e5).toISOString();
+  Promise.all([qSales(since,3000,'created_at,total,items'),qExp(isoDay(new Date(Date.now()-30*864e5)))]).then(function(rs){
+    var r=rs[0],ex=rs[1];
+    if(r.error){$('hbox').innerHTML='<h3>'+T('Rapò')+'</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var t0=new Date();t0.setHours(0,0,0,0);t0=t0.getTime();var w0=Date.now()-7*864e5;
+    var k={day:{t:0,n:0},week:{t:0,n:0},month:{t:0,n:0}},sec={},top={},exT=0;
+    (ex.data||[]).forEach(function(e){exT+=+e.amount});
+    r.data.forEach(function(s){
+      var ts=new Date(s.created_at).getTime(),tot=+s.total;
+      k.month.t+=tot;k.month.n++;if(ts>=w0){k.week.t+=tot;k.week.n++}if(ts>=t0){k.day.t+=tot;k.day.n++}
+      (s.items||[]).forEach(function(it){sec[it.sec]=(sec[it.sec]||0)+it.unit*it.qty;top[it.name]=(top[it.name]||0)+it.qty});
+    });
+    var mx=Math.max.apply(null,[1].concat(SECS.map(function(s){return sec[s.k]||0})));
+    var tops=Object.keys(top).sort(function(a,b){return top[b]-top[a]}).slice(0,5);
+    var low=PRODUCTS.filter(function(p){return p.s!=null&&!p.bed&&p.s<=5});
+    var kp=function(a){return '<div class="kpi"><b>'+a[1]+'</b><span>'+a[0]+'</span></div>'};
+    var h='<h3>'+T('Rapò')+'</h3><div class="kpis">'+
+      [[T('Jodi a')+' · '+T('{0} vant',[k.day.n]),g(k.day.t)],[T('7 dènye jou')+' · '+T('{0} vant',[k.week.n]),g(k.week.t)],[T('30 dènye jou')+' · '+T('{0} vant',[k.month.n]),g(k.month.t)]].map(kp).join('')+'</div>'+
+      '<div class="kpis" style="margin-top:8px">'+[[T('Vant (30 jou)'),g(k.month.t)],[T('Depans (30 jou)'),g(exT)],[T('Benefis net (30 jou)'),g(k.month.t-exT)]].map(kp).join('')+'</div>';
+    h+='<h4>'+T('Vant pa seksyon (30 jou)')+'</h4>'+SECS.map(function(s){return '<div class="rbar"><span>'+s.i+' '+esc(secName(s.k))+'</span><i style="width:'+Math.round((sec[s.k]||0)/mx*100)+'%"></i><b>'+g(sec[s.k]||0)+'</b></div>'}).join('');
+    h+='<h4>'+T('Pwodwi ki vann plis')+'</h4>'+(tops.length?tops.map(function(n){return '<div class="mini"><span>'+esc(n)+'</span><b>'+top[n]+'</b></div>'}).join(''):'<p class="none">'+T('Poko gen done.')+'</p>');
+    h+='<h4>'+T('Stok ki ba')+'</h4>'+(low.length?low.map(function(p){return '<div class="mini"><span>'+esc(p.n)+'</span><b class="lowt">'+p.s+'</b></div>'}).join(''):'<p class="none">'+T('Tout stok yo OK 👍')+'</p>');
+    $('hbox').innerHTML=h+closeBtn();
+  });
+}
+
+/* ---------- Depans (Direktè) ---------- */
+function openExp(){
+  $('hbox').innerHTML='<h3>'+T('Depans')+'</h3><p class="none">'+T('Ap chaje…')+'</p>';$('hov').classList.add('on');
+  qExp(isoDay(new Date(Date.now()-30*864e5))).then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>'+T('Depans')+'</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var tot=0;r.data.forEach(function(e){tot+=+e.amount});
+    var h='<h3>'+T('Depans')+'</h3><div class="kpis" style="grid-template-columns:1fr"><div class="kpi"><b>'+g(tot)+'</b><span>'+T('Total 30 jou')+'</span></div></div>'+
+      '<div class="fields">'+field('xd',T('Deskripsyon'),'text','','maxlength="80" autocomplete="off"')+
+      '<div class="two"><label class="fld">'+T('Kategori')+'<select id="pf-xc">'+EXPCATS.map(function(c){return '<option value="'+c+'">'+esc(T(c))+'</option>'}).join('')+'</select></label>'+field('xa',T('Montan (G)'),'number','','min="0" inputmode="decimal"')+'</div>'+
+      field('xt',T('Dat'),'date',isoDay(),'')+'</div><div class="msg" id="pmsg" role="status"></div>'+
+      '<div class="hbtns one"><button type="button" class="btn pay" data-act="addexp">'+T('Ajoute depans')+'</button></div>';
+    h+=r.data.length?r.data.map(function(e){return '<div class="exrow"><span><b>'+esc(e.description)+'</b><small>'+fdate(e.spent_on)+' · '+esc(T(e.category||'Lòt'))+'</small></span><b>'+g(e.amount)+'</b><button type="button" class="xbtn" data-delexp="'+e.id+'" aria-label="'+T('Retire')+'">✕</button></div>'}).join(''):'<p class="none">'+T('Poko gen depans.')+'</p>';
+    $('hbox').innerHTML=h+closeBtn();
+  });
+}
+function addExp(){
+  var d=$('pf-xd').value.trim(),a=parseFloat($('pf-xa').value),c=$('pf-xc').value,t=$('pf-xt').value||isoDay();
+  if(!d||isNaN(a)||a<=0){$('pmsg').textContent=T('Antre yon deskripsyon ak yon montan valab.');return}
+  var row={description:d,category:c,amount:a,spent_on:t};
+  if(DEMO){row.id=D.nextId++;D.expenses.push(row);toast(T('Depans anrejistre'));openExp();return}
+  P(sb.from('expenses').insert(row)).then(function(r){if(r.error){$('pmsg').textContent=nice(r.error);return}toast(T('Depans anrejistre'));openExp()});
+}
+function delExp(id){
+  if(DEMO){D.expenses=D.expenses.filter(function(e){return e.id!==id});toast(T('Depans retire'));openExp();return}
+  P(sb.from('expenses').delete().eq('id',id)).then(function(r){if(r.error){toast(nice(r.error));return}toast(T('Depans retire'));openExp()});
+}
+
+/* ---------- Paramèt (Direktè) ---------- */
+function openAdmin(){
+  var h='<h3>'+T('Paramèt')+'</h3><label class="fld">'+T('Non biznis la (parèt anwo ak sou resi yo)')+'<input id="bn" type="text" maxlength="60" value="'+esc(bizName())+'" autocomplete="off"></label><div class="hbtns one"><button type="button" class="btn sec" data-act="savebn">'+T('Sove non an')+'</button></div>'+
+  '<label class="fld">'+T('Adrès biznis la (parèt sou resi yo)')+'<input id="ba" type="text" maxlength="120" value="'+esc(addr)+'" autocomplete="off"></label><div class="hbtns one"><button type="button" class="btn sec" data-act="saveaddr">'+T('Sove adrès la')+'</button></div>'+
+  '<h4>'+T('Anplwaye ak wòl')+'</h4><div class="hbtns one"><button type="button" class="btn sec" data-act="staff">👥 '+T('Anplwaye')+'</button></div>'+
+  '<h4>'+T('Sovgad done')+'</h4><div class="hbtns one"><button type="button" class="btn sec" data-act="backup">'+T('Telechaje kopi done (JSON)')+'</button></div>'+
+  '<h4>'+T('Pwodwi')+'</h4><div class="hbtns one"><button type="button" class="btn pay" data-act="newp">'+T('+ Nouvo pwodwi')+'</button></div><div style="height:10px"></div>';
+  h+=PRODUCTS.length?PRODUCTS.map(function(p){
+    return '<button type="button" class="hrow" data-edit="'+p.id+'"><span><b>'+esc(p.e)+' '+esc(p.n)+'</b><small>'+esc(secName(p.sec))+' · '+esc(p.c)+' · '+T('stok: {0}',[p.s==null?T('ilimite'):p.s])+(p.w!=null?' · '+T('gwo {0} (≥{1})',[g(p.w),p.wm]):'')+'</small></span><b>'+g(p.p)+'</b></button>';
+  }).join(''):'<p class="none">'+T('Pa gen pwodwi ankò.')+'</p>';
+  $('hbox').innerHTML=h+closeBtn();$('hov').classList.add('on');
+}
+function field(id,label,type,val,extra){return '<label class="fld">'+label+'<input id="pf-'+id+'" type="'+type+'" value="'+esc(val==null?'':val)+'" '+(extra||'')+'></label>'}
+function editForm(id){
+  editId=id;armed='';
+  var p=id?prod(id):null;
+  var h='<h3>'+(p?T('Modifye pwodwi'):T('Nouvo pwodwi'))+'</h3>'+
+    field('n',T('Non'),'text',p&&p.n,'autocomplete="off"')+
+    '<div class="two"><label class="fld">'+T('Seksyon')+'<select id="pf-sec">'+SECS.map(function(s){return '<option value="'+s.k+'"'+((p?p.sec:st.sec)===s.k?' selected':'')+'>'+s.i+' '+esc(secName(s.k))+'</option>'}).join('')+'</select></label>'+field('c',T('Kategori'),'text',p?p.c:'','autocomplete="off"')+'</div>'+
+    '<div class="two">'+field('e','Emoji','text',p?p.e:'📦','maxlength="4"')+field('p',T('Pri (G)'),'number',p&&p.p,'min="0" inputmode="decimal"')+'</div>'+
+    '<div class="two">'+field('w',T('Pri an gwo (G)'),'number',p&&p.w,'min="0" inputmode="decimal"')+field('wm',T('Minimòm pou gwo'),'number',p&&p.wm,'min="1" inputmode="numeric"')+'</div>'+
+    '<div class="two">'+field('s',T('Stok (vid = ilimite)'),'number',p&&p.s,'min="0" inputmode="numeric"')+field('x',T('Ekspirasyon'),'date',p&&p.expDate)+'</div>'+
+    '<label class="chk"><input type="checkbox" id="pf-rx"'+(p&&p.rx?' checked':'')+'> '+T('Bezwen ordonnans (Rx)')+'</label>'+
+    '<label class="chk"><input type="checkbox" id="pf-bed"'+(p&&p.bed?' checked':'')+'> '+T('Se yon kabann (admisyon)')+'</label>'+
+    '<div class="msg" id="pmsg" role="status"></div>'+
+    '<div class="hbtns"><button type="button" class="btn sec" data-act="admin">'+T('Anile')+'</button><button type="button" class="btn pay" data-act="savep">'+T('Sove')+'</button></div>'+
+    (p?'<div class="hbtns one"><button type="button" class="btn sec" data-act="delp">'+T('Retire pwodwi sa a')+'</button></div>':'');
+  $('hbox').innerHTML=h;
+}
+function numOrNull(id){var v=$('pf-'+id).value.trim();return v===''?null:Number(v)}
+function saveProduct(){
+  var n=$('pf-n').value.trim(),price=numOrNull('p'),w=numOrNull('w'),wm=numOrNull('wm'),s=numOrNull('s');
+  var msg=$('pmsg');
+  if(!n){msg.textContent=T('Antre non pwodwi a.');return}
+  if(price==null||isNaN(price)||price<0){msg.textContent=T('Antre yon pri valab.');return}
+  if((w==null)!==(wm==null)){msg.textContent=T('Pou vant an gwo, ranpli pri a ak minimòm nan toude (oswa kite yo vid).');return}
+  if(w!=null&&(isNaN(w)||w<0||isNaN(wm)||wm<1)){msg.textContent=T('Pri an gwo oswa minimòm nan pa valab.');return}
+  if(s!=null&&(isNaN(s)||s<0||Math.floor(s)!==s)){msg.textContent=T('Stok la dwe yon nonb antye.');return}
+  var row={sec:$('pf-sec').value,name:n,category:$('pf-c').value.trim()||'Lòt',emoji:$('pf-e').value.trim()||'📦',price:price,
+    wholesale_price:w,wholesale_min:wm,stock:s,rx:$('pf-rx').checked,exp_date:$('pf-x').value||null,is_bed:$('pf-bed').checked};
+  var fin=function(r){if(r&&r.error){msg.textContent=nice(r.error);return}toast(T('Pwodwi a sove'));refresh().then(openAdmin)};
+  msg.textContent=T('Ap sove…');
+  if(DEMO){var o={id:editId||D.nextId++,sec:row.sec,n:n,c:row.category,e:row.emoji,p:price,w:w,wm:wm,s:s,rx:row.rx,expDate:row.exp_date,bed:row.is_bed,active:true};
+    var ix=D.products.map(function(x){return x.id}).indexOf(o.id);if(ix>-1)D.products[ix]=o;else D.products.push(o);fin();return}
+  P(editId?sb.from('products').update(row).eq('id',editId):sb.from('products').insert(row)).then(fin);
+}
+function deleteProduct(b){
+  if(armed!=='del'){armed='del';b.textContent=T('Konfime: retire li');return}
+  var fin=function(r){if(r&&r.error){$('pmsg').textContent=nice(r.error);return}delete st.cart[editId];toast(T('Pwodwi a retire'));refresh().then(openAdmin)};
+  if(DEMO){D.products.forEach(function(x){if(x.id===editId)x.active=false});fin();return}
+  P(sb.from('products').update({active:false}).eq('id',editId)).then(fin);
+}
+function saveBizName(){
+  var n=$('bn').value.trim();
+  if(!n){toast(T('Antre yon non pou biznis la.'));return}
+  if(DEMO){toast(T('Pa disponib nan demo'));return}
+  P(sb.rpc('rename_my_tenant',{p_name:n})).then(function(r){
+    if(r.error){toast(nice(r.error));return}
+    checkSub().then(function(){toast(T('Non biznis la chanje'))});
+  });
+}
+function saveAddr(){var a=$('ba').value.trim();if(DEMO){addr=a;toast(T('Adrès la sove'));return}P(sb.rpc('set_my_tenant_address',{p_address:a})).then(function(r){if(r.error){toast(nice(r.error));return}addr=a;toast(T('Adrès la sove'))})}
+function download(obj){var b=new Blob([JSON.stringify(obj,null,1)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='corlemps-sovgad-'+isoDay()+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);toast(T('Kopi done a telechaje'));try{localStorage.setItem('corlemps.bk.'+me.id,Date.now())}catch(e){}}
+function backup(){
+  if(DEMO){download({business:bizName(),products:D.products,sales:D.sales,expenses:D.expenses});return}
+  Promise.all([qSales(null,10000),P(sb.from('products').select('*')),qExp('2000-01-01')]).then(function(r){
+    var e=r[0].error||r[1].error;if(e){toast(nice(e));return}
+    download({date:new Date().toISOString(),business:bizName(),products:r[1].data,sales:r[0].data,expenses:r[2].data||[]});
+  });
+}
+
+/* ---------- Anplwaye (Direktè) ---------- */
+function openStaff(){
+  $('hbox').innerHTML='<h3>'+T('Anplwaye')+'</h3><p class="none">'+T('Ap chaje…')+'</p>';
+  (DEMO?P({data:D.staff}):P(sb.from('profiles').select('id,name,role,shift,employee_code').order('name'))).then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>'+T('Anplwaye')+'</h3><p class="none">'+esc(nice(r.error))+'</p><div class="hbtns one"><button type="button" class="btn sec" data-act="admin">'+T('Fèmen')+'</button></div>';return}
+    var rows=r.data.filter(function(x){return x.role==='owner'||x.role==='cashier'});
+    var h='<h3>'+T('Anplwaye')+'</h3><p class="sub">'+T('Kreye kont nan Supabase (Authentication → Add user), epi asiyen wòl la isit la.')+'</p>';
+    h+=rows.length?rows.map(function(x){
+      var v=x.role==='owner'?'owner':(x.shift==='aswe'?'aswe':'maten');
+      return '<div class="exrow" style="grid-template-columns:1fr auto"><span><b>'+esc(x.name||'—')+'</b><small>'+T('ID: {0}',[esc(x.employee_code||String(x.id).slice(0,8))])+'</small></span>'+
+        '<select class="sel2" data-staff="'+esc(x.id)+'">'+[['owner','Direktè Jeneral'],['maten','Vandè Maten'],['aswe','Vandè Aswè']].map(function(o){return '<option value="'+o[0]+'"'+(o[0]===v?' selected':'')+'>'+T(o[1])+'</option>'}).join('')+'</select></div>';
+    }).join(''):'<p class="none">'+T('Pa gen anplwaye.')+'</p>';
+    $('hbox').innerHTML=h+'<div class="hbtns one"><button type="button" class="btn sec" data-act="admin">'+T('Fèmen')+'</button></div>';
+  });
+}
+function setStaff(id,v){
+  var role=v==='owner'?'owner':'cashier',shift=v==='owner'?null:v;
+  if(DEMO){D.staff.forEach(function(x){if(x.id===id){x.role=role;x.shift=shift}});toast(T('Wòl chanje'));return}
+  P(sb.rpc('set_staff_role',{p_id:id,p_role:role,p_shift:shift})).then(function(r){if(r.error){toast(nice(r.error));openStaff();return}toast(T('Wòl chanje'))});
+}
+
+/* ---------- Asistan IA (Direktè) ---------- */
+var chat=[],aiBusy=false;
+var AI_Q=['Konbyen kòb mwen fè jodi a?','Ki pwodwi ki vann plis semèn sa a?','Ki pwodwi ki prèske fini nan stok?','Ki pwodwi ki pral ekspire?','Fè m yon rezime biznis la'];
+function openAI(){renderChat();$('hov').classList.add('on')}
+function renderChat(){
+  var log=chat.length?chat.map(function(m){return '<div class="bub '+(m.role==='user'?'me':'ai')+'">'+esc(m.content)+'</div>'}).join(''):'<p class="none">'+T('Poze yon kesyon sou biznis ou an Kreyòl, oswa tape sou yon sijesyon.')+'</p>';
+  $('hbox').innerHTML='<h3>'+T('Asistan IA')+' 💬</h3><p class="sub">'+T('Li wè sèlman total, pwodwi ak stok. Li pa wè non kliyan, pasyan, elèv oswa ordonnans.')+'</p>'+
+    '<div class="chatlog" id="chatLog">'+log+'</div>'+
+    '<div class="qchips">'+AI_Q.map(function(q){return '<button type="button" class="cat" data-ai="'+esc(q)+'">'+esc(T(q))+'</button>'}).join('')+'</div>'+
+    '<div class="chatin"><input id="aiq" type="text" placeholder="'+esc(T('Egz: Ki jou mwen vann plis?'))+'" maxlength="300" autocomplete="off"><button type="button" class="btn pay sm" data-act="aisend">'+T('Voye')+'</button></div>'+closeBtn();
+  var el=$('chatLog');el.scrollTop=el.scrollHeight;
+}
+function sendAI(){var i=$('aiq'),q=i?i.value.trim():'';if(q)askAI(q)}
+function askAI(q){
+  if(aiBusy)return;aiBusy=true;
+  var hist=chat.filter(function(m){return !m.tmp}).slice(-6).map(function(m){return {role:m.role,content:m.content}});
+  chat.push({role:'user',content:q});chat.push({role:'assistant',content:T('Ap reflechi…'),tmp:true});renderChat();
+  function done(t){aiBusy=false;chat=chat.filter(function(m){return !m.tmp});chat.push({role:'assistant',content:t});if(chat.length>20)chat=chat.slice(-20);if($('chatLog'))renderChat()}
+  sb.functions.invoke('ask-ai',{body:{question:q,history:hist,lang:lang}}).then(function(r){
+    done(r.error?T('Asistan IA pa disponib kounye a (verifye ke fonksyon ask-ai deplwaye epi kle IA a mete).'):(r.data&&(r.data.error||r.data.answer))||T('Pa gen repons.'));
+  }).catch(function(e){done(nice(e))});
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  var d=b.dataset;
+  if(d.id)add(+d.id);
+  else if(d.inc)add(+d.inc);
+  else if(d.dec)dec(+d.dec);
+  else if(d.mode){st.mode=d.mode;$('msg').textContent='';renderGrid();renderCart()}
+  else if(d.sec){st.sec=d.sec;st.cat='Tout';st.q='';$('q').value='';renderTabs();renderCats();renderGrid()}
+  else if(d.c){st.cat=d.c;renderCats();renderGrid()}
+  else if(d.m){st.method=d.m;renderCart()}
+  else if(d.held){var h=st.held.splice(+d.held,1)[0];if(ids().length)st.held.push({cart:st.cart});st.cart=h.cart;saveHeld();renderGrid();renderCart()}
+  else if(d.rec){showReceipt(histRows[+d.rec]);$('hov').classList.remove('on')}
+  else if(d.edit){editForm(+d.edit)}
+  else if(d.delexp)delExp(+d.delexp);
+  else if(d.act==='newp')editForm(null);
+  else if(d.act==='savebn')saveBizName();else if(d.act==='saveaddr')saveAddr();else if(d.act==='backup')backup();
+  else if(d.act==='staff')openStaff();else if(d.act==='addexp')addExp();
+  else if(d.act==='aisend')sendAI();
+  else if(d.ai)askAI(T(d.ai));
+  else if(d.act==='admin')openAdmin();
+  else if(d.act==='savep')saveProduct();
+  else if(d.act==='delp')deleteProduct(b);
+  else if(d.act==='hclose')$('hov').classList.remove('on');
+  else if(d.act==='new')$('ov').classList.remove('on');
+  else if(d.act==='print')window.print();
+  else if(d.act==='wa'){if(curSale)window.open('https://wa.me/?text='+encodeURIComponent(waText(curSale)),'_blank','noopener')}
+  else if(b.id==='hold'){
+    if(!ids().length){toast(T('Panye a vid'));return}
+    st.held.push({cart:st.cart});st.cart={};saveHeld();renderGrid();renderCart();toast(T('Vant lan mete an pause'));
+  }
+  else if(b.id==='pay')pay();
+  else if(b.id==='lbtn')login();
+  else if(b.id==='btnOut'||b.id==='lkout')logout();
+  else if(b.id==='lkretry')enter();
+  else if(b.id==='hist')openHist();
+  else if(b.id==='btnDash')openDash();
+  else if(b.id==='btnExp')openExp();
+  else if(b.id==='btnAdmin')openAdmin();
+  else if(b.id==='btnAI')openAI();
+  else if(b.id==='bar')$('cart').scrollIntoView({behavior:'smooth'});
+});
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.matches&&t.matches('select.langsel')&&!t.dataset.staff)setLang(t.value);
+  else if(t.dataset&&t.dataset.staff)setStaff(t.dataset.staff,t.value);
+});
+$('lpw').addEventListener('keydown',function(e){if(e.key==='Enter')login()});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target&&e.target.id==='aiq')sendAI();if(e.key==='Escape'){$('hov').classList.remove('on')}});
+$('q').addEventListener('input',function(e){st.q=e.target.value;renderGrid()});
+['disc','ins'].forEach(function(i){$(i).addEventListener('input',renderCart)});
+$('recv').addEventListener('input',updateChange);
+document.addEventListener('visibilitychange',tick);
+setInterval(tick,90000);
+boot();
+</script>
+</body>
+</html>
