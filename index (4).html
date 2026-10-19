@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="ht">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corlemps Company</title>
+<meta name="theme-color" content="#7A4DFF">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Corlemps">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E4DBFF;--paper:#FFFFFF;--ink:#14101F;--muted:#5E5578;--line:#14101F;--sh:#14101F;--field:#F3EEFF;
+  --violet:#7A4DFF;--pink:#FF5CA8;--lime:#C6F432;--sky:#6EC8FF;--sun:#FFD84D;--dark:#14101F;--bad:#E0245E;--good:#0B8F5A;
+  --display:'Unbounded','Arial Black',system-ui,sans-serif;--body:'DM Sans',system-ui,sans-serif;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#150F2A;--paper:#231A40;--ink:#F4EFFF;--muted:#B3A8D6;--line:#9B86E8;--sh:#05030C;--field:#2D2350;--bad:#FF6B97;--good:#4BE0A0}
+}
+:root[data-theme="dark"]{--bg:#150F2A;--paper:#231A40;--ink:#F4EFFF;--muted:#B3A8D6;--line:#9B86E8;--sh:#05030C;--field:#2D2350;--bad:#FF6B97;--good:#4BE0A0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+html,body{margin:0}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.4;-webkit-tap-highlight-color:transparent}
+body[data-sec="bou"]{--acc:var(--lime)}
+body[data-sec="fam"]{--acc:var(--sky)}
+body[data-sec="hop"]{--acc:var(--pink)}
+body[data-sec="hot"]{--acc:#FF9A3D}
+body[data-sec="mar"]{--acc:var(--sun)}
+body[data-sec="lek"]{--acc:#B79CFF}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--violet);outline-offset:3px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 16px;max-width:1200px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{flex:none;width:46px;height:46px;border-radius:14px;background:var(--violet);color:#fff;border:3px solid var(--line);box-shadow:3px 3px 0 var(--sh);display:grid;place-items:center;font:800 22px var(--display);transform:rotate(-6deg)}
+.brand h1{font:800 clamp(16px,4.4vw,24px) var(--display);margin:0;letter-spacing:-.02em;line-height:1.1}
+.brand small{color:var(--muted);display:block;font-size:13px;margin-top:2px}
+.stats{display:flex;gap:10px;flex:none}
+.stat{background:var(--sun);color:var(--dark);border:3px solid var(--line);border-radius:14px;box-shadow:3px 3px 0 var(--sh);padding:6px 12px;text-align:right}
+.stat b{font:800 16px var(--display);display:block}
+.stat span{font-size:12px;font-weight:500}
+.stat.alt{background:var(--paper);color:var(--ink)}
+
+.app{display:grid;grid-template-columns:1fr 390px;gap:20px;padding:6px 16px 24px;max-width:1200px;margin:0 auto}
+.card{background:var(--paper);border:3px solid var(--line);border-radius:20px;box-shadow:5px 5px 0 var(--sh)}
+
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.tab{border:3px solid var(--line);background:var(--paper);border-radius:16px;padding:12px 6px;font:700 15px var(--display);box-shadow:3px 3px 0 var(--sh);display:flex;flex-direction:column;align-items:center;gap:2px;transition:transform .1s,box-shadow .1s}
+.tab .i{font-size:24px}
+.tab span:last-child{font-size:clamp(12px,3.2vw,15px)}
+.tab[aria-pressed="true"]{background:var(--acc);color:var(--dark);transform:translate(2px,2px);box-shadow:1px 1px 0 var(--sh)}
+
+.catalog{padding:16px}
+.search{width:100%;padding:13px 16px;border:3px solid var(--line);border-radius:14px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.search::placeholder{color:var(--muted)}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:14px 4px 8px}
+.cat{flex:none;border:2px solid var(--line);background:var(--paper);padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px}
+.cat[aria-pressed="true"]{background:var(--acc);color:var(--dark)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;margin-top:8px}
+.prod{position:relative;text-align:left;border:3px solid var(--line);background:var(--paper);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:3px;min-height:130px;box-shadow:3px 3px 0 var(--sh);transition:transform .1s,box-shadow .1s}
+.prod:active:not([disabled]){transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
+.prod .e{font-size:28px;line-height:1}
+.prod .n{font-weight:700;font-size:14px;margin-top:4px}
+.prod .p{font:800 14px var(--display);color:var(--ink)}
+.prod .s{font-size:12px;color:var(--muted)}
+.prod .s.low{color:var(--bad);font-weight:700}
+.prod .x{font-size:12px;font-weight:700;color:var(--muted)}
+.prod .x.soon{color:#B45309}
+:root[data-theme="dark"] .prod .x.soon{color:#FFB357}
+.prod .x.gone{color:var(--bad)}
+.rx{position:absolute;top:8px;right:8px;background:var(--pink);color:var(--dark);border:2px solid var(--line);border-radius:8px;font:800 11px var(--display);padding:2px 6px;transform:rotate(6deg)}
+.prod[disabled]{opacity:.5;cursor:not-allowed;box-shadow:none}
+.none{grid-column:1/-1;text-align:center;color:var(--muted);padding:28px 8px}
+
+.cart{padding:16px;align-self:start;position:sticky;top:12px;display:flex;flex-direction:column}
+.cart h2{font:800 18px var(--display);margin:0 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+.cart h2 small{font:500 13px var(--body);color:var(--muted)}
+.held{display:flex;gap:6px;flex-wrap:wrap}
+.held button{border:2px dashed var(--line);background:transparent;border-radius:10px;padding:4px 10px;font-size:13px;font-weight:700;margin-bottom:8px}
+.lines{min-height:80px;max-height:280px;overflow-y:auto}
+.empty{color:var(--muted);padding:22px 4px;text-align:center}
+.line{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:9px 0;border-bottom:2px dashed var(--line)}
+.line .nm{font-weight:700}
+.line .un{font-size:12px;color:var(--muted)}
+.tag{display:inline-block;background:var(--pink);color:var(--dark);border-radius:6px;font:800 10px var(--display);padding:1px 5px;margin-left:4px;vertical-align:1px}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:34px;height:34px;border-radius:10px;border:2px solid var(--line);background:var(--field);font-weight:800;font-size:18px;line-height:1}
+.qty span{min-width:22px;text-align:center;font-weight:700}
+
+.fields{display:grid;gap:8px;margin-top:10px}
+.fld{display:grid;gap:3px;font-size:13px;font-weight:700}
+.fld input,.num{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.row .num{width:96px;text-align:right;padding:7px 10px}
+.sum{display:grid;gap:7px;margin-top:12px}
+.totalbox{margin-top:10px;background:var(--acc);color:var(--dark);border:3px solid var(--line);border-radius:18px;box-shadow:4px 4px 0 var(--sh);padding:12px 16px;transform:rotate(-1.2deg);display:flex;justify-content:space-between;align-items:center}
+.totalbox span{font-weight:700}
+.totalbox b{font:800 26px var(--display);letter-spacing:-.02em}
+.totalbox.pop b{animation:pop .25s}
+@keyframes pop{50%{transform:scale(1.12)}}
+.methods{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:14px}
+.m{border:2px solid var(--line);background:var(--paper);border-radius:12px;padding:10px;font-weight:700}
+.m[aria-pressed="true"]{background:var(--violet);color:#fff}
+.cash{margin-top:10px;display:none;gap:8px}
+.cash.on{display:grid}
+.change{font-weight:800;color:var(--good)}
+.change.bad{color:var(--bad)}
+.msg{min-height:20px;font-size:13px;font-weight:700;color:var(--bad);margin-top:8px}
+.actions{display:grid;grid-template-columns:1fr 1.6fr;gap:10px;margin-top:6px}
+.btn{border:3px solid var(--line);border-radius:14px;padding:13px;font:800 15px var(--display);box-shadow:3px 3px 0 var(--sh);transition:transform .1s,box-shadow .1s;color:var(--dark)}
+.btn:active:not(:disabled){transform:translate(3px,3px);box-shadow:0 0 0 var(--sh)}
+.btn.sec{background:var(--paper);color:var(--ink);font-size:13px}
+.btn.pay{background:var(--lime)}
+.btn:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+#bar{display:none}
+.hbtn{background:var(--paper);color:var(--ink);font-family:var(--body);text-align:center}
+.hbtn b{font-size:18px}
+.hist{background:var(--paper);color:var(--ink);width:100%;max-width:420px;max-height:88%;overflow-y:auto;border:3px solid var(--line);border-radius:20px;box-shadow:6px 6px 0 var(--sh);padding:18px}
+.hist h3{margin:0 0 10px;font:800 18px var(--display)}
+.hrow{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;text-align:left;background:var(--field);border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.hrow small{display:block;color:var(--muted);font-size:12px}
+.hbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.mode{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px;background:var(--field);border:3px solid var(--line);border-radius:14px;padding:4px}
+.mode button{border:0;background:transparent;border-radius:10px;padding:9px 6px;font:700 13px var(--display);color:var(--ink)}
+.mode button[aria-pressed="true"]{background:var(--violet);color:#fff}
+.prod .gw{font-size:12px;font-weight:700;color:var(--good)}
+.overlay{position:fixed;inset:0;background:rgba(10,5,30,.7);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.overlay.on{display:flex}
+.receipt{background:#fff;color:#14101F;width:100%;max-width:350px;max-height:100%;overflow-y:auto;border:3px solid #14101F;border-radius:16px;padding:20px 18px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px;box-shadow:6px 6px 0 #000}
+.receipt h3{margin:0;text-align:center;font:800 17px var(--display);letter-spacing:-.02em}
+.receipt .c{text-align:center;color:#554D70}
+.receipt hr{border:0;border-top:2px dashed #9A90BC;margin:10px 0}
+.receipt .r{display:flex;justify-content:space-between;gap:8px}
+.receipt .big{font-size:16px;font-weight:700}
+.receipt svg{display:block;margin:10px auto 4px;width:96px;height:96px}
+.rbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.rbtns .btn{padding:10px;font-size:12px;background:#EDE7FF;color:#14101F;border-color:#14101F;box-shadow:2px 2px 0 #14101F}
+.rbtns .btn.pri{grid-column:1/-1;background:#C6F432;font-size:13px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .2s;z-index:20;max-width:90%;text-align:center}
+.toast.on{opacity:1}
+
+@media (max-width:880px){
+  .app{grid-template-columns:1fr;padding:6px 12px 100px}
+  .cart{position:static}
+  .stat span{display:none}
+  .stat.alt{display:none}
+  #bar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--violet);color:#fff;justify-content:space-between;align-items:center;border:3px solid var(--line);border-radius:16px;box-shadow:4px 4px 0 var(--sh);padding:13px 16px;font:800 15px var(--display);z-index:5}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+.subbar{background:var(--sun);color:var(--dark);border-bottom:3px solid var(--line);padding:10px 16px;font-weight:700;text-align:center}
+.subbar.bad{background:var(--bad);color:#fff}
+.center{min-height:100vh;display:grid;place-items:center;padding:20px}
+.lcard{width:100%;max-width:400px;padding:26px;display:grid;gap:14px}
+.lcard h1{font:800 24px var(--display);letter-spacing:-.03em;margin:0}
+.lcard p{margin:0;color:var(--muted)}
+.lcard .brand{margin-bottom:6px}
+.lcard code{background:var(--field);border:2px solid var(--line);border-radius:8px;padding:1px 6px;font-size:13px}
+.fld select{width:100%;padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.chk{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;margin-top:8px}
+.chk input{width:20px;height:20px;accent-color:var(--violet)}
+.hbtns.one{grid-template-columns:1fr}
+.hist h4{font:800 14px var(--display);margin:16px 0 8px}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kpi{background:var(--sun);color:var(--dark);border:3px solid var(--line);border-radius:14px;padding:8px 8px;box-shadow:3px 3px 0 var(--sh)}
+.kpi b{font:800 14px var(--display);display:block;word-break:break-word}
+.kpi span{font-size:11px;font-weight:500}
+.rbar{display:grid;grid-template-columns:90px 1fr auto;align-items:center;gap:8px;margin-bottom:8px;font-size:14px;position:static;background:none;border:0;box-shadow:none;padding:0;color:inherit}
+.rbar i{display:block;height:16px;background:var(--acc,var(--violet));border:2px solid var(--line);border-radius:8px;min-width:3px}
+.mini{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:2px dashed var(--line)}
+.lowt{color:var(--bad)}
+.sub{color:var(--muted);font-size:13px;margin:0 0 10px}
+.chatlog{max-height:46vh;min-height:90px;overflow-y:auto;display:grid;gap:8px;align-content:start;padding:4px 2px;margin-bottom:8px}
+.bub{max-width:88%;padding:9px 12px;border:2px solid var(--line);border-radius:14px;white-space:pre-wrap;font-size:14px;line-height:1.4}
+.bub.me{justify-self:end;background:var(--violet);color:#fff;border-bottom-right-radius:4px}
+.bub.ai{justify-self:start;background:var(--field);border-bottom-left-radius:4px}
+.qchips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.qchips .cat{font-size:12px;padding:5px 10px;text-align:left}
+.chatin{display:grid;grid-template-columns:1fr auto;gap:8px}
+.chatin input{padding:10px 12px;border:2px solid var(--line);border-radius:12px;background:var(--field);color:var(--ink);font-size:16px;font-family:var(--body)}
+.who{font-size:12px;color:var(--muted);display:block}
+.stats{flex-wrap:wrap;justify-content:flex-end}
+@media (max-width:880px){
+  #bar{display:flex;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));background:var(--violet);color:#fff;justify-content:space-between;align-items:center;border:3px solid var(--line);border-radius:16px;box-shadow:4px 4px 0 var(--sh);padding:13px 16px;font:800 15px var(--display);z-index:5}
+}
+@media print{
+  body>*:not(#ov){display:none!important}
+  #ov{position:static;background:none;display:block!important;padding:0}
+  .receipt{box-shadow:none;border:0;max-width:none;max-height:none}
+  .rbtns{display:none}
+}
+
+/* intro video */
+#intro{position:fixed;inset:0;z-index:99;background:linear-gradient(135deg,#2B1B5A,#14101F);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:24px;animation:introOut .6s ease 4.4s forwards}
+#intro .lg{width:96px;height:96px;border-radius:26px;background:var(--violet);display:grid;place-items:center;font:800 52px/1 system-ui,sans-serif;animation:pop .9s cubic-bezier(.2,1.4,.4,1) both}
+#intro .w{font-size:16px;letter-spacing:.3em;text-transform:uppercase;opacity:0;animation:rise .8s ease .7s forwards}
+#intro h2{font-size:clamp(28px,7vw,52px);margin:0;opacity:0;animation:rise .8s ease 1.3s forwards}
+#intro .bar{width:min(240px,60vw);height:4px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+#intro .bar i{display:block;height:100%;width:0;background:#fff;animation:fill 4s linear .4s forwards}
+#intro button{background:none;border:2px solid rgba(255,255,255,.5);color:#fff;border-radius:999px;padding:8px 18px;font:inherit;cursor:pointer}
+@keyframes pop{from{transform:scale(0) rotate(-20deg)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fill{to{width:100%}}
+@keyframes introOut{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){#intro .w,#intro h2{opacity:1}#intro .bar i{width:100%}}
+/* telefòn · tablèt · laptòp · òdinatè */
+@media (min-width:600px) and (max-width:880px){.app{padding:10px 24px 100px}.lcard{max-width:460px}}
+@media (min-width:1400px){.top,.app{max-width:1500px}.app{grid-template-columns:1fr 440px}}
+/* ===== v2 ===== */
+body[data-sec="bar"]{--acc:#FF7A59}
+body[data-sec="pis"]{--acc:#4FD1C5}
+.logo.has{background:var(--paper);overflow:hidden;padding:0;transform:none}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.stat .av{width:24px;height:24px;border-radius:50%;object-fit:cover;vertical-align:middle;border:2px solid var(--line)}
+.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--good);vertical-align:middle;animation:blink 1.6s infinite}
+.dot.off{background:var(--bad);animation:none}
+@keyframes blink{50%{opacity:.35}}
+.alertbar{display:block;width:100%;border:0;border-bottom:3px solid var(--line);cursor:pointer;font:inherit;font-weight:700}
+.eq{font-size:12px;color:var(--muted);margin-top:6px;text-align:right}
+.receipt .rlogo{display:block;margin:0 auto 6px;max-width:72px;max-height:72px;object-fit:contain}
+label.btn{display:block;text-align:center;cursor:pointer;background:var(--paper);color:var(--ink);font-size:13px}
+.pic{width:92px;height:92px;border-radius:50%;border:3px solid var(--line);background:var(--field);display:grid;place-items:center;font:800 34px var(--display);overflow:hidden;margin:0 auto 10px}
+.pic img{width:100%;height:100%;object-fit:cover}
+.pic.sq{border-radius:18px}
+.kpis.one{grid-template-columns:1fr}
+.mode.k3{grid-template-columns:repeat(3,1fr)}
+.bal{font:800 13px var(--display);white-space:nowrap}
+.bal.owe{color:var(--bad)}
+.bal.ok{color:var(--good)}
+.tag.ref{background:var(--bad);color:#fff}
+.feed .it{display:grid;gap:2px;padding:8px 0;border-bottom:2px dashed var(--line)}
+.feed .it small{color:var(--muted)}
+.team{background:var(--field);border:2px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:10px;display:grid;gap:6px}
+.hist textarea{width:100%}
+.btn.sm{padding:9px 14px;font-size:13px}
+.plans{display:grid;gap:10px}.plan{width:100%;text-align:left;border:3px solid var(--line);background:var(--paper);border-radius:16px;padding:12px 14px;box-shadow:3px 3px 0 var(--sh);display:flex;justify-content:space-between;align-items:center;gap:8px}.plan[aria-pressed="true"]{background:var(--lime);color:var(--dark)}.plan b{font:800 15px var(--display)}.plan small{display:block;opacity:.75}.hlp{text-align:center;font-size:13px}
+</style>
+</head>
+<body data-sec="bou">
+<div id="intro" role="presentation"><div class="lg" aria-hidden="true">C</div><div class="w">Welcome to</div><h2>Corlemps Company</h2><div class="bar"><i></i></div><button type="button" id="introSkip">Pase</button></div>
+
+<section id="setup" class="center" hidden>
+  <div class="card lcard">
+    <div class="brand"><div class="logo" aria-hidden="true">C</div></div>
+    <h1>Konfigirasyon manke</h1>
+    <p>Louvri fichye <code>config.js</code> epi mete <code>url</code> ak <code>key</code> Supabase ou yo. Swiv etap yo nan <code>LIZE-MWEN.txt</code>.</p>
+  </div>
+</section>
+
+<section id="login" class="center" hidden>
+  <div class="card lcard">
+    <div class="brand"><div class="logo" aria-hidden="true">C</div></div>
+    <p class="welcome">Welcome to Corlemps Company</p>
+    <h1>Corlemps Company</h1>
+    <div class="mode" id="amode"><button type="button" data-am="in" aria-pressed="true">Konekte</button><button type="button" data-am="up" aria-pressed="false">Enskri</button></div>
+    <p id="atxt">Konekte pou louvri kès la.</p>
+    <div id="nmBox" hidden style="display:grid;gap:14px"><div class="two"><label class="fld">Non<input id="lfn" type="text" autocomplete="given-name" maxlength="40"></label><label class="fld">Prenon<input id="lnm2" type="text" autocomplete="family-name" maxlength="40"></label></div>
+    <label class="fld">Nimewo telefòn<input id="lph2" type="tel" inputmode="tel" autocomplete="tel" placeholder="+509 3X XX XXXX"></label>
+    <label class="fld">Adrès (opsyonèl)<input id="lad" type="text" autocomplete="street-address" maxlength="120"></label>
+    <label class="fld">Ki moun ki voye w?<select id="lrt"><option value="">— Chwazi —</option><option value="agent">Yon ajan</option><option value="social_media">Rezo sosyal</option><option value="friend">Yon zanmi</option></select></label>
+    <label class="fld" id="rbA" hidden>Nimewo ajan an<input id="lra" type="text" inputmode="numeric" maxlength="20"></label>
+    <label class="fld" id="rbP" hidden>Ki platfòm?<select id="lrp"><option value="">— Chwazi —</option><option>Facebook</option><option>TikTok</option><option>WhatsApp</option><option>Instagram</option><option>YouTube</option><option>Lòt</option></select></label>
+    <label class="fld" id="rbF" hidden>Non zanmi an<input id="lrf" type="text" maxlength="60"></label>
+    <label class="fld">Tip biznis<select id="lbt"><option value="">— Chwazi —</option><option value="hospital">Lopital</option><option value="shop">Boutik</option><option value="school">Lekòl</option><option value="pharmacy">Famasi</option><option value="custom">Lòt (mwen ekri pwòp mwen)</option></select></label>
+    <label class="fld" id="rbC" hidden>Tip biznis ou<input id="lcb" type="text" maxlength="40" placeholder="Egzanp: Salon bote"></label></div>
+    <label class="fld">Imèl oswa username<input id="lem" type="text" autocomplete="username" inputmode="email" autocapitalize="none" spellcheck="false"></label>
+    <label class="fld">Modpas<input id="lpw" type="password" autocomplete="current-password"></label>
+    <div class="msg" id="lmsg" role="status"></div>
+    <button class="btn pay" id="lbtn" type="button">Konekte</button>
+    <a class="btn sec" id="lsup" target="_blank" rel="noopener" hidden>💬 Bezwen èd? Pale ak sèvis kliyantèl</a>
+  </div>
+</section>
+
+<section id="locked" class="center" hidden>
+  <div class="card lcard">
+    <div class="brand"><div class="logo" aria-hidden="true">C</div></div>
+    <h1>Kès la bloke 🔒</h1>
+    <p id="lkmsg"></p>
+    <a class="btn pay" id="lkwa" href="#" hidden target="_blank" rel="noopener">Renouvle sou WhatsApp</a>
+    <button class="btn pay" id="lkplan" type="button" hidden>💳 Chwazi yon plan epi peye</button>
+    <button class="btn sec" id="lkretry" type="button">Mwen peye deja, verifye ankò</button>
+    <button class="btn sec" id="lkout" type="button">Soti</button>
+  </div>
+</section>
+
+<section id="plans" class="center" hidden>
+  <div class="card lcard">
+    <h1>Abònman 💳</h1>
+    <p id="pltxt"></p>
+    <div class="plans" id="plist"></div>
+    <label class="fld">Nimewo MonCash ou<input id="pph" type="tel" inputmode="tel" placeholder="509 3X XX XXXX" autocomplete="tel"></label>
+    <div class="msg" id="pmsg2" role="status"></div>
+    <button class="btn pay" id="ppay" type="button">Peye ak MonCash</button>
+    <a class="btn sec" id="psup" target="_blank" rel="noopener" hidden>💬 Pale ak sèvis kliyantèl</a>
+    <button class="btn sec" id="pback" type="button">Retounen</button>
+  </div>
+</section>
+
+<div id="appRoot" hidden>
+<div class="subbar" id="subBar" role="status" hidden></div>
+<button class="subbar alertbar" id="alertBar" type="button" hidden></button>
+<header class="top">
+  <div class="brand">
+    <div class="logo" id="hLogo" aria-hidden="true">C</div>
+    <div><h1 id="bizH">Corlemps Company</h1><small id="who" class="who"></small></div>
+  </div>
+  <div class="stats">
+    <div class="stat"><b id="stTotal">0 G</b><span>Vant jodi a</span></div>
+    <div class="stat alt"><b id="stCount">0</b><span>Tranzaksyon</span></div>
+    <button class="stat hbtn" id="netBadge" type="button" aria-label="Vant an atant" hidden><b>📴</b><span>Offline</span></button>
+    <button class="stat hbtn" id="btnAcc" type="button" aria-label="Kont"><b>📋</b><span>Kont</span></button>
+    <button class="stat hbtn" id="btnLive" type="button" aria-label="Dirèk" hidden><b><span class="dot off"></span></b><span>Dirèk</span></button>
+    <button class="stat hbtn" id="hist" type="button" aria-label="Istorik vant"><b>🧾</b><span>Istorik</span></button>
+    <button class="stat hbtn" id="btnDash" type="button" aria-label="Rapò" hidden><b>📊</b><span>Rapò</span></button>
+    <button class="stat hbtn" id="btnAI" type="button" aria-label="Asistan IA" hidden><b>💬</b><span>Asistan IA</span></button>
+    <button class="stat hbtn" id="btnAdmin" type="button" aria-label="Paramèt ak pwodwi" hidden><b>⚙️</b><span>Paramèt</span></button>
+    <button class="stat hbtn" id="btnProf" type="button" aria-label="Pwofil"><b>👤</b><span>Pwofil</span></button>
+    <button class="stat hbtn" id="btnOut" type="button" aria-label="Dekonekte"><b>🚪</b><span>Soti</span></button>
+  </div>
+</header>
+
+<main class="app">
+  <section aria-label="Katalòg">
+    <div class="tabs" id="tabs" role="group" aria-label="Seksyon"></div>
+    <div class="card catalog">
+      <input id="q" class="search" type="search" placeholder="Chèche pwodwi, medikaman oswa sèvis" aria-label="Rechèch">
+      <div class="cats" id="cats" role="group" aria-label="Kategori"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <aside class="card cart" id="cart" aria-label="Panye">
+    <h2>Panye <small id="cnt"></small></h2>
+    <div class="mode" id="mode" role="group" aria-label="Tip vant"><button type="button" data-mode="det" aria-pressed="true">Vant detay</button><button type="button" data-mode="gro" aria-pressed="false">Vant an gwo</button></div>
+    <div class="held" id="held"></div>
+    <div class="lines" id="lines"></div>
+
+    <div class="fields">
+      <label class="fld" id="custBox" hidden>Non kliyan / biznis (vant an gwo)
+        <input id="cust" type="text" placeholder="Egz: Boutik Mari" autocomplete="off"></label>
+      <label class="fld" id="rxBox" hidden>Non doktè / # ordonnans (pou medikaman Rx)
+        <input id="doc" type="text" placeholder="Egz: Dr. Pierre #2041" autocomplete="off"></label>
+      <div class="two" id="patBox" hidden>
+        <label class="fld"><span id="patL">Non pasyan</span><input id="pat" type="text" placeholder="Non konplè" autocomplete="off"></label>
+        <label class="fld"><span id="dosL"># dosye</span><input id="dos" type="text" placeholder="Opsyonèl" autocomplete="off"></label>
+      </div>
+    </div>
+
+    <div id="loyBox" hidden><div class="two"><label class="fld">Telefòn kliyan fidèl<input id="lph" type="tel" inputmode="tel" placeholder="Opsyonèl" autocomplete="off"></label><label class="fld">Non kliyan<input id="lnm" type="text" placeholder="Opsyonèl" autocomplete="off"></label></div><div class="sub" id="lpts" hidden></div></div>
+
+    <div class="sum">
+      <div class="row"><span>Sou-total</span><span id="sub">0 G</span></div>
+      <div class="row" id="gainRow" hidden><span>Ou ekonomize</span><b id="gain">0 G</b></div>
+      <div class="row" id="insRow" hidden><label for="ins">Asirans pran chaj (%)</label><input class="num" id="ins" type="number" min="0" max="100" value="0" inputmode="numeric"></div>
+      <div class="row"><label for="disc">Rabè (%)</label><input class="num" id="disc" type="number" min="0" max="100" value="0" inputmode="numeric"></div>
+    </div>
+    <div class="totalbox" id="tbox"><span>Total pou peye</span><b id="tot">0 G</b></div>
+    <div class="eq" id="eqRow" hidden></div>
+
+    <div class="methods" id="methods" role="group" aria-label="Metòd peman"></div>
+    <div class="cash" id="cashBox">
+      <div class="row"><label for="recv">Kach resevwa</label><input class="num" id="recv" type="number" min="0" inputmode="numeric" placeholder="0"></div>
+      <div class="row"><span>Monnen pou remèt</span><span class="change" id="chg">0 G</span></div>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+    <div class="actions">
+      <button class="btn sec" id="hold" type="button">Mete an pause</button>
+      <button class="btn pay" id="pay" type="button" disabled>Peye 💸</button>
+    </div>
+  </aside>
+</main>
+<button class="bar" id="bar" type="button"><span id="barN">Wè panye (0)</span><span id="barT">0 G</span></button>
+</div>
+
+<div class="overlay" id="ov" role="dialog" aria-modal="true" aria-label="Resi"><div class="receipt" id="rc"></div></div>
+<div class="overlay" id="hov" role="dialog" aria-modal="true" aria-label="Detay"><div class="hist" id="hbox"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>window.CORLEMPS={url:"https://juvhvyciklatbnerjxlq.supabase.co",key:"sb_publishable_8OxBH-_Fi2uXZd33LOo_EA_EZKLZ3xb",support:"50947570435",trialDays:7,plans:[{k:"m1",n:"1 mwa",mo:1,p:2999.9},{k:"m3",n:"3 mwa",mo:3,p:8997.9},{k:"m6",n:"6 mwa",mo:6,p:17994.9},{k:"y1",n:"12 mwa (1 ane)",mo:12,p:35988.9}]};</script>
+<script>
+/* Corlemps Company — Kès Vant v1 (Supabase) */
+var SECS=[{k:'bou',n:'Boutik',i:'🛒'},{k:'mar',n:'Market',i:'🧺'},{k:'fam',n:'Famasi',i:'💊'},{k:'hop',n:'Lopital',i:'🏥'},{k:'hot',n:'Otèl',i:'🏨'},{k:'lek',n:'Lekòl',i:'🎓'},{k:'bar',n:'Bar',i:'🍹'},{k:'pis',n:'Pisin',i:'🏊'}];
+var METHODS=['Lajan kach','MonCash','NatCash','Kat'];
+var CFG=window.CORLEMPS||{};
+var sb=null,sub=null,me=null,PRODUCTS=[],todaySum={t:0,n:0},histRows=[],curSale=null,busy=false,armed='',editId=null;
+var st={cart:{},sec:'bou',cat:'Tout',q:'',method:'Lajan kach',held:[],mode:'det'};
+
+function $(i){return document.getElementById(i)}
+function isParty(p){return p.sec==='hop'||p.sec==='hot'||p.sec==='lek'||p.sec==='bar'||p.sec==='pis'}
+function secsInCart(){var a=[];ids().forEach(function(i){var p=prod(i);if(p&&a.indexOf(p.sec)<0)a.push(p.sec)});return a}
+function partyLbl(secs){
+  var h=secs.indexOf('hop')>-1,o=secs.indexOf('hot')>-1,l=secs.indexOf('lek')>-1,b=secs.indexOf('bar')>-1||secs.indexOf('pis')>-1,n=(h?1:0)+(o?1:0)+(l?1:0)+(b?1:0);
+  if(n>1)return ['Non kliyan / pasyan / elèv / tab','# dosye / chanm / klas / remak','Kliyan'];
+  if(h)return ['Non pasyan','# dosye','Pasyan'];
+  if(o)return ['Non kliyan otèl','# chanm','Kliyan'];
+  if(l)return ['Non elèv','Klas','Elèv'];
+  if(b)return ['Nimewo tab / non kliyan','Remak','Tab'];
+  return ['Non','Referans','Kliyan'];
+}
+function bizName(){return (sub&&sub.name)||'Corlemps Company'}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function g(n){return Math.round(+n||0).toLocaleString('fr-FR')+' '+(CURS[BASE]||BASE)}
+function prod(id){for(var i=0;i<PRODUCTS.length;i++)if(PRODUCTS[i].id===id)return PRODUCTS[i];return null}
+function inCart(id){return st.cart[id]||0}
+function ids(){return Object.keys(st.cart).map(Number)}
+function cartCount(){var n=0;ids().forEach(function(i){n+=st.cart[i]});return n}
+function has(fn){return ids().some(function(i){var p=prod(i);return p&&fn(p)})}
+function pct(id){var v=parseFloat($(id).value)||0;return Math.min(100,Math.max(0,v))}
+function unit(p,q){return (st.mode==='gro'&&p.w!=null&&q>=p.wm)?p.w:p.p}
+function hint(p,q){if(st.mode!=='gro'||p.w==null)return '';return q>=p.wm?' · pri an gwo ✓':' · +'+(p.wm-q)+' pou pri an gwo'}
+function toast(t){var el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('on')},2800)}
+function nice(err){var m=(err&&err.message)||String(err||'');if(/fetch|network|load failed/i.test(m))return 'Pa gen entènèt. Eseye ankò lè rezo a retounen.';if(/does not exist|schema cache|could not find|relation .* not|function .* not|bucket not found/i.test(m))return 'Fonksyon sa a mande pou ou egzekite fichye supabase-v2.sql nan Supabase (SQL Editor) yon fwa.';return m}
+
+function calc(list){
+  if(!list){var T={sub:0,ins:0,disc:0,gain:0,total:0};groupsOf(ids()).forEach(function(x){var c=calc(x.ids);for(var k in T)T[k]+=c[k]});return T}
+  var sb2=0,hosp=0,gain=0,hasH=false;
+  list.forEach(function(i){var p=prod(i);if(!p)return;var u=unit(p,st.cart[i]),a=u*st.cart[i];sb2+=a;gain+=(p.p-u)*st.cart[i];if(p.sec==='hop'){hosp+=a;hasH=true}});
+  var ins=hasH?Math.round(hosp*pct('ins')/100):0;
+  var d=Math.round((sb2-ins)*pct('disc')/100);
+  return {sub:sb2,ins:ins,disc:d,gain:gain,total:sb2-ins-d};
+}
+function expInfo(p){
+  if(p.exp==null)return null;
+  var d=new Date(p.expDate+'T12:00:00').toLocaleDateString('fr-FR',{month:'short',year:'numeric'});
+  if(p.exp<0)return {cls:'gone',t:'Ekspire ('+d+')',dead:true};
+  if(p.exp<90)return {cls:'soon',t:'Ekspire nan '+p.exp+' jou'};
+  return {cls:'',t:'Ekspire: '+d};
+}
+function norm(r){
+  return {id:r.id,sec:r.sec,n:r.name,c:r.category||'Lòt',e:r.emoji||'📦',p:+r.price,
+    w:r.wholesale_price==null?null:+r.wholesale_price,wm:r.wholesale_min,s:r.stock,rx:!!r.rx,
+    exp:r.exp_date?Math.floor((new Date(r.exp_date+'T23:59:59')-Date.now())/864e5):null,expDate:r.exp_date,bed:!!r.is_bed};
+}
+
+/* ---------- Views ---------- */
+function view(v){['setup','login','locked','plans','appRoot'].forEach(function(k){$(k).hidden=(k!==v)})}
+
+/* ---------- Boot / auth ---------- */
+function introInit(){var el=$('intro');if(!el)return;try{if(sessionStorage.getItem('corlemps.intro')){el.remove();return}sessionStorage.setItem('corlemps.intro','1')}catch(e){}var t=setTimeout(close,4800);function close(){clearTimeout(t);el.remove()}$('introSkip').onclick=close}
+var addr='',idleT,IDLE_MS=10*60*1000;
+function roleLbl(){if(!me)return '';if(me.role==='owner')return 'Direktè Jeneral';return me.shift==='aswe'?'Vandè Aswè':me.shift==='maten'?'Vandè Maten':'Vandè'}
+function idleReset(){clearTimeout(idleT);if(!me)return;idleT=setTimeout(function(){if(me&&navigator.onLine){toast('Dekonekte otomatikman (inaktivite)');sb.auth.signOut()}},IDLE_MS)}
+['click','keydown','touchstart','mousemove'].forEach(function(ev){document.addEventListener(ev,idleReset,{passive:true})});
+function boot(){
+  introInit();
+  if(!CFG.url||!CFG.key||!window.supabase){view('setup');return}
+  sb=window.supabase.createClient(CFG.url,CFG.key);
+  sb.auth.getSession().then(function(r){if(r.data&&r.data.session)enter();else if(!navigator.onLine&&enterOffline())return;else{view('login');supLink('lsup')}}).catch(function(){if(!enterOffline())view('login')});
+  sb.auth.onAuthStateChange(function(ev){if(ev==='SIGNED_OUT'){rtStop();me=null;view('login')}});
+}
+function login(){
+  var em=$('lem').value.trim(),pw=$('lpw').value;if(em&&em.indexOf('@')<0)em=em.toLowerCase().replace(/\s+/g,'')+'@fakeseller.com';
+  if(!em||!pw){$('lmsg').textContent='Antre imèl ak modpas.';return}
+  $('lbtn').disabled=true;$('lmsg').textContent='';
+  sb.auth.signInWithPassword({email:em,password:pw}).then(function(r){
+    $('lbtn').disabled=false;
+    if(r.error){$('lmsg').textContent=/invalid/i.test(r.error.message)?'Imèl oswa modpas pa kòrèk.':nice(r.error);return}
+    $('lpw').value='';enter();
+  });
+}
+function enter(){
+  sb.auth.getUser().then(function(r){
+    var u=r.data&&r.data.user;if(!u){view('login');return}
+    return selProfile(u.id).then(function(p){
+      if((p.error||!p.data)&&!REG&&u.user_metadata&&u.user_metadata.name){REG=true;return sb.rpc('register_owner',regArgs(u.user_metadata)).then(function(rr){if(rr.error){$('lmsg').textContent=nice(rr.error);sb.auth.signOut();return}sb.auth.refreshSession().then(enter,enter)})}
+      if(p.error||!p.data){$('lmsg').textContent='Kont sa a poko gen aksè. Kontakte Corlemps.';sb.auth.signOut();return}
+      if(p.data.role==='superadmin'){$('lmsg').textContent='Kont sa a se administratè plat fòm nan. Itilize sit Kontwòl la (kontwol.html).';sb.auth.signOut();return}
+      if(p.data.role!=='owner'&&p.data.role!=='cashier'){$('lmsg').textContent='Kont sa a poko asiyen a yon biznis. Kontakte Corlemps.';sb.auth.signOut();return}
+      if(p.data.active===false){$('lmsg').textContent='Kont sa a dezaktive. Kontakte direktè a.';sb.auth.signOut();return}
+      me={id:u.id,name:p.data.name||u.email,role:p.data.role,shift:p.data.shift,perms:p.data.perms||{},avatar:p.data.avatar_url||'',username:p.data.username||'',business_type:p.data.business_type||''};idleReset();loadAddr();
+      setupUI();
+      try{st.held=JSON.parse(localStorage.getItem('corlemps.held.'+me.id)||'[]')}catch(e){st.held=[]}
+      return payReturn().then(checkSub).then(function(ok){if(!ok)return;view('appRoot');return refresh().then(afterEnter)});
+    });
+  }).catch(function(e){if(!navigator.onLine&&enterOffline())return;view('login');$('lmsg').textContent=nice(e)});
+}
+function logout(){logAct('Dekoneksyon');rtStop();try{sessionStorage.removeItem('corlemps.logged')}catch(e){}sb.auth.signOut()}
+
+
+/* ---------- Abònman ---------- */
+function fdate(s){return new Date(s+'T12:00:00').toLocaleDateString('fr-FR')}
+function checkSub(){
+  return sb.rpc('sub_status').then(function(r){
+    if(r.error||!r.data)return true;        // baz done ki pa ankò gen abònman, oswa pa gen rezo
+    sub=r.data;cacheSave();
+    if(!sub.active){lock();return false}
+    banner();return true;
+  });
+}
+function lock(){
+  $('lkmsg').innerHTML=sub.suspended?'Aksè kont sa a sispann pa Corlemps. Kontakte nou pou rezoud sa. Done ou yo an sekirite.':'Kès la sispann travay depi <b>'+fdate(sub.paid_until)+'</b>. Renouvle abònman an pou kontinye vann. Done ou yo an sekirite.';
+  var w=$('lkwa'),n=String(CFG.support||'').replace(/\D/g,'');
+  w.hidden=!n;if(n)w.href='https://wa.me/'+n+'?text='+encodeURIComponent('Bonjou, mwen vle renouvle abònman Corlemps mwen.');
+  $('lkplan').hidden=!(me&&me.role==='owner');view('locked');
+}
+function banner(){
+  $('bizH').textContent=bizName();document.title=bizName()+' – Kès Vant';
+  var el=$('subBar'),d=sub.days_left,left=sub.grace_days+d;
+  if(me&&me.role==='owner')$('who').textContent=(sub.name?sub.name+' · ':'')+me.name+' · '+roleLbl()+' · abònman '+(sub.plan==='trial'?'esè gratis':sub.plan==='yearly'?'anyèl':'mansyèl')+' jiska '+fdate(sub.paid_until);
+  else if(me&&sub.name)$('who').textContent=sub.name+' · '+me.name+' · '+roleLbl();
+  if(d<0){el.className='subbar bad';el.textContent='⚠️ Abònman an ekspire. Kès la ap koupe nan '+left+' jou si ou pa renouvle.';el.hidden=false}
+  else if(d<=5){el.className='subbar';el.textContent=d===0?'Abònman ou fini jodi a. Renouvle pou kès la pa koupe.':'Abònman ou fini nan '+d+' jou ('+fdate(sub.paid_until)+'). Renouvle pou kès la pa koupe.';el.hidden=false}
+  else if(sub.plan==='trial'){el.className='subbar';el.textContent='🎁 Esè gratis: '+d+' jou ki rete. Ale nan Paramèt > Abònman pou peye.';el.hidden=false}
+  else el.hidden=true;
+}
+function tick(){if(document.hidden||!me||busy||$('appRoot').hidden)return;if(!navigator.onLine){netBadge();return}syncQ();checkSub().then(function(ok){if(ok&&!$('hov').classList.contains('on'))refresh()})}
+
+/* ---------- Data ---------- */
+function loadProducts(){
+  if(!navigator.onLine)return Promise.resolve();
+  return sb.from('products').select('*').eq('active',true).order('sec').order('name').then(function(r){
+    if(r.error){toast('Pa ka chaje pwodwi yo: '+nice(r.error));return}
+    PRODUCTS=r.data.map(norm);cacheSave();
+  });
+}
+function loadToday(){
+  if(!navigator.onLine)return Promise.resolve();
+  var d=new Date();d.setHours(0,0,0,0);
+  return q2(function(rf){return sb.from('sales').select(rf?'total,refunded_at':'total').gte('created_at',d.toISOString()).limit(2000)}).then(function(r){
+    if(r.error)return;var t=0,n=0;r.data.forEach(function(x){if(x.refunded_at)return;t+=+x.total;n++});todaySum={t:t,n:n};
+  });
+}
+function refresh(){return Promise.all([loadProducts(),loadToday()]).then(all)}
+function saveHeld(){try{localStorage.setItem('corlemps.held.'+me.id,JSON.stringify(st.held))}catch(e){}}
+
+/* ---------- Render ---------- */
+function renderTabs(){
+  $('tabs').innerHTML=secsFor().map(function(s){return '<button class="tab" type="button" data-sec="'+s.k+'" aria-pressed="'+(s.k===st.sec)+'"><span class="i">'+s.i+'</span><span>'+s.n+'</span></button>'}).join('');
+  document.body.setAttribute('data-sec',st.sec);
+}
+function renderCats(){
+  var cs=['Tout'];PRODUCTS.forEach(function(p){if(p.sec===st.sec&&cs.indexOf(p.c)<0)cs.push(p.c)});
+  if(cs.indexOf(st.cat)<0)st.cat='Tout';
+  $('cats').innerHTML=cs.map(function(c){return '<button class="cat" type="button" data-c="'+esc(c)+'" aria-pressed="'+(c===st.cat)+'">'+esc(c)+'</button>'}).join('');
+}
+function renderGrid(){
+  var q=st.q.toLowerCase();
+  var list=PRODUCTS.filter(function(p){return p.sec===st.sec&&(st.cat==='Tout'||p.c===st.cat)&&(!q||p.n.toLowerCase().indexOf(q)>-1)});
+  $('grid').innerHTML=list.length?list.map(function(p){
+    var ex=expInfo(p),left=p.s==null?Infinity:p.s-inCart(p.id),dead=(ex&&ex.dead)||left<=0;
+    var stock=p.s==null?'':(left<=0?'<span class="s low">Fini</span>':'<span class="s'+(left<=5?' low':'')+'">'+(p.bed?left+(p.sec==='hot'?' chanm lib':' kabann lib'):(left<=5?'Rete '+left:left+' nan stok'))+'</span>');
+    return '<button class="prod" type="button" data-id="'+p.id+'"'+(dead?' disabled':'')+'>'+(p.rx?'<span class="rx">Rx</span>':'')+
+      '<span class="e">'+esc(p.e)+'</span><span class="n">'+esc(p.n)+'</span><span class="p">'+g(p.p)+'</span>'+
+      (st.mode==='gro'&&p.w!=null?'<span class="gw">Gwo: '+g(p.w)+' (≥'+p.wm+')</span>':'')+stock+
+      (ex?'<span class="x '+ex.cls+'">'+ex.t+'</span>':'')+'</button>';
+  }).join(''):'<p class="none">Anyen pa matche isit la 👀 Si katalòg la vid, pwopriyetè a ka ajoute pwodwi nan ⚙️.</p>';
+}
+function renderCart(){
+  ids().forEach(function(i){if(!prod(i))delete st.cart[i]});
+  var list=ids();
+  $('lines').innerHTML=list.length?list.map(function(k){
+    var p=prod(k),q=st.cart[k];
+    return '<div class="line"><div><div class="nm">'+esc(p.n)+(p.rx?'<span class="tag">Rx</span>':'')+'</div><div class="un">'+g(unit(p,q))+' chak'+hint(p,q)+'</div></div>'+
+      '<div class="qty"><button type="button" data-dec="'+k+'" aria-label="Retire yon '+esc(p.n)+'">−</button><span>'+q+'</span><button type="button" data-inc="'+k+'" aria-label="Ajoute yon '+esc(p.n)+'">+</button></div>'+
+      '<b>'+g(unit(p,q)*q)+'</b></div>';
+  }).join(''):'<div class="empty">Panye a vid 👀<br>Tape sou yon bagay pou kòmanse.</div>';
+  $('cnt').textContent=list.length?cartCount()+' atik':'';
+  var needRx=has(function(p){return p.rx}),needPat=has(isParty),needIns=has(function(p){return p.sec==='hop'});
+  $('rxBox').hidden=!needRx;$('custBox').hidden=st.mode!=='gro';$('patBox').hidden=!needPat;$('insRow').hidden=!needIns;
+  $('mode').hidden=!can('gro');if(!can('gro')&&st.mode==='gro')st.mode='det';var dr=$('disc').closest('.row');if(dr)dr.hidden=!can('disc');$('loyBox').hidden=!(SET.pts_per>0);
+  var pl=partyLbl(secsInCart());$('patL').textContent=pl[0];$('dosL').textContent=pl[1];
+  document.querySelectorAll('#mode button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===st.mode)});
+  var c=calc();
+  $('sub').textContent=g(c.sub);$('gainRow').hidden=!(c.gain>0);$('gain').textContent=g(c.gain);
+  $('tot').textContent=g(c.total);var eqt=eqLine(c.total);$('eqRow').hidden=!eqt;$('eqRow').textContent=eqt;
+  var tb=$('tbox');tb.classList.remove('pop');void tb.offsetWidth;tb.classList.add('pop');
+  $('barN').textContent='Wè panye ('+cartCount()+')';$('barT').textContent=g(c.total);
+  $('methods').innerHTML=METHODS.map(function(m){return '<button class="m" type="button" data-m="'+m+'" aria-pressed="'+(m===st.method)+'">'+m+'</button>'}).join('');
+  $('cashBox').classList.toggle('on',st.method==='Lajan kach');
+  $('held').innerHTML=st.held.map(function(h,i){return '<button type="button" data-held="'+i+'">'+esc(h.label||('Rale vant #'+(i+1)))+'</button>'}).join('');
+  updateChange();
+  $('pay').disabled=!list.length||busy;
+}
+function updateChange(){
+  if(st.method!=='Lajan kach')return;
+  var r=parseFloat($('recv').value)||0,d=r-calc().total,el=$('chg');
+  if(!r){el.textContent='0 G';el.className='change';return}
+  if(d<0){el.textContent='Manke '+g(-d);el.className='change bad'}else{el.textContent=g(d);el.className='change'}
+}
+function renderStats(){var t=todaySum.t,n=todaySum.n;qGet().forEach(function(x){t+=+x.loc.total;n++});$('stTotal').textContent=g(t);$('stCount').textContent=n;renderAlerts();netBadge()}
+function all(){renderTabs();renderCats();renderGrid();renderCart();renderStats()}
+
+function add(id){var p=prod(id);if(!p)return;if(p.s!=null&&inCart(id)>=p.s)return;st.cart[id]=inCart(id)+1;$('msg').textContent='';renderGrid();renderCart()}
+function dec(id){if(!st.cart[id])return;st.cart[id]--;if(st.cart[id]<=0)delete st.cart[id];renderGrid();renderCart()}
+
+/* ---------- Receipt ---------- */
+function qr(seed){
+  seed=String(seed);var n=21,s=0,i;for(i=0;i<seed.length;i++)s=(s*31+seed.charCodeAt(i))>>>0;
+  function rnd(){s=(s*1664525+1013904223)>>>0;return s/4294967296}
+  function f(x,y){return '<rect x="'+x+'" y="'+y+'" width="7" height="7" fill="#14101F"/><rect x="'+(x+1)+'" y="'+(y+1)+'" width="5" height="5" fill="#fff"/><rect x="'+(x+2)+'" y="'+(y+2)+'" width="3" height="3" fill="#14101F"/>'}
+  var o='<svg viewBox="0 0 21 21" shape-rendering="crispEdges" role="img" aria-label="QR kòd resi"><rect width="21" height="21" fill="#fff"/>';
+  for(var y=0;y<n;y++)for(var x=0;x<n;x++){var inF=(x<8&&y<8)||(x>12&&y<8)||(x<8&&y>12);if(!inF&&rnd()>.5)o+='<rect x="'+x+'" y="'+y+'" width="1" height="1" fill="#14101F"/>'}
+  return o+f(0,0)+f(14,0)+f(0,14)+'</svg>';
+}
+var NM={bou:'Boutik',mar:'Market',fam:'Famasi',hop:'Lopital',hot:'Otèl',lek:'Lekòl',bar:'Bar',pis:'Pisin'};
+function waText(s){
+  var t=bizName()+(addr?'\n'+addr:'')+'\nResi '+s.no+'\n';
+  (s.items||[]).forEach(function(it){t+=it.qty+' x '+it.name+' = '+g(it.unit*it.qty)+'\n'});
+  return t+'TOTAL: '+g(s.total)+' ('+s.method+')\nMèsi!';
+}
+
+/* ---------- History ---------- */
+function closeBtn(){return '<div class="hbtns one"><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>'}
+
+/* ---------- Dashboard (owner) ---------- */
+function openDash(){
+  $('hbox').innerHTML='<h3>Rapò</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  var since=new Date(Date.now()-30*864e5).toISOString();
+  q2(function(rf){return sb.from('sales').select(rf?'created_at,total,items,refunded_at':'created_at,total,items').gte('created_at',since).order('created_at',{ascending:false}).limit(3000)}).then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>Rapò</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var t0=new Date();t0.setHours(0,0,0,0);t0=t0.getTime();var w0=Date.now()-7*864e5;
+    var k={day:{t:0,n:0},week:{t:0,n:0},month:{t:0,n:0}},sec={},top={};
+    r.data.forEach(function(s){
+      if(s.refunded_at)return;
+      var ts=new Date(s.created_at).getTime(),tot=+s.total;
+      k.month.t+=tot;k.month.n++;if(ts>=w0){k.week.t+=tot;k.week.n++}if(ts>=t0){k.day.t+=tot;k.day.n++}
+      (s.items||[]).forEach(function(it){sec[it.sec]=(sec[it.sec]||0)+it.unit*it.qty;top[it.name]=(top[it.name]||0)+it.qty});
+    });
+    var mx=Math.max.apply(null,[1].concat(SECS.map(function(s){return sec[s.k]||0})));
+    var tops=Object.keys(top).sort(function(a,b){return top[b]-top[a]}).slice(0,5);
+    var low=PRODUCTS.filter(function(p){return p.s!=null&&!p.bed&&p.s<=5});
+    var h='<h3>Rapò</h3><div class="kpis">'+
+      [['Jodi a',k.day],['7 dènye jou',k.week],['30 dènye jou',k.month]].map(function(x){return '<div class="kpi"><b>'+g(x[1].t)+'</b><span>'+x[0]+' · '+x[1].n+' vant</span></div>'}).join('')+'</div>';
+    h+='<h4>Vant pa seksyon (30 jou)</h4>'+SECS.map(function(s){return '<div class="rbar"><span>'+s.i+' '+s.n+'</span><i style="width:'+Math.round((sec[s.k]||0)/mx*100)+'%"></i><b>'+g(sec[s.k]||0)+'</b></div>'}).join('');
+    h+='<h4>Pwodwi ki vann plis</h4>'+(tops.length?tops.map(function(n){return '<div class="mini"><span>'+esc(n)+'</span><b>'+top[n]+'</b></div>'}).join(''):'<p class="none">Poko gen done.</p>');
+    h+='<h4>Stok ki ba</h4>'+(low.length?low.map(function(p){return '<div class="mini"><span>'+esc(p.n)+'</span><b class="lowt">'+p.s+'</b></div>'}).join(''):'<p class="none">Tout stok yo OK 👍</p>');
+    $('hbox').innerHTML=h+closeBtn();
+  });
+}
+
+/* ---------- Products admin (owner) ---------- */
+function openAdmin(){
+  var h='<h3>Paramèt</h3><label class="fld">Non biznis la (parèt anwo ak sou resi yo)<input id="bn" type="text" maxlength="60" value="'+esc(bizName())+'" autocomplete="off"></label><div class="hbtns one"><button type="button" class="btn sec" data-act="savebn">Sove non an</button></div><label class="fld">Adrès biznis la (parèt sou resi yo)<input id="ba" type="text" maxlength="120" value="'+esc(addr)+'" autocomplete="off"></label><div class="hbtns one"><button type="button" class="btn sec" data-act="saveaddr">Sove adrès la</button></div>'+adminMenu()+'<h4>Sovgad done</h4><div class="hbtns one"><button type="button" class="btn sec" data-act="backup">Telechaje kopi done (JSON)</button></div><h4>Pwodwi</h4><div class="hbtns one"><button type="button" class="btn pay" data-act="newp">+ Nouvo pwodwi</button></div><div style="height:10px"></div>';
+  h+=PRODUCTS.length?PRODUCTS.map(function(p){
+    return '<button type="button" class="hrow" data-edit="'+p.id+'"><span><b>'+esc(p.e)+' '+esc(p.n)+'</b><small>'+esc(NM[p.sec])+' · '+esc(p.c)+' · stok: '+(p.s==null?'ilimite':p.s)+(p.w!=null?' · gwo '+g(p.w)+' (≥'+p.wm+')':'')+'</small></span><b>'+g(p.p)+'</b></button>';
+  }).join(''):'<p class="none">Pa gen pwodwi ankò.</p>';
+  $('hbox').innerHTML=h+closeBtn();$('hov').classList.add('on');
+}
+function field(id,label,type,val,extra){return '<label class="fld">'+label+'<input id="pf-'+id+'" type="'+type+'" value="'+esc(val==null?'':val)+'" '+(extra||'')+'></label>'}
+function editForm(id){
+  editId=id;armed='';
+  var p=id?prod(id):null;
+  var h='<h3>'+(p?'Modifye pwodwi':'Nouvo pwodwi')+'</h3>'+
+    field('n','Non','text',p&&p.n,'autocomplete="off"')+
+    '<div class="two"><label class="fld">Seksyon<select id="pf-sec">'+secsFor().map(function(s){return '<option value="'+s.k+'"'+((p?p.sec:st.sec)===s.k?' selected':'')+'>'+s.i+' '+s.n+'</option>'}).join('')+'</select></label>'+field('c','Kategori','text',p?p.c:'','autocomplete="off" list="catlist"')+catDL()+'</div>'+
+    '<div class="two">'+field('e','Emoji','text',p?p.e:'📦','maxlength="4"')+field('p','Pri (G)','number',p&&p.p,'min="0" inputmode="decimal"')+'</div>'+
+    '<div class="two">'+field('w','Pri an gwo (G)','number',p&&p.w,'min="0" inputmode="decimal"')+field('wm','Minimòm pou gwo','number',p&&p.wm,'min="1" inputmode="numeric"')+'</div>'+
+    '<div class="two">'+field('s','Stok (vid = ilimite)','number',p&&p.s,'min="0" inputmode="numeric"')+field('x','Ekspirasyon','date',p&&p.expDate)+'</div>'+
+    '<label class="chk"><input type="checkbox" id="pf-rx"'+(p&&p.rx?' checked':'')+'> Bezwen ordonnans (Rx)</label>'+
+    '<label class="chk"><input type="checkbox" id="pf-bed"'+(p&&p.bed?' checked':'')+'> Se yon kabann / chanm (admisyon)</label>'+
+    '<div class="msg" id="pmsg" role="status"></div>'+
+    '<div class="hbtns"><button type="button" class="btn sec" data-act="admin">Anile</button><button type="button" class="btn pay" data-act="savep">Sove</button></div>'+
+    (p?'<div class="hbtns one"><button type="button" class="btn sec" data-act="delp">Retire pwodwi sa a</button></div>':'');
+  $('hbox').innerHTML=h;
+}
+function numOrNull(id){var v=$('pf-'+id).value.trim();return v===''?null:Number(v)}
+function saveProduct(){
+  var n=$('pf-n').value.trim(),price=numOrNull('p'),w=numOrNull('w'),wm=numOrNull('wm'),s=numOrNull('s');
+  var msg=$('pmsg');
+  if(!n){msg.textContent='Antre non pwodwi a.';return}
+  if(price==null||isNaN(price)||price<0){msg.textContent='Antre yon pri valab.';return}
+  if((w==null)!==(wm==null)){msg.textContent='Pou vant an gwo, ranpli pri a ak minimòm nan toude (oswa kite yo vid).';return}
+  if(w!=null&&(isNaN(w)||w<0||isNaN(wm)||wm<1)){msg.textContent='Pri an gwo oswa minimòm nan pa valab.';return}
+  if(s!=null&&(isNaN(s)||s<0||Math.floor(s)!==s)){msg.textContent='Stok la dwe yon nonb antye.';return}
+  var row={sec:$('pf-sec').value,name:n,category:$('pf-c').value.trim()||'Lòt',emoji:$('pf-e').value.trim()||'📦',price:price,
+    wholesale_price:w,wholesale_min:wm,stock:s,rx:$('pf-rx').checked,exp_date:$('pf-x').value||null,is_bed:$('pf-bed').checked};
+  var q=editId?sb.from('products').update(row).eq('id',editId):sb.from('products').insert(row);
+  msg.textContent='Ap sove…';
+  q.then(function(r){
+    if(r.error){msg.textContent=nice(r.error);return}
+    toast('Pwodwi a sove');logAct(editId?'Modifye pwodwi':'Nouvo pwodwi',n);refresh().then(openAdmin);
+  });
+}
+function deleteProduct(b){
+  if(armed!=='del'){armed='del';b.textContent='Konfime: retire li';return}
+  sb.from('products').update({active:false}).eq('id',editId).then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}
+    delete st.cart[editId];toast('Pwodwi a retire');logAct('Retire pwodwi',String(editId));refresh().then(openAdmin);
+  });
+}
+
+/* ---------- Non biznis (pwopriyetè) ---------- */
+function saveBizName(){
+  var n=$('bn').value.trim();
+  if(!n){toast('Antre yon non pou biznis la.');return}
+  sb.rpc('rename_my_tenant',{p_name:n}).then(function(r){
+    if(r.error){toast(nice(r.error));return}
+    checkSub().then(function(){toast('Non biznis la chanje');renderStats()});
+  });
+}
+
+function saveAddr(){var a=$('ba').value.trim();sb.rpc('set_my_tenant_address',{p_address:a}).then(function(r){if(r.error){toast(nice(r.error));return}addr=a;toast('Adrès la sove')})}
+function backup(){Promise.all([sb.from('sales').select('*').order('created_at',{ascending:false}).limit(10000),sb.from('products').select('*')]).then(function(r){var e=r[0].error||r[1].error;if(e){toast(nice(e));return}var b=new Blob([JSON.stringify({date:new Date().toISOString(),business:bizName(),products:r[1].data,sales:r[0].data},null,1)],{type:'application/json'});var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='corlemps-sovgad-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000);toast('Kopi done a telechaje')})}
+
+/* ---------- Asistan IA (pwopriyetè) ---------- */
+var chat=[],aiBusy=false;
+var AI_Q=['Konbyen kòb mwen fè jodi a?','Ki pwodwi ki vann plis semèn sa a?','Ki pwodwi ki prèske fini nan stok?','Ki pwodwi ki pral ekspire?','Fè m yon rezime biznis la'];
+function openAI(){renderChat();$('hov').classList.add('on')}
+function renderChat(){
+  var log=chat.length?chat.map(function(m){return '<div class="bub '+(m.role==='user'?'me':'ai')+'">'+esc(m.content)+'</div>'}).join(''):'<p class="none">Poze yon kesyon sou biznis ou an Kreyòl, oswa tape sou yon sijesyon.</p>';
+  $('hbox').innerHTML='<h3>Asistan IA 💬</h3><p class="sub">Li wè sèlman total, pwodwi ak stok. Li pa wè non kliyan, pasyan, elèv oswa ordonnans.</p>'+
+    '<div class="chatlog" id="chatLog">'+log+'</div>'+
+    '<div class="qchips">'+AI_Q.map(function(q){return '<button type="button" class="cat" data-ai="'+esc(q)+'">'+esc(q)+'</button>'}).join('')+'</div>'+
+    '<div class="chatin"><input id="aiq" type="text" placeholder="Egz: Ki jou mwen vann plis?" maxlength="300" autocomplete="off"><button type="button" class="btn pay sm" data-act="aisend">Voye</button></div>'+closeBtn();
+  var el=$('chatLog');el.scrollTop=el.scrollHeight;
+}
+function sendAI(){var i=$('aiq'),q=i?i.value.trim():'';if(q)askAI(q)}
+function askAI(q){
+  if(aiBusy)return;aiBusy=true;
+  var hist=chat.filter(function(m){return !m.tmp}).slice(-6).map(function(m){return {role:m.role,content:m.content}});
+  chat.push({role:'user',content:q});chat.push({role:'assistant',content:'Ap reflechi…',tmp:true});renderChat();
+  function done(t){aiBusy=false;chat=chat.filter(function(m){return !m.tmp});chat.push({role:'assistant',content:t});if(chat.length>20)chat=chat.slice(-20);if($('chatLog'))renderChat()}
+  sb.functions.invoke('ask-ai',{body:{question:q,history:hist}}).then(function(r){
+    done(r.error?'Asistan IA pa disponib kounye a (verifye ke fonksyon ask-ai deplwaye epi kle IA a mete).':(r.data&&(r.data.error||r.data.answer))||'Pa gen repons.');
+  }).catch(function(e){done(nice(e))});
+}
+
+/* ---------- Events ---------- */
+document.addEventListener('click',function(e){
+  var b=e.target.closest('button');if(!b)return;
+  var d=b.dataset;
+  if(extraClick(b,d))return;
+  if(d.id)add(+d.id);
+  else if(d.inc)add(+d.inc);
+  else if(d.dec)dec(+d.dec);
+  else if(d.mode){st.mode=d.mode;$('msg').textContent='';renderGrid();renderCart()}
+  else if(d.sec){st.sec=d.sec;st.cat='Tout';st.q='';$('q').value='';renderTabs();renderCats();renderGrid()}
+  else if(d.c){st.cat=d.c;renderCats();renderGrid()}
+  else if(d.m){st.method=d.m;renderCart()}
+  else if(d.held){var h=st.held.splice(+d.held,1)[0];if(ids().length)st.held.push({cart:st.cart});st.cart=h.cart;saveHeld();renderGrid();renderCart()}
+  else if(d.rec){showReceipt(histRows[+d.rec]);$('hov').classList.remove('on')}
+  else if(d.edit){editForm(+d.edit)}
+  else if(d.act==='newp')editForm(null);
+  else if(d.act==='savebn')saveBizName();else if(d.act==='saveaddr')saveAddr();else if(d.act==='backup')backup();
+  else if(d.act==='aisend')sendAI();
+  else if(d.ai)askAI(d.ai);
+  else if(d.act==='admin')openAdmin();
+  else if(d.act==='savep')saveProduct();
+  else if(d.act==='delp')deleteProduct(b);
+  else if(d.act==='hclose')$('hov').classList.remove('on');
+  else if(d.act==='new')$('ov').classList.remove('on');
+  else if(d.act==='print')window.print();
+  else if(d.act==='wa'){if(curSale)window.open('https://wa.me/'+waNum(askWa())+'?text='+encodeURIComponent(waText(curSale)),'_blank','noopener')}
+  else if(b.id==='hold'){
+    if(!ids().length){toast('Panye a vid');return}
+    st.held.push({cart:st.cart});st.cart={};saveHeld();renderGrid();renderCart();toast('Vant lan mete an pause');
+  }
+  else if(b.id==='pay')pay();
+  else if(b.id==='lbtn'){if(AM==='up')signup();else login()}
+  else if(b.dataset.am)setAM(b.dataset.am);
+  else if(b.dataset.plan){selPlan=b.dataset.plan;document.querySelectorAll('.plan').forEach(function(x){x.setAttribute('aria-pressed',x.dataset.plan===selPlan)})}
+  else if(b.id==='ppay')payPlan();
+  else if(b.id==='lkplan')openPlans();
+  else if(b.id==='pback'){if(me&&sub&&sub.active)view('appRoot');else if(me&&sub)lock();else view('login')}
+  else if(b.id==='btnOut'||b.id==='lkout')logout();
+  else if(b.id==='lkretry')enter();
+  else if(b.id==='hist')openHist();
+  else if(b.id==='btnDash')openDash();
+  else if(b.id==='btnAdmin')openAdmin();
+  else if(b.id==='btnAI')openAI();
+  else if(b.id==='bar')$('cart').scrollIntoView({behavior:'smooth'});
+});
+$('lpw').addEventListener('keydown',function(e){if(e.key==='Enter')login()});
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target&&e.target.id==='aiq')sendAI()});
+$('q').addEventListener('input',function(e){st.q=e.target.value;renderGrid()});
+['disc','ins'].forEach(function(i){$(i).addEventListener('input',renderCart)});
+$('recv').addEventListener('input',updateChange);
+document.addEventListener('visibilitychange',tick);
+setInterval(tick,90000);
+if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})}
+/* ================= v2 : vandè, dirèk, kont, offline, bluetooth, backup ================= */
+var SET={rates:{},pts_per:100,pt_value:1,low:5,auto_backup:true,auto_report:true};
+var CURS={HTG:'G',USD:'$',DOP:'RD$',JMD:'J$',BSD:'B$'};
+var BASE='HTG',logoUrl='',rtCh=[],feed=[],recQ=[],curText='',loyal=null,loyUsed=0,deferredInstall=null,hf={from:'',to:'',q:''},acc={kind:'pasyan'},syncing=false,rtT,lt,offline=false;
+var KIND={
+  pasyan:{n:'Pasyan',sec:'hop',pay:'Peman',chg:'Sèvis medikal',ic:'🏥'},
+  elev:{n:'Elèv',sec:'lek',pay:'Vèsman',chg:'Frè lekòl',ic:'🎓'},
+  kliyan:{n:'Kliyan otèl',sec:'hot',pay:'Peman',chg:'Sèvis otèl',ic:'🏨'}
+};
+var SECKIND={hop:'pasyan',lek:'elev',hot:'kliyan'};
+
+/* ---------- Ti zouti ---------- */
+function sym(){return CURS[BASE]||BASE}
+function eqLine(total){
+  var o=[];Object.keys(SET.rates||{}).forEach(function(c){var r=+SET.rates[c];if(r>0&&c!==BASE)o.push('≈ '+(total/r).toLocaleString('fr-FR',{minimumFractionDigits:2,maximumFractionDigits:2})+' '+(CURS[c]||c))});
+  return o.join(' · ');
+}
+function can(k){
+  if(!me)return false;if(me.role==='owner')return true;
+  var p=me.perms||{};return k==='refund'?p.refund===true:p[k]!==false;
+}
+function logAct(a,d){
+  if(!sb||!me||!navigator.onLine)return;
+  try{sb.from('activity_log').insert({action:a,detail:d==null?null:String(d),user_name:me.name,role:me.role}).then(function(){},function(){})}catch(e){}
+}
+function q2(mk){return mk(true).then(function(r){if(r.error&&/refunded_at|column/i.test(r.error.message||''))return mk(false);return r})}
+function selProfile(id){
+  return sb.from('profiles').select('name,role,shift,perms,active,avatar_url,username,business_type').eq('id',id).maybeSingle().then(function(p){
+    if(p.error&&/column|schema/i.test(p.error.message||''))return sb.from('profiles').select('name,role,shift').eq('id',id).maybeSingle();
+    return p;
+  });
+}
+function reexp(p){p.exp=p.expDate?Math.floor((new Date(p.expDate+'T23:59:59')-Date.now())/864e5):null;return p}
+function rep(c,n){return new Array(n+1).join(c)}
+function ctr(t){t=String(t);return t.length>=32?t:rep(' ',Math.floor((32-t.length)/2))+t}
+function pad2(l,r){l=String(l);r=String(r);if(l.length+r.length>=32)l=l.slice(0,Math.max(1,31-r.length));return l+rep(' ',Math.max(1,32-l.length-r.length))+r}
+function dstr(s){var d=new Date(s);return d.toLocaleDateString('fr-FR')+' '+d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}
+function shortD(s){return new Date(s).toLocaleDateString('fr-FR',{day:'2-digit',month:'2-digit'})}
+function rcHead(){return (logoUrl?'<img class="rlogo" alt="" src="'+esc(logoUrl)+'">':'')+'<h3>'+esc(bizName())+'</h3>'+(addr?'<div class="c">'+esc(addr)+'</div>':'')}
+function secProds(sec,beds){return PRODUCTS.filter(function(p){return p.sec===sec&&!!p.bed===!!beds})}
+function dl(name,text,type){var b=new Blob([text],{type:type||'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(a.href)},2000)}
+
+/* ---------- Mak biznis, pwofil, cache ---------- */
+function applyBrand(){
+  var el=$('hLogo');
+  if(el){if(logoUrl){el.classList.add('has');el.innerHTML='<img alt="" src="'+esc(logoUrl)+'">'}else{el.classList.remove('has');el.textContent='C'}}
+  var b=$('btnProf');if(b&&me)b.querySelector('b').innerHTML=me.avatar?'<img class="av" alt="" src="'+esc(me.avatar)+'">':'👤';
+}
+function setupUI(){
+  var own=me.role==='owner';
+  $('btnDash').hidden=$('btnAdmin').hidden=$('btnAI').hidden=$('btnLive').hidden=!own;
+  $('btnAcc').hidden=!can('kont');
+  $('who').textContent=me.name+' · '+roleLbl();
+  applyBrand();
+}
+function cacheSave(){
+  if(!me)return;
+  try{localStorage.setItem('corlemps.last',me.id);localStorage.setItem('corlemps.cache.'+me.id,JSON.stringify({me:me,products:PRODUCTS,sub:sub,addr:addr,logoUrl:logoUrl,BASE:BASE,SET:SET}))}catch(e){}
+}
+function loadAddr(){
+  return sb.from('tenants').select('address,logo_url,settings,currency').maybeSingle().then(function(r){
+    if(r.error&&/column|schema/i.test(r.error.message||''))return sb.from('tenants').select('address').maybeSingle();
+    return r;
+  }).then(function(r){
+    var t=r.data||{};addr=t.address||'';logoUrl=t.logo_url||'';
+    if(t.currency&&CURS[String(t.currency).toUpperCase()])BASE=String(t.currency).toUpperCase();
+    var s=t.settings||{};
+    SET.rates=s.rates||{};SET.pts_per=s.pts_per==null?100:+s.pts_per;SET.pt_value=s.pt_value==null?1:+s.pt_value;
+    SET.low=s.low==null?5:+s.low;SET.auto_backup=s.auto_backup!==false;SET.auto_report=s.auto_report!==false;
+    applyBrand();cacheSave();if(me&&!$('appRoot').hidden)all();
+  }).catch(function(){});
+}
+function enterOffline(){
+  var id;try{id=localStorage.getItem('corlemps.last')}catch(e){}
+  if(!id)return false;
+  var c;try{c=JSON.parse(localStorage.getItem('corlemps.cache.'+id)||'null')}catch(e){c=null}
+  if(!c||!c.me)return false;
+  me=c.me;PRODUCTS=(c.products||[]).map(reexp);sub=c.sub||null;addr=c.addr||'';logoUrl=c.logoUrl||'';BASE=c.BASE||'HTG';SET=Object.assign(SET,c.SET||{});
+  if(expiredLocal()){offline=true;lock();return true}
+  offline=true;try{st.held=JSON.parse(localStorage.getItem('corlemps.held.'+me.id)||'[]')}catch(e){st.held=[]}
+  view('appRoot');setupUI();$('who').textContent=me.name+' · '+roleLbl()+' · offline';all();netBadge();
+  return true;
+}
+function afterEnter(){
+  offline=false;
+  try{if(!sessionStorage.getItem('corlemps.logged')){sessionStorage.setItem('corlemps.logged','1');logAct('Koneksyon')}}catch(e){}
+  rtStart();syncQ();netBadge();
+  if(me.role==='owner'){setTimeout(autoReport,1500);setTimeout(autoBackup,6000)}
+}
+
+/* ---------- Dirèk (Supabase Realtime) ---------- */
+function rtStart(){
+  rtStop();
+  ['products','sales','activity_log','tenants'].forEach(function(t){
+    var ch=sb.channel('cz-'+t+'-'+me.id).on('postgres_changes',{event:'*',schema:'public',table:t},function(pl){rtEvent(t,pl)}).subscribe(function(s){if(t==='sales')setLive(s==='SUBSCRIBED')});
+    rtCh.push(ch);
+  });
+}
+function rtStop(){rtCh.forEach(function(c){try{sb.removeChannel(c)}catch(e){}});rtCh=[]}
+function setLive(v){var b=$('btnLive');if(b)b.querySelector('b').innerHTML='<span class="dot'+(v?'':' off')+'"></span>'}
+function rtEvent(t,pl){
+  if(!me)return;
+  if(t==='products'){
+    clearTimeout(rtT);rtT=setTimeout(function(){if(busy)return;loadProducts().then(function(){all();if(me.role!=='owner')toast('Katalòg la mizajou 🔄')})},500);return;
+  }
+  if(t==='tenants'){checkSub();loadAddr();return}
+  if(t==='sales'){
+    var s=pl.new||{};
+    if(pl.eventType==='INSERT'&&me.role==='owner'&&s.cashier!==me.name){
+      toast('💸 '+(s.cashier||'Vandè')+' : '+g(s.total)+' ('+s.no+')');
+      feed.unshift({t:s.created_at,u:s.cashier,a:'Vant '+s.no,d:g(s.total)+' · '+s.method});renderLive();
+    }
+    loadToday().then(renderStats);return;
+  }
+  if(t==='activity_log'&&pl.eventType==='INSERT'){
+    var a=pl.new||{};
+    if(me.role==='owner'&&a.user_name!==me.name){feed.unshift({t:a.created_at,u:a.user_name,a:a.action,d:a.detail});renderLive()}
+  }
+}
+function openLive(){
+  $('hbox').innerHTML='<h3>Dirèk 📡</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  var t0=new Date();t0.setHours(0,0,0,0);
+  Promise.all([
+    sb.from('sales').select('created_at,cashier,no,total,method').order('created_at',{ascending:false}).limit(25),
+    sb.from('activity_log').select('created_at,user_name,action,detail').order('created_at',{ascending:false}).limit(40),
+    q2(function(rf){return sb.from('sales').select(rf?'cashier,total,refunded_at':'cashier,total').gte('created_at',t0.toISOString()).limit(2000)})
+  ]).then(function(r){
+    feed=[];
+    (r[0].data||[]).forEach(function(s){feed.push({t:s.created_at,u:s.cashier,a:'Vant '+s.no,d:g(s.total)+' · '+s.method})});
+    (r[1].data||[]).forEach(function(a){feed.push({t:a.created_at,u:a.user_name,a:a.action,d:a.detail})});
+    feed.sort(function(a,b){return new Date(b.t)-new Date(a.t)});feed=feed.slice(0,60);
+    var by={};(r[2].data||[]).forEach(function(s){if(s.refunded_at)return;var k=s.cashier||'—';by[k]=by[k]||{t:0,n:0};by[k].t+=+s.total;by[k].n++});
+    window._liveBy=by;renderLive(true);
+  });
+}
+function renderLive(first){
+  var box=$('hbox');if(!box||!$('hov').classList.contains('on'))return;
+  if(!first&&!box.querySelector('#liveBox'))return;
+  var by=window._liveBy||{};
+  var h='<div id="liveBox"><h3>Dirèk <span class="dot"></span></h3><p class="sub">Vant ak aksyon vandè yo parèt isit la otomatikman.</p>'+
+    '<div class="kpis one"><div class="kpi"><b>'+g(todaySum.t)+'</b><span>Vant jodi a · '+todaySum.n+' tranzaksyon</span></div></div>'+
+    '<h4>Pa vandè (jodi a)</h4>'+(Object.keys(by).length?Object.keys(by).map(function(k){return '<div class="mini"><span>'+esc(k)+' · '+by[k].n+' vant</span><b>'+g(by[k].t)+'</b></div>'}).join(''):'<p class="none">Poko gen vant jodi a.</p>')+
+    '<h4>Dènye aktivite</h4><div class="feed">'+(feed.length?feed.slice(0,40).map(function(f){return '<div class="it"><b>'+esc(f.a||'')+'</b><small>'+esc(f.u||'—')+' · '+new Date(f.t).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})+(f.d?' · '+esc(f.d):'')+'</small></div>'}).join(''):'<p class="none">Anyen ankò.</p>')+'</div></div>'+closeBtn();
+  box.innerHTML=h;
+}
+function openActLog(){
+  $('hbox').innerHTML='<h3>Jounal aktivite</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  sb.from('activity_log').select('created_at,user_name,role,action,detail').order('created_at',{ascending:false}).limit(150).then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>Jounal aktivite</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    $('hbox').innerHTML='<h3>Jounal aktivite</h3><div class="feed">'+((r.data||[]).length?r.data.map(function(a){return '<div class="it"><b>'+esc(a.action)+'</b><small>'+esc(a.user_name||'—')+' · '+dstr(a.created_at)+(a.detail?' · '+esc(a.detail):'')+'</small></div>'}).join(''):'<p class="none">Jounal la vid.</p>')+'</div><div class="hbtns"><button type="button" class="btn sec" data-act="admin">Retounen</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+  });
+}
+
+/* ---------- Alèt stok + rapò otomatik ---------- */
+function alertsInfo(){
+  return {low:PRODUCTS.filter(function(p){return p.s!=null&&!p.bed&&p.s<=SET.low}),ex:PRODUCTS.filter(function(p){return p.exp!=null&&p.exp>=0&&p.exp<90})};
+}
+function renderAlerts(){
+  var b=$('alertBar');if(!b||!me)return;
+  if(me.role!=='owner'){b.hidden=true;return}
+  var a=alertsInfo(),t=[];
+  if(a.low.length)t.push('⚠️ '+a.low.length+' pwodwi ak stok ba');
+  if(a.ex.length)t.push('⏳ '+a.ex.length+' ap ekspire (< 90 jou)');
+  b.hidden=!t.length;b.textContent=t.join(' · ')+' — tape pou wè';
+  if(t.length)notifyOnce(t.join(' · '));
+}
+function notifyOnce(msg){
+  try{
+    if(!('Notification' in window)||Notification.permission!=='granted')return;
+    var k='corlemps.notif.'+me.id,td=new Date().toISOString().slice(0,10);
+    if(localStorage.getItem(k)===td)return;localStorage.setItem(k,td);
+    new Notification(bizName(),{body:msg});
+  }catch(e){}
+}
+function openAlerts(){
+  var a=alertsInfo();
+  var h='<h3>Alèt</h3><h4>Stok ba (≤ '+SET.low+')</h4>'+(a.low.length?a.low.map(function(p){return '<div class="mini"><span>'+esc(NM[p.sec]+' · '+p.n)+'</span><b class="lowt">'+p.s+'</b></div>'}).join(''):'<p class="none">Tout stok yo OK 👍</p>')+
+    '<h4>Ap ekspire</h4>'+(a.ex.length?a.ex.map(function(p){return '<div class="mini"><span>'+esc(p.n)+'</span><b class="lowt">'+p.exp+' jou</b></div>'}).join(''):'<p class="none">Anyen pa ap ekspire talè.</p>');
+  $('hbox').innerHTML=h+closeBtn();$('hov').classList.add('on');
+}
+function autoReport(){
+  if(!me||me.role!=='owner'||!SET.auto_report||!navigator.onLine||$('hov').classList.contains('on')||$('appRoot').hidden)return;
+  var td=new Date().toISOString().slice(0,10),k='corlemps.rep.'+me.id;
+  try{if(localStorage.getItem(k)===td)return;localStorage.setItem(k,td)}catch(e){return}
+  var t0=new Date();t0.setHours(0,0,0,0);var y0=new Date(t0.getTime()-864e5);
+  q2(function(rf){return sb.from('sales').select(rf?'total,items,refunded_at':'total,items').gte('created_at',y0.toISOString()).lt('created_at',t0.toISOString()).limit(3000)}).then(function(r){
+    if(r.error||$('hov').classList.contains('on'))return;
+    var t=0,n=0,top={};
+    r.data.forEach(function(s){if(s.refunded_at)return;t+=+s.total;n++;(s.items||[]).forEach(function(it){top[it.name]=(top[it.name]||0)+it.qty})});
+    var tops=Object.keys(top).sort(function(a,b){return top[b]-top[a]}).slice(0,3),a=alertsInfo();
+    var h='<h3>Rapò otomatik · '+y0.toLocaleDateString('fr-FR')+'</h3><div class="kpis"><div class="kpi"><b>'+g(t)+'</b><span>Vant yè</span></div><div class="kpi"><b>'+n+'</b><span>Tranzaksyon</span></div><div class="kpi"><b>'+g(n?t/n:0)+'</b><span>Mwayèn / vant</span></div></div>'+
+      '<h4>Pi bon vant</h4>'+(tops.length?tops.map(function(x){return '<div class="mini"><span>'+esc(x)+'</span><b>'+top[x]+'</b></div>'}).join(''):'<p class="none">Pa t gen vant yè.</p>')+
+      '<h4>Alèt</h4><div class="mini"><span>Stok ba</span><b class="'+(a.low.length?'lowt':'')+'">'+a.low.length+'</b></div><div class="mini"><span>Ap ekspire</span><b class="'+(a.ex.length?'lowt':'')+'">'+a.ex.length+'</b></div>';
+    $('hbox').innerHTML=h+closeBtn();$('hov').classList.add('on');
+  });
+}
+
+/* ---------- Backup cloud ---------- */
+function cloudBackup(auto){
+  if(!navigator.onLine){if(!auto)toast('Pa gen entènèt.');return Promise.resolve()}
+  return Promise.all([
+    sb.from('sales').select('*').order('created_at',{ascending:false}).limit(10000),sb.from('products').select('*'),
+    sb.from('accounts').select('*'),sb.from('account_tx').select('*'),sb.from('customers').select('*')
+  ]).then(function(r){
+    var e=r[0].error||r[1].error;if(e){if(!auto)toast(nice(e));return}
+    var body=JSON.stringify({date:new Date().toISOString(),business:bizName(),products:r[1].data,sales:r[0].data,accounts:r[2].data||[],account_tx:r[3].data||[],customers:r[4].data||[]});
+    var path=me.id+'/'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';
+    return sb.storage.from('backups').upload(path,new Blob([body],{type:'application/json'}),{contentType:'application/json'}).then(function(u){
+      if(u.error){if(!auto)toast(nice(u.error));return}
+      try{localStorage.setItem('corlemps.bk.'+me.id,new Date().toISOString().slice(0,10))}catch(x){}
+      logAct('Backup cloud');if(!auto)toast('Backup cloud fini ☁️');
+    });
+  });
+}
+function autoBackup(){
+  if(!me||me.role!=='owner'||!SET.auto_backup)return;
+  var td=new Date().toISOString().slice(0,10);
+  try{if(localStorage.getItem('corlemps.bk.'+me.id)===td)return}catch(e){}
+  cloudBackup(true);
+}
+function openBackups(){
+  $('hbox').innerHTML='<h3>Backup cloud ☁️</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  sb.storage.from('backups').list(me.id,{limit:30,sortBy:{column:'created_at',order:'desc'}}).then(function(r){
+    var h='<h3>Backup cloud ☁️</h3><p class="sub">Yon kopi otomatik fèt chak jou lè ou louvri app la (ou ka dezaktive l nan Preferans).</p><div class="hbtns one"><button type="button" class="btn pay" data-act="bkcloud">Fè backup kounye a</button></div><h4>Dènye kopi yo</h4>';
+    if(r.error)h+='<p class="none">'+esc(nice(r.error))+'</p>';
+    else h+=(r.data||[]).length?r.data.map(function(f){return '<button type="button" class="hrow" data-bk="'+esc(me.id+'/'+f.name)+'"><span><b>'+esc(f.name.replace('.json','').replace('T',' ').slice(0,16))+'</b><small>'+(f.metadata&&f.metadata.size?Math.round(f.metadata.size/1024)+' Ko':'')+'</small></span><b>⬇️</b></button>'}).join(''):'<p class="none">Poko gen backup.</p>';
+    $('hbox').innerHTML=h+'<div class="hbtns"><button type="button" class="btn sec" data-act="admin">Retounen</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+  });
+}
+
+/* ---------- Bluetooth (ESC/POS) ---------- */
+var BTS=['000018f0-0000-1000-8000-00805f9b34fb','0000ffe0-0000-1000-8000-00805f9b34fb','0000ff00-0000-1000-8000-00805f9b34fb','49535343-fe7d-4ae5-8fa9-9fafd205e455','e7810a71-73ae-499d-8c15-faa9aef0c3f2','0000fee7-0000-1000-8000-00805f9b34fb'];
+var bt={dev:null,ch:null};
+function btFind(srv){
+  return srv.getPrimaryServices().then(function(ss){
+    var i=0;
+    function nx(){
+      if(i>=ss.length)return Promise.reject(new Error('Pa jwenn kanal ekriti sou enprimant lan.'));
+      return ss[i++].getCharacteristics().then(function(cs){for(var k=0;k<cs.length;k++){var p=cs[k].properties;if(p.write||p.writeWithoutResponse)return cs[k]}return nx()},nx);
+    }
+    return nx();
+  });
+}
+function btConn(){
+  if(!navigator.bluetooth)return Promise.reject(new Error('Navigatè sa a pa sipòte Bluetooth. Itilize Chrome sou Android oswa òdinatè.'));
+  if(bt.ch&&bt.dev&&bt.dev.gatt.connected)return Promise.resolve(bt.ch);
+  var p=bt.dev?Promise.resolve(bt.dev):navigator.bluetooth.requestDevice({acceptAllDevices:true,optionalServices:BTS});
+  return p.then(function(d){bt.dev=d;d.addEventListener('gattserverdisconnected',function(){bt.ch=null});return d.gatt.connect()}).then(btFind).then(function(c){bt.ch=c;return c});
+}
+function btBytes(t){
+  var s=String(t).replace(/[\u00a0\u202f]/g,' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\x20-\x7E\n]/g,'?'),a=[0x1B,0x40];
+  for(var i=0;i<s.length;i++)a.push(s.charCodeAt(i));
+  a.push(10,10,10,10);return new Uint8Array(a);
+}
+function btPrint(text){
+  return btConn().then(function(c){
+    var b=btBytes(text),i=0;
+    function nx(){
+      if(i>=b.length)return;
+      var ch=b.slice(i,i+100);i+=100;
+      var w=(c.properties.writeWithoutResponse&&c.writeValueWithoutResponse)?c.writeValueWithoutResponse(ch):c.writeValue(ch);
+      return w.then(function(){return new Promise(function(r){setTimeout(r,30)})}).then(nx);
+    }
+    return nx();
+  }).then(function(){toast('Resi voye sou enprimant lan 🖨️')}).catch(function(e){toast(e&&e.name==='NotFoundError'?'Pa gen enprimant chwazi.':nice(e))});
+}
+
+/* ---------- Offline + senkronizasyon ---------- */
+function qKey(){return 'corlemps.offq.'+(me?me.id:'x')}
+function qGet(){try{return JSON.parse(localStorage.getItem(qKey())||'[]')}catch(e){return[]}}
+function qSet(a){try{localStorage.setItem(qKey(),JSON.stringify(a))}catch(e){}netBadge()}
+function netBadge(){
+  var b=$('netBadge');if(!b)return;
+  var n=qGet().length,off=!navigator.onLine;b.hidden=!(off||n);
+  if(!b.hidden){b.querySelector('b').textContent=off?'📴':'🔄';b.querySelector('span').textContent=off?'Offline'+(n?' · '+n:''):n+' an atant'}
+}
+function queueSale(args,loc,loy){
+  var a=qGet();a.push({id:Date.now()+'-'+Math.random().toString(36).slice(2,6),args:args,loc:loc,loy:loy||null});qSet(a);
+  loc.items.forEach(function(it){var p=prod(it.id);if(p&&p.s!=null)p.s-=it.qty});cacheSave();
+}
+function syncQ(){
+  if(syncing||!me||!navigator.onLine)return Promise.resolve();
+  var arr=qGet(),q=arr.filter(function(x){return !x.err});
+  if(!q.length){netBadge();return Promise.resolve()}
+  syncing=true;var i=0,okn=0;
+  function next(){
+    if(i>=q.length){syncing=false;qSet(arr);if(okn){toast('Senkronizasyon fini ✅ ('+okn+')');refresh()}return}
+    var it=q[i++];
+    return sb.rpc('make_sale',it.args).then(function(r){
+      if(r.error){
+        if(/fetch|network|load failed/i.test(r.error.message||'')){syncing=false;qSet(arr);return}
+        it.err=nice(r.error);
+      }else{
+        okn++;arr=arr.filter(function(x){return x!==it});
+        if(it.loy)sb.rpc('loyalty_add',it.loy).then(function(){},function(){});
+        logAct('Vant offline senkronize',it.loc.no+' → '+(r.data&&r.data.no));
+      }
+      qSet(arr);return next();
+    },function(){syncing=false});
+  }
+  return next();
+}
+function openQ(){
+  var a=qGet();
+  var h='<h3>Vant an atant 🔄</h3><p class="sub">Vant ki fèt san entènèt yo sove sou aparèy sa a, epi y ap monte otomatikman lè entènèt la retounen.</p>'+
+    (a.length?a.map(function(x,i){return '<div class="mini"><span><b>'+esc(x.loc.no)+'</b> · '+g(x.loc.total)+'<br><small>'+dstr(x.loc.created_at)+(x.err?' · ❌ '+esc(x.err):'')+'</small></span>'+(x.err?'<button type="button" class="cat" data-offdrop="'+i+'">Retire</button>':'')+'</div>'}).join(''):'<p class="none">Anyen pa an atant ✅</p>')+
+    '<div class="hbtns"><button type="button" class="btn pay" data-act="offsync">Senkronize kounye a</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+  $('hbox').innerHTML=h;$('hov').classList.add('on');
+}
+
+/* ---------- Resi (nouvo) ---------- */
+function btText(s){
+  var L=[ctr(bizName())];if(addr)L.push(ctr(addr));
+  L.push(ctr((s.sectors||[]).map(function(k){return NM[k]||k}).join(' + ')),'Resi '+s.no,dstr(s.created_at));
+  if(s.cashier)L.push('Kasye: '+s.cashier);
+  if(s.offline)L.push(ctr('RESI PWOVIZWA'));
+  if(s.patient){var pl=partyLbl(s.sectors||[]);L.push(pl[2]+': '+s.patient+(s.dossier?' ('+s.dossier+')':''))}
+  L.push(rep('-',32));
+  (s.items||[]).forEach(function(it){L.push(pad2(it.qty+'x '+it.name,g(it.unit*it.qty)))});
+  L.push(rep('-',32),pad2('Sou-total',g(s.subtotal)));
+  if(+s.insurance>0)L.push(pad2('Asirans','-'+g(s.insurance)));
+  if(+s.discount>0)L.push(pad2('Rabe','-'+g(s.discount)));
+  L.push(pad2('TOTAL',g(s.total)),pad2('Peman',s.method));
+  if(s.method==='Lajan kach'&&s.received!=null)L.push(pad2('Resevwa',g(s.received)),pad2('Monnen',g(s.received-s.total)));
+  var e=eqLine(s.total);if(e)L.push(e);
+  L.push('',ctr('Mesi!'));return L.join('\n');
+}
+function receiptHTML(s){
+  var items=s.items||[],gain=0;items.forEach(function(it){gain+=(it.retail-it.unit)*it.qty});
+  var h=rcHead()+'<div class="c">'+esc((s.sectors||[]).map(function(k){return NM[k]||k}).join(' + '))+'<br>Resi '+esc(s.no)+'<br>'+dstr(s.created_at)+(s.cashier?'<br>Kasye: '+esc(s.cashier):'')+'</div>';
+  if(s.offline)h+='<div class="c"><b>RESI PWOVIZWA · OFFLINE</b></div>';
+  if(s.refunded_at)h+='<div class="c"><b>⚠ VANT SA A RANBOUSE</b></div>';
+  h+='<hr>';
+  if(s.wholesale)h+='<div class="r"><span>Vant an gwo</span><span>'+esc(s.customer||'')+'</span></div><hr>';
+  if(s.patient){var pl=partyLbl(s.sectors||[]);h+='<div class="r"><span>'+pl[2]+'</span><span>'+esc(s.patient)+(s.dossier?' ('+esc(pl[1])+' '+esc(s.dossier)+')':'')+'</span></div>'}
+  if(s.doctor)h+='<div class="r"><span>Doktè/Ord.</span><span>'+esc(s.doctor)+'</span></div>';
+  if(s.patient||s.doctor)h+='<hr>';
+  items.forEach(function(it){h+='<div class="r"><span>'+it.qty+' × '+esc(it.name)+(it.rx?' (Rx)':'')+'</span><span>'+g(it.unit*it.qty)+'</span></div>'});
+  h+='<hr><div class="r"><span>Sou-total</span><span>'+g(s.subtotal)+'</span></div>';
+  if(gain>0)h+='<div class="r"><span>Ou ekonomize (gwo)</span><span>'+g(gain)+'</span></div>';
+  if(+s.insurance>0)h+='<div class="r"><span>Asirans</span><span>− '+g(s.insurance)+'</span></div>';
+  if(+s.discount>0)h+='<div class="r"><span>Rabè</span><span>− '+g(s.discount)+'</span></div>';
+  h+='<div class="r big"><span>TOTAL</span><span>'+g(s.total)+'</span></div><div class="r"><span>Peman</span><span>'+esc(s.method)+'</span></div>';
+  if(s.method==='Lajan kach'&&s.received!=null)h+='<div class="r"><span>Resevwa</span><span>'+g(s.received)+'</span></div><div class="r"><span>Monnen</span><span>'+g(s.received-s.total)+'</span></div>';
+  var e=eqLine(s.total);if(e)h+='<div class="c">'+esc(e)+'</div>';
+  if(s.loyalty&&(s.loyalty.earn>0||s.loyalty.used>0))h+='<hr><div class="c">⭐ Pwen fidelite: '+(s.loyalty.earn>0?'+'+s.loyalty.earn:'')+(s.loyalty.used>0?' (itilize '+s.loyalty.used+')':'')+'</div>';
+  h+='<hr>'+qr(s.no)+'<div class="c">Mèsi! Pran swen tèt ou 💜</div>'+
+    '<div class="rbtns"><button class="btn" type="button" data-act="print">Enprime</button><button class="btn" type="button" data-act="wa">WhatsApp</button><button class="btn" type="button" data-act="bt">Bluetooth</button>'+
+    (can('refund')&&!s.offline&&!s.refunded_at?'<button class="btn" type="button" data-act="rfopen">Ranbouse</button>':'')+
+    '<button class="btn pri" type="button" data-act="new">'+(recQ.length?'Resi swivan ('+recQ.length+')':'Fèmen')+'</button></div>';
+  return h;
+}
+function showReceipt(s){curSale=s;curText=btText(s);$('rc').innerHTML=receiptHTML(s);$('ov').classList.add('on')}
+function showReceipts(a){recQ=a.slice(1);showReceipt(a[0])}
+function showDoc(html,text){
+  curSale=null;curText=text;recQ=[];
+  $('rc').innerHTML=html+'<div class="rbtns"><button class="btn" type="button" data-act="print">Enprime</button><button class="btn" type="button" data-act="wa">WhatsApp</button><button class="btn" type="button" data-act="bt">Bluetooth</button><button class="btn pri" type="button" data-act="new">Fèmen</button></div>';
+  $('ov').classList.add('on');
+}
+
+/* ---------- Vant: resi separe (bar / pisin) + offline + fidelite ---------- */
+function groupsOf(list){
+  var m={},o=[];
+  list.forEach(function(i){var p=prod(i);if(!p)return;var k=(p.sec==='bar'||p.sec==='pis')?p.sec:'main';if(!m[k]){m[k]={k:k,ids:[]};o.push(m[k])}m[k].ids.push(i)});
+  return o;
+}
+function localSale(gp,gc,rc,args){
+  var secs=[];gp.ids.forEach(function(i){var s=prod(i).sec;if(secs.indexOf(s)<0)secs.push(s)});
+  return {no:'OFF-'+Date.now().toString(36).toUpperCase(),created_at:new Date().toISOString(),cashier:me.name,sectors:secs,
+    items:gp.ids.map(function(i){var p=prod(i),q=st.cart[i];return {id:i,sec:p.sec,name:p.n,qty:q,unit:unit(p,q),retail:p.p,rx:p.rx}}),
+    subtotal:gc.sub,insurance:gc.ins,discount:gc.disc,total:gc.total,method:st.method,received:rc,wholesale:args.p_wholesale,
+    customer:args.p_customer,patient:args.p_patient,dossier:args.p_dossier,doctor:args.p_doctor,offline:true};
+}
+function pay(){
+  if(busy)return;
+  var list=ids();if(!list.length)return;
+  var c=calc(),r=parseFloat($('recv').value)||0;
+  var doc=$('doc').value.trim(),pat=$('pat').value.trim(),dos=$('dos').value.trim(),cust=$('cust').value.trim();
+  var needRx=has(function(p){return p.rx}),needPat=has(isParty);
+  if(st.mode==='gro'&&!cust){$('msg').textContent='Antre non kliyan an oswa biznis la pou vant an gwo.';$('cust').focus();return}
+  if(needRx&&!doc){$('msg').textContent='Antre non doktè a oswa # ordonnans lan pou medikaman Rx yo.';$('doc').focus();return}
+  if(needPat&&!pat){$('msg').textContent='Ranpli "'+partyLbl(secsInCart())[0]+'" pou kontinye.';$('pat').focus();return}
+  if(pct('disc')>0&&!can('disc')){$('msg').textContent='Ou pa gen dwa pou bay rabè.';return}
+  if(st.method==='Lajan kach'&&r<c.total){$('msg').textContent='Kach la pa ase. Antre yon kantite ki egal oswa pi gran pase total la.';$('recv').focus();return}
+  busy=true;$('pay').disabled=true;$('msg').textContent='Ap anrejistre vant lan…';
+  var groups=groupsOf(list),rest=r,sales=[],queued=false;
+  var ph=($('lph').value||'').trim().replace(/\s+/g,''),ln=($('lnm').value||'').trim();
+  var used=pct('disc')>0?loyUsed:0,earn=(ph&&SET.pts_per>0)?Math.floor(c.total/SET.pts_per):0;
+  var loy=(ph&&(earn>0||used>0))?{p_phone:ph,p_name:ln||null,p_earn:earn,p_used:used}:null;
+  function mk(gp,rc){
+    var hh=gp.ids.some(function(i){return prod(i).sec==='hop'}),hr=gp.ids.some(function(i){return prod(i).rx}),hp=gp.ids.some(function(i){return isParty(prod(i))});
+    return {p_items:gp.ids.map(function(i){return {id:i,qty:st.cart[i]}}),p_method:st.method,p_discount:pct('disc'),p_insurance:hh?pct('ins'):0,
+      p_wholesale:st.mode==='gro',p_customer:cust||null,p_patient:hp?pat:null,p_dossier:hp?(dos||null):null,p_doctor:hr?doc:null,p_received:rc};
+  }
+  function drop(gp){gp.ids.forEach(function(i){delete st.cart[i]})}
+  function one(i){
+    if(i>=groups.length)return Promise.resolve(true);
+    var gp=groups[i],gc=calc(gp.ids),last=(i===groups.length-1),rc=null;
+    if(st.method==='Lajan kach'){rc=last?rest:gc.total;rest-=rc}
+    var args=mk(gp,rc);
+    var go=navigator.onLine?sb.rpc('make_sale',args):Promise.resolve({error:{message:'network'}});
+    return go.then(function(res){
+      if(res.error&&/fetch|network|load failed/i.test(res.error.message||'')){
+        var loc=localSale(gp,gc,rc,args);if(last&&loy)loc.loyalty={earn:earn,used:used};
+        queueSale(args,loc,last?loy:null);queued=true;sales.push(loc);drop(gp);return one(i+1);
+      }
+      if(res.error){
+        $('msg').textContent=nice(res.error);
+        if(/abònman/i.test(res.error.message||''))checkSub();
+        return false;
+      }
+      if(last&&loy){res.data.loyalty={earn:earn,used:used};sb.rpc('loyalty_add',loy).then(function(){},function(){})}
+      sales.push(res.data);drop(gp);return one(i+1);
+    });
+  }
+  one(0).then(function(ok){
+    busy=false;
+    if(!ok){renderGrid();renderCart();if(sales.length)showReceipts(sales);return}
+    st.cart={};st.mode='det';loyal=null;loyUsed=0;
+    ['disc','ins'].forEach(function(i){$(i).value=0});['recv','doc','pat','dos','cust','lph','lnm'].forEach(function(i){$(i).value=''});
+    $('msg').textContent='';renderLoy();
+    showReceipts(sales);
+    if(queued){all()}else refresh();
+  });
+}
+
+/* ---------- Istorik (filt + CSV) ---------- */
+function openHist(){
+  $('hbox').innerHTML='<h3>Istorik vant</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');histLoad();
+}
+function histLoad(){
+  var f=hf,q=sb.from('sales').select('*').order('created_at',{ascending:false}).limit(300);
+  if(f.from)q=q.gte('created_at',new Date(f.from+'T00:00:00').toISOString());
+  if(f.to)q=q.lte('created_at',new Date(f.to+'T23:59:59').toISOString());
+  q.then(function(r){
+    if(r.error){$('hbox').innerHTML='<h3>Istorik vant</h3><p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var t=(f.q||'').toLowerCase();
+    histRows=r.data.filter(function(x){return !t||(String(x.no)+' '+(x.cashier||'')+' '+x.method).toLowerCase().indexOf(t)>-1});
+    var tot=0,n=0;histRows.forEach(function(x){if(!x.refunded_at){tot+=+x.total;n++}});
+    var h='<h3>Istorik vant</h3><div class="two"><label class="fld">De<input id="hfrom" type="date" value="'+esc(f.from)+'"></label><label class="fld">Jiska<input id="hto" type="date" value="'+esc(f.to)+'"></label></div>'+
+      '<div class="chatin" style="margin-top:8px"><input id="hq" type="text" placeholder="Chèche (# resi, kasye, metòd)" value="'+esc(f.q)+'" autocomplete="off"><button type="button" class="btn pay sm" data-act="hfilter">Chèche</button></div>'+
+      '<div class="kpis one" style="margin-top:10px"><div class="kpi"><b>'+g(tot)+'</b><span>'+n+' vant (san ranbousman)</span></div></div><h4>Tranzaksyon yo</h4>';
+    h+=histRows.length?histRows.map(function(x,i){
+      return '<button type="button" class="hrow" data-rec="'+i+'"><span><b>'+esc(x.no)+(x.refunded_at?' <span class="tag ref">RANBOUSE</span>':'')+'</b><small>'+new Date(x.created_at).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})+' · '+esc((x.sectors||[]).map(function(k){return NM[k]||k}).join(' + '))+' · '+esc(x.method)+(me.role==='owner'&&x.cashier?' · '+esc(x.cashier):'')+'</small></span><b>'+g(x.total)+'</b></button>';
+    }).join(''):'<p class="none">Pa gen vant pou filt sa a.</p>';
+    $('hbox').innerHTML=h+'<div class="hbtns"><button type="button" class="btn sec" data-act="hcsv">Ekspòte CSV</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+  });
+}
+function histCSV(){
+  var L=['no,dat,kasye,seksyon,metod,sou-total,rabe,asirans,total,ranbouse'];
+  histRows.forEach(function(x){L.push([x.no,new Date(x.created_at).toISOString(),x.cashier||'',(x.sectors||[]).join('+'),x.method,x.subtotal,x.discount,x.insurance,x.total,x.refunded_at?'wi':''].map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'}).join(','))});
+  dl('corlemps-istorik-'+new Date().toISOString().slice(0,10)+'.csv','\ufeff'+L.join('\n'),'text/csv');
+}
+
+/* ---------- Ranbousman ---------- */
+function openRefund(no){
+  $('hbox').innerHTML='<h3>Ranbousman</h3><p class="sub">Resi <b>'+esc(no)+'</b>. Stok la ap remonte epi vant lan ap make kòm ranbouse.</p><label class="fld">Rezon<input id="rfr" type="text" maxlength="120" autocomplete="off"></label><div class="msg" id="rmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-act="hclose">Anile</button><button type="button" class="btn pay" data-rf="'+esc(no)+'">Konfime</button></div>';
+  $('hov').classList.add('on');
+}
+function doRefund(no){
+  var why=($('rfr').value||'').trim();
+  if(!why){$('rmsg').textContent='Antre yon rezon.';return}
+  $('rmsg').textContent='Ap trete…';
+  sb.rpc('refund_sale',{p_no:no,p_reason:why}).then(function(r){
+    if(r.error){$('rmsg').textContent=nice(r.error);return}
+    logAct('Ranbousman',no+' · '+why);toast('Vant lan ranbouse ✅');
+    $('hov').classList.remove('on');$('ov').classList.remove('on');refresh();
+  });
+}
+
+/* ---------- Pwofil + lojo ---------- */
+function imgBlob(file,max,type,cb){
+  var im=new Image(),u=URL.createObjectURL(file);
+  im.onload=function(){
+    var s=Math.min(1,max/Math.max(im.width,im.height)),c=document.createElement('canvas');
+    c.width=Math.round(im.width*s);c.height=Math.round(im.height*s);
+    var x=c.getContext('2d');if(type==='image/jpeg'){x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height)}
+    x.drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(cb,type,.85);
+  };
+  im.onerror=function(){toast('Foto a pa ka li.')};im.src=u;
+}
+function uploadImg(bucket,file,max,type,name,cb){
+  if(!navigator.onLine){toast('Pa gen entènèt.');return}
+  imgBlob(file,max,type,function(b){
+    var path=me.id+'/'+name;
+    sb.storage.from(bucket).upload(path,b,{upsert:true,contentType:type}).then(function(r){
+      if(r.error){toast(nice(r.error));return}
+      cb(sb.storage.from(bucket).getPublicUrl(path).data.publicUrl+'?v='+Date.now());
+    });
+  });
+}
+function openProfile(){
+  var ini=esc((me.name||'?').charAt(0).toUpperCase());
+  $('hbox').innerHTML='<h3>Pwofil</h3><div class="pic">'+(me.avatar?'<img alt="" src="'+esc(me.avatar)+'">':ini)+'</div>'+
+    '<input id="pfile" type="file" accept="image/*" hidden><label class="btn" for="pfile">📷 Chanje foto</label><div style="height:10px"></div>'+
+    field('pn','Non','text',me.name,'maxlength="60" autocomplete="off"')+
+    '<p class="sub">'+esc(roleLbl())+(me.username?' · username: '+esc(me.username):'')+'</p>'+
+    field('pp','Nouvo modpas (opsyonèl, 6+ karaktè)','password','','autocomplete="new-password"')+
+    '<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-act="hclose">Fèmen</button><button type="button" class="btn pay" data-act="profsave">Sove</button></div>';
+  $('hov').classList.add('on');
+}
+function profSave(){
+  var n=$('pf-pn').value.trim(),pw=$('pf-pp').value;
+  if(!n){$('pmsg').textContent='Antre yon non.';return}
+  if(pw&&pw.length<6){$('pmsg').textContent='Modpas la dwe gen omwen 6 karaktè.';return}
+  $('pmsg').textContent='Ap sove…';
+  sb.rpc('set_my_profile',{p_name:n,p_avatar:null}).then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}
+    me.name=n;setupUI();cacheSave();
+    if(pw)return sb.auth.updateUser({password:pw}).then(function(u){if(u.error){$('pmsg').textContent=nice(u.error);return}toast('Pwofil la sove ✅');$('hov').classList.remove('on')});
+    toast('Pwofil la sove ✅');$('hov').classList.remove('on');
+  });
+}
+function openBrand(){
+  $('hbox').innerHTML='<h3>Lojo biznis</h3><p class="sub">Lojo a parèt anwo ak sou tout resi yo.</p><div class="pic sq">'+(logoUrl?'<img alt="" src="'+esc(logoUrl)+'">':'C')+'</div>'+
+    '<input id="lfile" type="file" accept="image/*" hidden><label class="btn" for="lfile">🖼️ Chwazi lojo</label>'+
+    (logoUrl?'<div class="hbtns one" style="margin-top:10px"><button type="button" class="btn sec" data-act="logorm">Retire lojo a</button></div>':'')+
+    '<div class="hbtns one" style="margin-top:10px"><button type="button" class="btn sec" data-act="admin">Retounen</button></div>';
+  $('hov').classList.add('on');
+}
+
+/* ---------- Kont vandè + aksè ekip ---------- */
+function openSeller(){
+  $('hbox').innerHTML='<h3>Kont vandè</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  sb.rpc('my_seller').then(function(r){
+    var s=r.data||{},h='<h3>Kont vandè</h3>';
+    if(r.error){$('hbox').innerHTML=h+'<p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    if(!s.username){
+      h+='<p class="sub">Poko gen kont vandè pou kont direktè sa a.</p><div class="hbtns one"><button type="button" class="btn pay" data-act="sellermk">Kreye kont vandè</button></div>';
+    }else{
+      h+='<p class="sub">Kont sa a kreye otomatikman ak kont direktè ou. Vandè a ka konekte ak <b>username</b> li sèlman; sistèm nan ajoute <code>@fakeseller.com</code> poukont li.</p>'+
+        '<div class="team"><b>'+esc(s.username)+'</b><small>'+esc(s.email||'')+'</small></div>'+
+        field('su','Nouvo username','text',s.username,'autocomplete="off" autocapitalize="none" maxlength="30"')+
+        '<div class="hbtns one"><button type="button" class="btn sec" data-act="sellername">Chanje username</button></div>'+
+        field('sp','Modpas vandè a (6+ karaktè)','text','','autocomplete="off"')+
+        '<div class="hbtns one"><button type="button" class="btn pay" data-act="sellerpw">Mete modpas la</button></div>';
+    }
+    h+='<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-act="admin">Retounen</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+    $('hbox').innerHTML=h;
+  });
+}
+function sellerCall(fn,args,ok){
+  $('pmsg').textContent='Ap travay…';
+  sb.rpc(fn,args).then(function(r){if(r.error){$('pmsg').textContent=nice(r.error);return}logAct(ok);toast(ok+' ✅');openSeller()});
+}
+function openTeam(){
+  $('hbox').innerHTML='<h3>Aksè ekip</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  sb.rpc('list_team').then(function(r){
+    var h='<h3>Aksè ekip</h3><p class="sub">Chwazi sa chak vandè gen dwa fè.</p>';
+    if(r.error){$('hbox').innerHTML=h+'<p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var rows=r.data||[];
+    h+=rows.length?rows.map(function(u){
+      var p=u.perms||{};
+      return '<div class="team" data-uid="'+esc(u.id)+'"><b>'+esc(u.name||u.username||'Vandè')+'</b><small>'+esc(u.username||'')+'</small>'+
+        '<label class="chk"><input type="checkbox" data-p="active"'+(u.active!==false?' checked':'')+'> Kont aktif</label>'+
+        '<label class="chk"><input type="checkbox" data-p="disc"'+(p.disc!==false?' checked':'')+'> Ka bay rabè</label>'+
+        '<label class="chk"><input type="checkbox" data-p="gro"'+(p.gro!==false?' checked':'')+'> Ka fè vant an gwo</label>'+
+        '<label class="chk"><input type="checkbox" data-p="kont"'+(p.kont!==false?' checked':'')+'> Ka jere kont (pasyan / elèv / otèl)</label>'+
+        '<label class="chk"><input type="checkbox" data-p="refund"'+(p.refund===true?' checked':'')+'> Ka fè ranbousman</label>'+
+        '<label class="fld">Ekip<select data-p="shift"><option value="">—</option><option value="maten"'+(u.shift==='maten'?' selected':'')+'>Maten</option><option value="aswe"'+(u.shift==='aswe'?' selected':'')+'>Aswè</option></select></label>'+
+        '<button type="button" class="btn sec" data-teamsave="'+esc(u.id)+'">Sove</button></div>';
+    }).join(''):'<p class="none">Pa gen vandè ankò. Kreye kont vandè a nan "Kont vandè".</p>';
+    $('hbox').innerHTML=h+'<div class="hbtns"><button type="button" class="btn sec" data-act="admin">Retounen</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';
+  });
+}
+function teamSave(id){
+  var box=document.querySelector('.team[data-uid="'+id+'"]');if(!box)return;
+  var perms={},active=true,shift=null;
+  box.querySelectorAll('[data-p]').forEach(function(el){var k=el.dataset.p;if(k==='active')active=el.checked;else if(k==='shift')shift=el.value||null;else perms[k]=el.checked});
+  sb.rpc('set_user_access',{p_id:id,p_perms:perms,p_active:active,p_shift:shift}).then(function(r){
+    if(r.error){toast(nice(r.error));return}logAct('Chanje aksè vandè',id);toast('Aksè yo sove ✅');
+  });
+}
+
+/* ---------- Preferans ---------- */
+function openPrefs(){
+  var cs=Object.keys(CURS).filter(function(c){return c!==BASE});
+  var h='<h3>Preferans</h3><p class="sub">Lajan prensipal: <b>'+BASE+' ('+esc(sym())+')</b>, administratè a chwazi l.</p><h4>Lòt lajan (ekivalan sou resi)</h4><p class="sub">Antre konbyen '+esc(sym())+' ki nan 1 inite lòt lajan an. Kite vid pou pa afiche l.</p>'+
+    cs.map(function(c){return field('r'+c,'1 '+c+' = ? '+sym(),'number',SET.rates[c]||'','min="0" step="any" inputmode="decimal"')}).join('')+
+    '<h4>Pwogram fidelite</h4><div class="two">'+field('lp','Chak ? '+sym()+' = 1 pwen (0 = ofri)','number',SET.pts_per,'min="0" inputmode="decimal"')+field('lv','1 pwen vo ? '+sym(),'number',SET.pt_value,'min="0" step="any" inputmode="decimal"')+'</div>'+
+    '<h4>Alèt ak otomatik</h4>'+field('lw','Alèt stok ba (≤)','number',SET.low,'min="0" inputmode="numeric"')+
+    '<label class="chk"><input type="checkbox" id="pf-xr"'+(SET.auto_report?' checked':'')+'> Rapò otomatik chak jou</label>'+
+    '<label class="chk"><input type="checkbox" id="pf-xb"'+(SET.auto_backup?' checked':'')+'> Backup cloud otomatik chak jou</label>'+
+    '<div class="hbtns one"><button type="button" class="btn sec" data-act="notif">Aktive notifikasyon navigatè</button></div>'+
+    '<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-act="admin">Retounen</button><button type="button" class="btn pay" data-act="prefsave">Sove</button></div>';
+  $('hbox').innerHTML=h;$('hov').classList.add('on');
+}
+function prefSave(){
+  var rates={};Object.keys(CURS).forEach(function(c){if(c===BASE)return;var el=$('pf-r'+c),v=el?parseFloat(el.value):0;if(v>0)rates[c]=v});
+  var s={rates:rates,pts_per:Math.max(0,parseFloat($('pf-lp').value)||0),pt_value:Math.max(0,parseFloat($('pf-lv').value)||0),low:Math.max(0,parseInt($('pf-lw').value,10)||0),auto_report:$('pf-xr').checked,auto_backup:$('pf-xb').checked};
+  $('pmsg').textContent='Ap sove…';
+  sb.rpc('set_my_tenant_settings',{p_settings:s}).then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}
+    SET=Object.assign(SET,s);cacheSave();all();logAct('Chanje preferans');toast('Preferans yo sove ✅');openAdmin();
+  });
+}
+
+/* ---------- Kont (pasyan · elèv · otèl) ---------- */
+function balTxt(b){return b>0?'<b class="bal owe">Dwe '+g(b)+'</b>':b<0?'<b class="bal ok">Kredi '+g(-b)+'</b>':'<b class="bal ok">Peye ✓</b>'}
+function openAccts(kind){
+  kind=kind||SECKIND[st.sec]||acc.kind;acc.kind=kind;
+  $('hbox').innerHTML='<h3>Kont</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');
+  sb.from('accounts').select('*').eq('kind',kind).eq('status','open').order('created_at',{ascending:false}).limit(100).then(function(r){
+    var head='<h3>Kont</h3><div class="mode k3">'+Object.keys(KIND).map(function(k){return '<button type="button" data-kind="'+k+'" aria-pressed="'+(k===kind)+'">'+KIND[k].ic+' '+KIND[k].n+'</button>'}).join('')+'</div>';
+    if(r.error){$('hbox').innerHTML=head+'<p class="none">'+esc(nice(r.error))+'</p>'+closeBtn();return}
+    var rows=r.data||[],ids2=rows.map(function(a){return a.id});
+    return (ids2.length?sb.from('account_tx').select('account_id,kind,amount').in('account_id',ids2):Promise.resolve({data:[]})).then(function(t){
+      var bal={};(t.data||[]).forEach(function(x){bal[x.account_id]=(bal[x.account_id]||0)+(x.kind==='chaj'?+x.amount:-x.amount)});
+      var h=head+'<div class="hbtns one"><button type="button" class="btn pay" data-act="accnew">+ Nouvo '+esc(KIND[kind].n.toLowerCase())+'</button></div><div style="height:10px"></div>';
+      h+=rows.length?rows.map(function(a){
+        var x=a.extra||{};
+        return '<button type="button" class="hrow" data-acc="'+a.id+'"><span><b>'+esc(a.name)+'</b><small>'+esc([a.ref,x.klas?'Klas '+x.klas:'',x.bed?(kind==='kliyan'?'Chanm ':'Kabann ')+x.bed_name:''].filter(Boolean).join(' · '))+'</small></span>'+balTxt(bal[a.id]||0)+'</button>';
+      }).join(''):'<p class="none">Pa gen kont ouvè ankò.</p>';
+      $('hbox').innerHTML=h+closeBtn();
+    });
+  });
+}
+function accNew(){
+  var kind=acc.kind,K=KIND[kind],beds=kind==='elev'?[]:secProds(K.sec,true).filter(function(p){return p.s==null||p.s>0});
+  var h='<h3>Nouvo '+esc(K.n.toLowerCase())+'</h3>'+field('an','Non konplè','text','','autocomplete="off"')+
+    field('ar',kind==='elev'?'Matikil / # elèv':kind==='kliyan'?'Telefòn / pyès idantite':'# dosye','text','','autocomplete="off"');
+  if(kind==='elev')h+='<div class="two">'+field('ak','Klas','text','','autocomplete="off"')+field('at','Total frè lekòl ('+sym()+')','number','','min="0" inputmode="decimal"')+'</div>';
+  else h+='<label class="fld">'+(kind==='kliyan'?'Chanm':'Kabann')+'<select id="pf-ab"><option value="">— Pa ankò —</option>'+beds.map(function(p){return '<option value="'+p.id+'">'+esc(p.e+' '+p.n)+' — '+g(p.p)+'</option>'}).join('')+'</select></label>';
+  h+='<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-act="acclist">Anile</button><button type="button" class="btn pay" data-act="accsave">Sove</button></div>';
+  $('hbox').innerHTML=h;
+}
+function accSave(){
+  var K=KIND[acc.kind],name=$('pf-an').value.trim();
+  if(!name){$('pmsg').textContent='Antre non an.';return}
+  var row={kind:acc.kind,name:name,ref:$('pf-ar').value.trim()||null,extra:{},created_by:me.name};
+  var bedId=$('pf-ab')?(+$('pf-ab').value||null):null,tuit=$('pf-at')?(+$('pf-at').value||0):0;
+  if($('pf-ak'))row.extra.klas=$('pf-ak').value.trim();
+  if(bedId){var bp=prod(bedId);row.extra.bed=bedId;row.extra.bed_name=bp?bp.n:'';row.extra.since=new Date().toISOString()}
+  $('pmsg').textContent='Ap sove…';
+  sb.from('accounts').insert(row).select().single().then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}
+    var a=r.data,jobs=[];
+    if(tuit>0)jobs.push(sb.from('account_tx').insert({account_id:a.id,kind:'chaj',label:'Total frè lekòl',qty:1,amount:tuit,by_name:me.name}));
+    if(bedId)jobs.push(sb.rpc('adjust_stock',{p_id:bedId,p_delta:-1}));
+    return Promise.all(jobs).then(function(){logAct('Nouvo kont '+K.n,name);refresh().then(function(){openAcct(a.id)})});
+  });
+}
+function openAcct(id){
+  $('hbox').innerHTML='<h3>Kont</h3><p class="none">Ap chaje…</p>';$('hov').classList.add('on');armed='';
+  Promise.all([sb.from('accounts').select('*').eq('id',id).single(),sb.from('account_tx').select('*').eq('account_id',id).order('created_at',{ascending:true})]).then(function(r){
+    if(r[0].error){$('hbox').innerHTML='<h3>Kont</h3><p class="none">'+esc(nice(r[0].error))+'</p>'+closeBtn();return}
+    var a=r[0].data,tx=r[1].data||[],K=KIND[a.kind],bal=0,x=a.extra||{};
+    tx.forEach(function(t){bal+=t.kind==='chaj'?+t.amount:-t.amount});
+    acc.cur=a;acc.tx=tx;acc.bal=bal;
+    var h='<h3>'+K.ic+' '+esc(a.name)+'</h3><p class="sub">'+esc([a.ref,x.klas?'Klas '+x.klas:'',x.bed?(a.kind==='kliyan'?'Chanm ':'Kabann ')+x.bed_name+' (depi '+fdate(String(x.since).slice(0,10))+')':''].filter(Boolean).join(' · '))+'</p>'+
+      '<div class="kpis one"><div class="kpi"><b>'+g(bal)+'</b><span>'+(bal>0?'Balans pou peye':bal<0?'Kredi':'Balans')+'</span></div></div><h4>Mouvman yo</h4>';
+    h+=tx.length?tx.map(function(t){return '<div class="mini"><span>'+shortD(t.created_at)+' · '+esc(t.label||'')+(t.qty>1?' ×'+t.qty:'')+'</span><b class="'+(t.kind==='chaj'?'lowt':'')+'">'+(t.kind==='chaj'?'':'− ')+g(t.amount)+'</b></div>'}).join(''):'<p class="none">Pa gen mouvman ankò.</p>';
+    h+='<div class="hbtns"><button type="button" class="btn sec" data-act="accchg">+ '+esc(K.chg)+'</button><button type="button" class="btn pay" data-act="accpay">+ '+esc(K.pay)+'</button></div>'+
+      '<div class="hbtns"><button type="button" class="btn sec" data-act="accrcpt">Resi / Ekstrè</button>'+(x.bed?'<button type="button" class="btn sec" data-act="accrel">'+(a.kind==='kliyan'?'Libere chanm':'Libere kabann')+'</button>':'<button type="button" class="btn sec" data-act="acclist">Tout kont</button>')+'</div>'+
+      '<div class="hbtns"><button type="button" class="btn sec" data-act="acclist">Retounen</button><button type="button" class="btn sec" data-act="accclose">Fèmen kont lan</button></div>';
+    $('hbox').innerHTML=h;
+  });
+}
+function accChg(){
+  var a=acc.cur,K=KIND[a.kind],ps=secProds(K.sec,false);
+  $('hbox').innerHTML='<h3>'+esc(K.chg)+'</h3>'+(ps.length?'<label class="fld">Chwazi nan katalòg<select id="ac-p"><option value="">— Lòt (antre men) —</option>'+ps.map(function(p){return '<option value="'+p.id+'">'+esc(p.e+' '+p.n)+' — '+g(p.p)+'</option>'}).join('')+'</select></label>':'')+
+    '<div class="two">'+field('al','Deskripsyon','text','','autocomplete="off"')+field('aq','Kantite','number',1,'min="1" inputmode="numeric"')+'</div>'+field('am','Montan inite ('+sym()+')','number','','min="0" inputmode="decimal"')+
+    '<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-acc="'+a.id+'">Anile</button><button type="button" class="btn pay" data-act="accchgsave">Ajoute</button></div>';
+}
+function accChgSave(){
+  var a=acc.cur,l=$('pf-al').value.trim(),q=Math.max(1,parseInt($('pf-aq').value,10)||1),m=parseFloat($('pf-am').value);
+  if(!l||isNaN(m)||m<0){$('pmsg').textContent='Antre deskripsyon an ak montan an.';return}
+  sb.from('account_tx').insert({account_id:a.id,kind:'chaj',label:l,qty:q,amount:q*m,by_name:me.name}).then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}logAct('Chaj sou kont',a.name+' · '+l);openAcct(a.id);
+  });
+}
+function accPay(){
+  var a=acc.cur,K=KIND[a.kind];
+  $('hbox').innerHTML='<h3>'+esc(K.pay)+'</h3><p class="sub">Balans kounye a: <b>'+g(acc.bal)+'</b></p>'+field('apm','Montan ('+sym()+')','number',acc.bal>0?acc.bal:'','min="0" inputmode="decimal"')+
+    '<label class="fld">Metòd<select id="pf-apt">'+METHODS.map(function(m){return '<option>'+m+'</option>'}).join('')+'</select></label>'+
+    '<div class="msg" id="pmsg" role="status"></div><div class="hbtns"><button type="button" class="btn sec" data-acc="'+a.id+'">Anile</button><button type="button" class="btn pay" data-act="accpaysave">Anrejistre</button></div>';
+}
+function accPaySave(){
+  var a=acc.cur,K=KIND[a.kind],m=parseFloat($('pf-apm').value);
+  if(isNaN(m)||m<=0){$('pmsg').textContent='Antre yon montan valab.';return}
+  sb.from('account_tx').insert({account_id:a.id,kind:'peman',label:K.pay,qty:1,amount:m,method:$('pf-apt').value,by_name:me.name}).then(function(r){
+    if(r.error){$('pmsg').textContent=nice(r.error);return}
+    logAct(K.pay+' sou kont',a.name+' · '+g(m));
+    sb.from('account_tx').select('*').eq('account_id',a.id).order('created_at',{ascending:true}).then(function(t){
+      var tx=t.data||[],bal=0;tx.forEach(function(x){bal+=x.kind==='chaj'?+x.amount:-x.amount});
+      acc.cur=a;accDoc(a,tx,bal,'Resi '+K.pay.toLowerCase());
+    });
+  });
+}
+function accDoc(a,tx,bal,title){
+  var K=KIND[a.kind];
+  var h=rcHead()+'<div class="c"><b>'+esc(title)+'</b></div><hr><div class="r"><span>'+esc(K.n)+'</span><span>'+esc(a.name)+'</span></div>'+(a.ref?'<div class="r"><span>Ref</span><span>'+esc(a.ref)+'</span></div>':'')+'<hr>';
+  tx.forEach(function(x){h+='<div class="r"><span>'+shortD(x.created_at)+' '+esc(x.label||'')+(x.qty>1?' ×'+x.qty:'')+'</span><span>'+(x.kind==='chaj'?'':'− ')+g(x.amount)+'</span></div>'});
+  h+='<hr><div class="r big"><span>BALANS</span><span>'+g(bal)+'</span></div><div class="c">Mèsi!</div>';
+  var L=[ctr(bizName()),ctr(title),rep('-',32),K.n+': '+a.name];
+  tx.forEach(function(x){L.push(pad2(shortD(x.created_at)+' '+(x.label||'')+(x.qty>1?' x'+x.qty:''),(x.kind==='chaj'?'':'-')+g(x.amount)))});
+  L.push(rep('-',32),pad2('BALANS',g(bal)),'',ctr('Mesi!'));
+  $('hov').classList.remove('on');showDoc(h,L.join('\n'));
+}
+function accRelease(b){
+  var a=acc.cur,x=a.extra||{};if(!x.bed)return;
+  if(armed!=='rel'){armed='rel';b.textContent='Konfime: libere';return}
+  var p=prod(x.bed),days=Math.max(1,Math.ceil((Date.now()-new Date(x.since))/864e5)),jobs=[];
+  if(p)jobs.push(sb.from('account_tx').insert({account_id:a.id,kind:'chaj',label:(a.kind==='kliyan'?'Chanm ':'Kabann ')+x.bed_name,qty:days,amount:p.p*days,by_name:me.name}));
+  jobs.push(sb.rpc('adjust_stock',{p_id:x.bed,p_delta:1}));
+  jobs.push(sb.from('accounts').update({extra:Object.assign({},x,{bed:null,left:new Date().toISOString()})}).eq('id',a.id));
+  Promise.all(jobs).then(function(rs){
+    var e=rs.filter(function(r){return r&&r.error})[0];if(e){toast(nice(e.error));return}
+    logAct('Libere '+(a.kind==='kliyan'?'chanm':'kabann'),a.name+' · '+days+' jou');refresh().then(function(){openAcct(a.id)});
+  });
+}
+function accClose(b){
+  var a=acc.cur;
+  if(acc.bal>0&&armed!=='clo'){armed='clo';b.textContent='Balans pa 0. Tape ankò pou fèmen';return}
+  if(a.extra&&a.extra.bed){toast('Libere kabann/chanm nan anvan.');return}
+  sb.from('accounts').update({status:'closed'}).eq('id',a.id).then(function(r){
+    if(r.error){toast(nice(r.error));return}logAct('Fèmen kont',a.name);toast('Kont lan fèmen');openAccts(a.kind);
+  });
+}
+
+/* ---------- Fidelite ---------- */
+function lookLoyal(){
+  var ph=($('lph').value||'').trim().replace(/\s+/g,'');loyal=null;loyUsed=0;
+  if(ph.length<6||!navigator.onLine||!(SET.pts_per>0)){renderLoy();return}
+  sb.from('customers').select('name,points').eq('phone',ph).maybeSingle().then(function(r){
+    loyal=r.data||{name:'',points:0,fresh:true};
+    if(loyal.name&&!$('lnm').value)$('lnm').value=loyal.name;renderLoy();
+  });
+}
+function renderLoy(){
+  var el=$('lpts');if(!el)return;
+  if(!loyal){el.hidden=true;return}
+  el.hidden=false;
+  el.innerHTML=(loyal.fresh?'Nouvo kliyan fidèl: l ap jwenn pwen apre vant lan.':'⭐ <b>'+loyal.points+' pwen</b> (≈ '+g(loyal.points*SET.pt_value)+')')+(loyal.points>0?' <button type="button" class="cat" data-act="usepts">Itilize pwen</button>':'');
+}
+
+/* ---------- Aksyon (bouton yo) ---------- */
+var tokVal='';
+function showTok(t){tokVal=t||'';$('hbox').innerHTML='<h3>Token pwen de vant 🔑</h3><p class="sub">Kòd sa a idantifye pwen de vant ou. Pa pataje l ak moun ki pa vandè ou.</p><div class="pic sq" style="width:auto;height:auto;padding:14px;font-size:22px;letter-spacing:.12em">'+esc(tokVal||'—')+'</div><div class="hbtns"><button type="button" class="btn sec" data-act="tokcopy">Kopye</button><button type="button" class="btn sec" data-act="tokregen">Jenere nouvo</button></div>'+closeBtn();$('hov').classList.add('on')}
+var ACTS={
+  mods:function(){var f=FEAT[(me&&me.business_type)||'shop']||FEAT.shop;$('hbox').innerHTML='<h3>Modil aktif 🧩</h3><p class="sub">Modil ki gen rapò ak tip biznis ou.</p>'+Object.keys(f).map(function(k){return '<div class="rbar"><span>'+esc(FLBL[k]||k)+'</span><b>'+(f[k]?'✅ disponib':'⏳ pwochèn')+'</b></div>'}).join('')+closeBtn();$('hov').classList.add('on')},
+  tok:function(){sb.rpc('get_pos_token').then(function(r){if(r.error){toast(nice(r.error));return}showTok(r.data)})},
+  tokregen:function(){if(!confirm('Jenere yon nouvo token? Ansyen an p ap mache ankò.'))return;sb.rpc('regen_pos_token').then(function(r){if(r.error){toast(nice(r.error));return}showTok(r.data);toast('Nouvo token ✅')})},
+  tokcopy:function(){if(navigator.clipboard)navigator.clipboard.writeText(tokVal).then(function(){toast('Token kopye ✅')})},
+  plans:function(){openPlans()},
+  waSub:function(){window.open('https://wa.me/'+waNum(subRcPh)+'?text='+encodeURIComponent(subRcTxt),'_blank','noopener')},
+  new:function(){if(recQ.length)showReceipt(recQ.shift());else $('ov').classList.remove('on')},
+  wa:function(){var t=curSale?waText(curSale):curText;if(t)window.open('https://wa.me/'+waNum(askWa())+'?text='+encodeURIComponent(t),'_blank','noopener')},
+  bt:function(){if(curText)btPrint(curText)},
+  btconn:function(){btConn().then(function(){toast('Enprimant konekte ✅')}).catch(function(e){toast(e&&e.name==='NotFoundError'?'Pa gen enprimant chwazi.':nice(e))})},
+  rfopen:function(){if(curSale)openRefund(curSale.no)},
+  profsave:profSave,
+  seller:openSeller,
+  sellermk:function(){sb.rpc('ensure_my_seller').then(function(r){if(r.error){toast(nice(r.error));return}logAct('Kreye kont vandè');toast('Kont vandè kreye ✅');openSeller()})},
+  sellername:function(){sellerCall('set_seller_username',{p_username:($('pf-su').value||'').trim().toLowerCase()},'Username chanje')},
+  sellerpw:function(){var p=$('pf-sp').value;if(p.length<6){$('pmsg').textContent='Modpas la dwe gen omwen 6 karaktè.';return}sellerCall('set_seller_password',{p_password:p},'Modpas vandè mete')},
+  team:openTeam,brand:openBrand,
+  logorm:function(){sb.rpc('set_my_tenant_logo',{p_url:''}).then(function(r){if(r.error){toast(nice(r.error));return}logoUrl='';applyBrand();cacheSave();openBrand()})},
+  prefs:openPrefs,prefsave:prefSave,
+  notif:function(){if(!('Notification' in window)){toast('Navigatè sa a pa sipòte notifikasyon.');return}Notification.requestPermission().then(function(p){toast(p==='granted'?'Notifikasyon aktive ✅':'Notifikasyon pa otorize')})},
+  bkmenu:openBackups,bkcloud:function(){toast('Ap fè backup…');cloudBackup(false).then(openBackups)},
+  actlog:openActLog,
+  install:function(){if(deferredInstall){deferredInstall.prompt();deferredInstall=null}else toast('iPhone: Pataje → Ajoute sou ekran prensipal. Android/PC: menu navigatè a → Enstale app.')},
+  hfilter:function(){hf={from:$('hfrom').value,to:$('hto').value,q:$('hq').value.trim()};$('hbox').innerHTML='<h3>Istorik vant</h3><p class="none">Ap chaje…</p>';histLoad()},
+  hcsv:histCSV,
+  offsync:function(){if(!navigator.onLine){toast('Pa gen entènèt toujou.');return}syncQ().then(openQ)},
+  usepts:function(){
+    var c=calc(),base=c.sub-c.ins;if(!loyal||!base||!(SET.pt_value>0))return;
+    var v=Math.min(loyal.points*SET.pt_value,base),p=Math.round(v/base*10000)/100;
+    $('disc').value=p;loyUsed=Math.ceil(v/SET.pt_value);renderCart();toast('Rabè '+p+'% aplike ('+loyUsed+' pwen)');
+  },
+  accnew:accNew,accsave:accSave,acclist:function(){openAccts()},accchg:accChg,accchgsave:accChgSave,accpay:accPay,accpaysave:accPaySave,
+  accrcpt:function(){if(acc.cur)accDoc(acc.cur,acc.tx||[],acc.bal||0,'Ekstrè kont')},
+  accrel:function(b){accRelease(b)},accclose:function(b){accClose(b)}
+};
+var IDS={btnProf:openProfile,btnLive:openLive,btnAcc:function(){openAccts()},netBadge:openQ,alertBar:openAlerts};
+function extraClick(b,d){
+  if(d.act&&ACTS[d.act]){ACTS[d.act](b,d);return true}
+  if(b.id&&IDS[b.id]){IDS[b.id]();return true}
+  if(d.acc){openAcct(+d.acc);return true}
+  if(d.kind){openAccts(d.kind);return true}
+  if(d.rf){doRefund(d.rf);return true}
+  if(d.teamsave){teamSave(d.teamsave);return true}
+  if(d.offdrop!=null){var a=qGet();a.splice(+d.offdrop,1);qSet(a);openQ();return true}
+  if(d.bk){sb.storage.from('backups').createSignedUrl(d.bk,120).then(function(r){if(r.error){toast(nice(r.error));return}window.open(r.data.signedUrl,'_blank','noopener')});return true}
+  if(b.id==='hold'){
+    if(!ids().length){toast('Panye a vid');return true}
+    var lbl=has(function(p){return p.sec==='bar'||p.sec==='pis'})&&$('pat').value.trim()?'Tab '+$('pat').value.trim():'';
+    st.held.push({cart:st.cart,label:lbl,pat:lbl?$('pat').value.trim():''});st.cart={};if(lbl)$('pat').value='';saveHeld();renderGrid();renderCart();toast(lbl?lbl+' mete an pause':'Vant lan mete an pause');return true;
+  }
+  if(d.held){
+    var h=st.held.splice(+d.held,1)[0];
+    if(ids().length)st.held.push({cart:st.cart});
+    st.cart=h.cart;if(h.pat){$('pat').value=h.pat}
+    saveHeld();renderGrid();renderCart();return true;
+  }
+  return false;
+}
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.id==='pfile'&&t.files&&t.files[0])uploadImg('avatars',t.files[0],256,'image/jpeg','avatar.jpg',function(u){
+    sb.rpc('set_my_profile',{p_name:'',p_avatar:u}).then(function(r){if(r.error){toast(nice(r.error));return}me.avatar=u;cacheSave();applyBrand();openProfile()});
+  });
+  else if(t.id==='lfile'&&t.files&&t.files[0])uploadImg('logos',t.files[0],320,'image/png','logo.png',function(u){
+    sb.rpc('set_my_tenant_logo',{p_url:u}).then(function(r){if(r.error){toast(nice(r.error));return}logoUrl=u;applyBrand();cacheSave();logAct('Chanje lojo');openBrand()});
+  });
+  else if(t.id==='ac-p'){var p=prod(+t.value);if(p){$('pf-al').value=p.n;$('pf-am').value=p.p}}
+});
+document.addEventListener('input',function(e){if(e.target.id==='lph'){clearTimeout(lt);lt=setTimeout(lookLoyal,500)}});
+window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredInstall=e});
+window.addEventListener('offline',function(){netBadge();toast('Offline: vant yo ap sove sou aparèy la 📴')});
+window.addEventListener('online',function(){
+  netBadge();
+  if(me){offline=false;rtStart();checkSub();syncQ().then(function(){refresh()})}
+  else if(sb)enter();
+});
+
+function adminMenu(){
+  var B=[['seller','👤 Kont vandè'],['team','👥 Aksè ekip'],['brand','🖼️ Lojo biznis'],['prefs','⚙️ Preferans'],['bkmenu','☁️ Backup cloud'],['actlog','📜 Jounal aktivite'],['btconn','🖨️ Enprimant Bluetooth'],['install','📲 Enstale app'],['plans','💳 Abònman'],['tok','🔑 Token pwen de vant'],['mods','🧩 Modil aktif']];
+  return '<h4>Plis opsyon</h4><div class="hbtns">'+B.map(function(x){return '<button type="button" class="btn sec" data-act="'+x[0]+'">'+x[1]+'</button>'}).join('')+'</div>';
+}
+function catDL(){
+  var cs=[];PRODUCTS.forEach(function(p){if(cs.indexOf(p.c)<0)cs.push(p.c)});
+  return '<datalist id="catlist">'+cs.map(function(c){return '<option value="'+esc(c)+'">'}).join('')+'</datalist>';
+}
+
+/* ---------- v3: Enskripsyon, plan, MonCash, esè gratis, fèmti otomatik ---------- */
+var PLANS=CFG.plans||[{k:'m1',n:'1 mwa',mo:1,p:2999.9},{k:'m3',n:'3 mwa',mo:3,p:8997.9},{k:'m6',n:'6 mwa',mo:6,p:17994.9},{k:'y1',n:'12 mwa (1 ane)',mo:12,p:35988.9}];
+var AM='in',selPlan='m1',REG=false,subRcTxt='',subRcPh='';
+function supUrl(t){var n=String(CFG.support||'').replace(/\D/g,'');return n?'https://wa.me/'+n+'?text='+encodeURIComponent(t||'Bonjou, mwen bezwen èd ak Corlemps. (+509 47 57 0435)'):''}
+function supLink(id,t){var a=$(id),u=supUrl(t);a.hidden=!u;if(u)a.href=u}
+function waNum(s){var d=String(s||'').replace(/\D/g,'');return d.length===8?'509'+d:d}
+function askWa(){var d=$('lph')&&$('lph').value;if(!d)d=prompt('Nimewo WhatsApp kliyan an (kite vid pou chwazi kontak la nan WhatsApp)')||'';return d}
+function expiredLocal(){return !!(sub&&sub.paid_until&&Date.now()>new Date(sub.paid_until+'T23:59:59').getTime()+(+sub.grace_days||0)*864e5)}
+setInterval(function(){if(me&&sub&&!$('appRoot').hidden&&expiredLocal())lock()},60000);
+function setAM(m){AM=m;REG=false;document.querySelectorAll('#amode button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.am===m)});$('nmBox').hidden=m!=='up';$('lbtn').textContent=m==='up'?'Enskri':'Konekte';$('atxt').textContent=m==='up'?'Kreye kont ou epi jwenn '+(CFG.trialDays||7)+' jou esè gratis.':'Konekte pou louvri kès la.';$('lmsg').textContent=''}
+function atansyon(lines,cb){
+  var m=$('atn');m.innerHTML='<div class="card" style="max-width:420px;width:100%;padding:22px;display:grid;gap:12px"><h2 style="margin:0;font:800 20px var(--display);color:var(--bad)">⚠️ Atansyon</h2><ul style="margin:0;padding-left:20px">'+lines.map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul><label class="chk"><input type="checkbox" id="atnck"> Mwen li epi mwen konprann</label><div class="hbtns"><button type="button" class="btn sec" id="atnno">Anile</button><button type="button" class="btn pay" id="atnok" disabled>Kontinye</button></div></div>';
+  m.style.display='flex';m.onkeydown=function(e){if(e.key==='Escape')m.style.display='none'};var ck=$('atnck'),ok=$('atnok');
+  ck.onchange=function(){ok.disabled=!ck.checked};$('atnno').onclick=function(){m.style.display='none'};
+  ok.onclick=function(){if(!ck.checked)return;m.style.display='none';cb()};
+}
+var ATN_UP=['Abònman an fini apre dire plan an: kès la bloke otomatikman epi vant yo sispann.','Done ou yo rete an sekirite epi yo retounen lè ou renouvle.','Esè gratis la disponib yon sèl fwa pou chak kont.','Sèvis kliyantèl: WhatsApp +509 47 57 0435.'];
+var ATN_PAY=['Verifye nimewo MonCash la ak plan ou chwazi a anvan ou peye.','Peman MonCash yo pa ranbouse otomatikman. Pou nenpòt pwoblèm, kontakte sèvis kliyantèl.','Pa fèmen paj la anvan ou tounen nan app la pou peman an konfime.'];
+function regArgs(m){return {p_meta:m||{}}}
+function e164(x){var d=String(x||'').replace(/[^\d+]/g,'');if(d[0]==='+')return /^\+[1-9]\d{7,14}$/.test(d)?d:'';d=d.replace(/\D/g,'');if(d.length===8)d='509'+d;return /^[1-9]\d{7,14}$/.test(d)?'+'+d:''}
+document.addEventListener('change',function(e){var i=e.target.id;if(i==='lrt'){var v=e.target.value;$('rbA').hidden=v!=='agent';$('rbP').hidden=v!=='social_media';$('rbF').hidden=v!=='friend'}if(i==='lbt')$('rbC').hidden=e.target.value!=='custom'});
+function signup(){
+  var fn=$('lfn').value.trim(),ln=$('lnm2').value.trim(),ph=e164($('lph2').value),em=$('lem').value.trim().toLowerCase(),pw=$('lpw').value,rt=$('lrt').value,bt=$('lbt').value,cb=$('lcb').value.trim().replace(/\s+/g,' '),ag=$('lra').value.trim(),pf=$('lrp').value,fr=$('lrf').value.trim();
+  function E(t){$('lmsg').textContent=t}
+  if(!fn||!ln)return E('Non ak prenon obligatwa.');
+  if(!ph)return E('Antre yon nimewo telefòn valid (egzanp +509 3X XX XXXX).');
+  if(!/^\S+@\S+\.\S+$/.test(em))return E('Antre yon imèl valid.');
+  if(pw.length<8)return E('Modpas la dwe gen omwen 8 karaktè.');
+  if(!rt)return E('Di nou ki moun ki voye w.');
+  if(rt==='agent'&&!ag)return E('Antre nimewo ajan an.');
+  if(rt==='social_media'&&!pf)return E('Chwazi platfòm lan.');
+  if(rt==='friend'&&!fr)return E('Antre non zanmi an.');
+  if(!bt)return E('Chwazi tip biznis ou.');
+  if(bt==='custom'&&(cb.length<2||cb.length>40))return E('Ekri tip biznis ou (2 a 40 karaktè).');
+  atansyon(ATN_UP,function(){
+    $('lbtn').disabled=true;
+    sb.auth.signUp({email:em,password:pw,options:{data:{name:fn+' '+ln,first_name:fn,last_name:ln,phone:ph,address:$('lad').value.trim(),referrer_type:rt,referrer_detail:rt==='agent'?ag:rt==='social_media'?pf:fr,business_type:bt,custom_business_type:bt==='custom'?cb:''}}}).catch(function(e){return {error:e}}).then(function(r){
+      $('lbtn').disabled=false;
+      if(r.error){E(/registered|already/i.test(r.error.message||'')?'Imèl sa a gen kont deja. Chwazi Konekte.':nice(r.error));return}
+      if(r.data&&r.data.session){$('lpw').value='';enter()}else{setAM('in');E('Kont kreye ✅ Verifye imèl ou pou konfime l, apre sa konekte.')}
+    });
+  });
+}
+var BTSEC={hospital:'hop',shop:'bou',school:'lek',pharmacy:'fam',custom:'bou',hopital:'hop',boutik:'bou',lekol:'lek',famasi:'fam'};
+var FEAT={pharmacy:{expiration_dates:1,batch_tracking:0,prescription_required:1},hospital:{patients:1,dosage_management:0,appointments:0,doctors:0},school:{students:1,tuition_fees:0,academic_year:0},shop:{inventory_variants:0,barcode_scanner:0},custom:{inventory_variants:0}};
+var FLBL={expiration_dates:'Date ekspirasyon',batch_tracking:'Swivi lo',prescription_required:'Preskripsyon (Rx)',patients:'Pasyan (kont ouvè)',dosage_management:'Jesyon dozaj',appointments:'Randevou',doctors:'Doktè',students:'Elèv (kont ouvè)',tuition_fees:'Frè lekòl',academic_year:'Ane akademik',inventory_variants:'Varyant (koulè/gwosè)',barcode_scanner:'Eskanè kòdba'};
+function secsFor(){var k=me&&BTSEC[me.business_type];if(!k)return SECS;var l=SECS.filter(function(x){return x.k===k});st.sec=k;return l}
+function openPlans(){
+  $('hov').classList.remove('on');var o=me&&me.role==='owner';
+  $('pltxt').textContent=o?'Chwazi yon plan, antre nimewo MonCash ou epi peye. Kès la ouvè otomatikman apre peman an.':'Se sèlman direktè a ki ka renouvle abònman an.';
+  $('plist').innerHTML=PLANS.map(function(x){return '<button type="button" class="plan" data-plan="'+x.k+'" aria-pressed="'+(x.k===selPlan)+'"><span><b>'+esc(x.n)+'</b><small>'+Math.round(x.p/x.mo).toLocaleString('fr-FR')+' G / mwa</small></span><b>'+x.p.toLocaleString('fr-FR',{maximumFractionDigits:2})+' G</b></button>'}).join('');
+  $('ppay').disabled=!o;$('pmsg2').textContent='';supLink('psup','Bonjou, mwen bezwen èd ak abònman Corlemps.');view('plans');
+}
+function payPlan(){atansyon(ATN_PAY,payGo)}
+function payGo(){
+  var ph=waNum($('pph').value);if(!/^509\d{8}$/.test(ph)){$('pmsg2').textContent='Antre yon nimewo MonCash valid (8 chif).';return}
+  $('ppay').disabled=true;$('pmsg2').textContent='Ap kreye peman an...';
+  sb.functions.invoke('moncash-pay',{body:{plan:selPlan,phone:ph,return_url:location.origin+location.pathname+'?pay=1'}}).catch(function(e){return {error:e}}).then(function(r){
+    $('ppay').disabled=false;
+    if(r.error||!r.data||!r.data.redirect){$('pmsg2').textContent='Pa ka kòmanse peman an. Eseye ankò oswa kontakte sèvis kliyantèl.';return}
+    try{localStorage.setItem('corlemps.pay',JSON.stringify({o:r.data.order_id,ph:ph}))}catch(e){}
+    location.href=r.data.redirect;
+  });
+}
+function payReturn(){
+  var o;try{o=JSON.parse(localStorage.getItem('corlemps.pay')||'null')}catch(e){}
+  if(!o)return Promise.resolve();
+  var q=new URLSearchParams(location.search),back=q.has('pay')||q.has('transactionId');
+  return sb.functions.invoke('moncash-verify',{body:{order_id:o.o,transaction_id:q.get('transactionId')||undefined}}).then(function(r){
+    if(r.data&&r.data.ok){try{localStorage.removeItem('corlemps.pay')}catch(e){}history.replaceState(null,'',location.pathname);payReceipt(o,r.data)}
+    else if(back){try{localStorage.removeItem('corlemps.pay')}catch(e){}history.replaceState(null,'',location.pathname);toast('Peman an pa konfime. Si ou peye deja, kontakte sèvis kliyantèl.')}
+  }).catch(function(){});
+}
+function payReceipt(o,d){
+  subRcPh=o.ph;
+  setTimeout(function(){subRcTxt='🧾 Resi abònman Corlemps\n'+(sub&&sub.name?sub.name+'\n':'')+'Plan: '+d.plan_name+'\nMontan: '+d.amount+' G\nTransaksyon: '+d.tx+'\nAbònman jiska: '+d.paid_until;$('hbox').innerHTML='<h3>Peman reyisi ✅</h3><p class="sub">'+esc(subRcTxt).replace(/\n/g,'<br>')+'</p><div class="hbtns"><button type="button" class="btn pay" data-act="waSub">Voye resi sou WhatsApp</button><button type="button" class="btn sec" data-act="hclose">Fèmen</button></div>';$('hov').classList.add('on')},1500);
+}
+
+supLink('lsup');boot();
+
+</script>
+<div id="atn" role="alertdialog" aria-modal="true" style="display:none;position:fixed;inset:0;z-index:120;background:rgba(20,16,31,.7);align-items:center;justify-content:center;padding:18px"></div>
+</body>
+</html>
