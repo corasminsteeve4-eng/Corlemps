@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ht"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corlemps — Verifikasyon peman</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; connect-src 'self' https://juvhvyciklatbnerjxlq.supabase.co; img-src 'self' data:">
+<style>
+:root{--bg:#E4DBFF;--ink:#14101F;--card:#fff;--line:#14101F;--ok:#0B8F5A;--no:#E0245E;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150F2A;--ink:#F4EFFF;--card:#231A40;--line:#9B86E8}}
+:root[data-theme="dark"]{--bg:#150F2A;--ink:#F4EFFF;--card:#231A40;--line:#9B86E8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,sans-serif;padding:16px;max-width:900px;margin:auto}
+.c{background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px;margin:10px 0}
+input,button{font:inherit;padding:10px;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink);width:100%;margin:4px 0}
+button{cursor:pointer;font-weight:700}.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.no{background:var(--no);color:#fff;border-color:var(--no)}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:8px}small{opacity:.75}
+</style></head><body>
+<h1>Verifikasyon peman manyèl</h1>
+<div class="c" id="lg"><input id="em" type="email" placeholder="Imèl administratè" autocomplete="username"><input id="pw" type="password" placeholder="Modpas" autocomplete="current-password"><button id="go">Konekte</button><small id="m"></small></div>
+<div id="ls" hidden><button id="rf">↻ Rafrechi</button><div id="lst"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+var sb=supabase.createClient("https://juvhvyciklatbnerjxlq.supabase.co","sb_publishable_8OxBH-_Fi2uXZd33LOo_EA_EZKLZ3xb"),$=function(i){return document.getElementById(i)};
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+$('go').onclick=function(){sb.auth.signInWithPassword({email:$('em').value.trim(),password:$('pw').value}).then(function(r){
+  if(r.error){$('m').textContent='Koneksyon echwe.';return}$('lg').hidden=true;$('ls').hidden=false;load()})};
+$('rf').onclick=load;
+function load(){sb.from('payment_requests').select('*').in('status',['pending_review','pending']).order('created_at',{ascending:false}).then(function(r){
+  if(r.error){$('lst').textContent='Pa gen aksè oswa tab la poko enstale (payment_requests.sql).';return}
+  $('lst').innerHTML=(r.data||[]).map(function(p){return '<div class="c"><b>'+esc(p.ref)+'</b> · '+esc(p.status)+'<br>Plan '+esc(p.plan)+' ('+p.months+' mwa) · '+esc(p.method)+' · '+esc(p.country)+'<br>Montan: '+p.amount_usd+' USD'+(p.country==='HT'?' · '+p.final_htg+' HTG (rabè '+p.discount_htg+')':'')+'<br>Referans transfè: <b>'+esc(p.proof_ref||'poko voye')+'</b><div class="g"><button class="ok" data-i="'+p.id+'" data-a="approve"'+(p.status==='pending_review'?'':' disabled')+'>✅ Konfime</button><button class="no" data-i="'+p.id+'" data-a="reject"'+(p.status==='pending_review'?'':' disabled')+'>❌ Rejte</button></div></div>'}).join('')||'<p>Pa gen peman an atant.</p>'})}
+$('lst').onclick=function(e){var b=e.target.closest('button[data-a]');if(!b)return;var why=prompt(b.dataset.a==='approve'?'Nòt (opsyonèl):':'Rezon rejè:','')||'';
+  if(b.dataset.a==='reject'&&!why)return;b.disabled=true;sb.rpc('admin_review_payment',{p_id:b.dataset.i,p_action:b.dataset.a,p_reason:why}).then(function(r){if(r.error)alert(r.error.message);load()})};
+</script></body></html>
